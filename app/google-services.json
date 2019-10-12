@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "352927218593",
+    "firebase_url": "https://daily-quest-72b56.firebaseio.com",
+    "project_id": "daily-quest-72b56",
+    "storage_bucket": "daily-quest-72b56.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352927218593:android:2981113cfa490a0962e9e0",
+        "android_client_info": {
+          "package_name": "com.dailyquest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352927218593-6icefhqvolrt2conki1fcr61m9rmqu4j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dailyquest",
+            "certificate_hash": "c59aea3de0fad05d8e0d6f906782bf9783e33d0c"
+          }
+        },
+        {
+          "client_id": "352927218593-gbm8nio1i7dnl6787pp9gogupedbovmj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgplZUk4ujrBp2BahBVl90G_T5GKi22I4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352927218593-gbm8nio1i7dnl6787pp9gogupedbovmj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

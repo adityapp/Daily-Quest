@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Daily Quest</string>
+
+    <string-array name="role">
+        <item>Anak</item>
+        <item>Orang Tua</item>
+    </string-array>
 </resources>
