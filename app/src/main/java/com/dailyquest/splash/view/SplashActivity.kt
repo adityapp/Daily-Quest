@@ -9,11 +9,12 @@ import com.dailyquest.R
 import com.dailyquest.homeChild.view.HomeChildActivity
 import com.dailyquest.homeParent.view.HomeParentActivity
 import com.dailyquest.role.view.RoleActivity
+import com.dailyquest.splash.SplashPresenterContract
 import com.dailyquest.splash.SplashViewContract
 import com.dailyquest.splash.presenter.SplashPresenter
 
 class SplashActivity : AppCompatActivity(), SplashViewContract {
-    private lateinit var presenter: SplashPresenter
+    private lateinit var presenter: SplashPresenterContract
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,6 +1,8 @@
 package com.dailyquest
 
 import android.view.View
+import android.widget.EditText
+import android.widget.Spinner
 import java.util.regex.Pattern
 
 fun View.show() {
@@ -17,4 +19,12 @@ fun String.isEmailValid(): Boolean {
 
 fun String.isPasswordValid(): Boolean {
     return this.length >= 6 && !this.isNullOrBlank()
+}
+
+fun EditText.value(): String{
+    return this.text.toString()
+}
+
+fun Spinner.value(): String{
+    return this.selectedItem.toString()
 }

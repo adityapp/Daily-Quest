@@ -1,18 +1,22 @@
 package com.dailyquest.login.view
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.dailyquest.Constants
-import com.dailyquest.R
+import com.dailyquest.*
+import com.dailyquest.homeChild.view.HomeChildActivity
+import com.dailyquest.homeParent.view.HomeParentActivity
+import com.dailyquest.login.LoginPresenterContract
 import com.dailyquest.login.LoginViewContract
 import com.dailyquest.login.presenter.LoginPresenter
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.dialog_loading.*
 
 class LoginActivity : AppCompatActivity(), LoginViewContract, View.OnClickListener {
     private lateinit var role: String
-    private lateinit var presenter: LoginPresenter
+    private lateinit var presenter: LoginPresenterContract
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,16 +34,30 @@ class LoginActivity : AppCompatActivity(), LoginViewContract, View.OnClickListen
 
     override fun onClick(v: View?) {
         when (v) {
-            b_masuk -> presenter.login(et_email.text.toString(), et_kata_sandi.text.toString())
+            b_masuk -> presenter.login(et_email.value(), et_kata_sandi.value())
         }
     }
 
     override fun showLoadingDialog() {
-        Log.d("HELLO", "valid")
+        loading_dialog.show()
     }
 
     override fun dismissLoadingDialog() {
-        Log.d("HELLO", "invalid")
+        loading_dialog.remove()
+    }
+
+    override fun navigateToHomeChild() {
+        startActivity(Intent(this, HomeChildActivity::class.java))
+        finish()
+    }
+
+    override fun navigateToHomeParent() {
+        startActivity(Intent(this, HomeParentActivity::class.java))
+        finish()
+    }
+
+    override fun showFailedMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onSupportNavigateUp(): Boolean {

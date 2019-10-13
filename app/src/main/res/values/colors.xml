@@ -6,4 +6,6 @@
     
     <color name="dutchWhite">#F6DBBE</color>
     <color name="middleYellowRed">#EBA880</color>
+
+    <color name="black_50">#80000000</color>
 </resources>
