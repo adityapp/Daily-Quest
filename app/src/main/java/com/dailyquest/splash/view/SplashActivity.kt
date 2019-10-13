@@ -3,8 +3,8 @@ package com.dailyquest.splash.view
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.postDelayed
 import com.dailyquest.R
 import com.dailyquest.homeChild.view.HomeChildActivity
 import com.dailyquest.homeParent.view.HomeParentActivity
@@ -25,23 +25,26 @@ class SplashActivity : AppCompatActivity(), SplashViewContract {
     }
 
     override fun navigateToSelectRole() {
-        Handler().postDelayed(3000) {
-            startActivity(Intent(this, RoleActivity::class.java))
-            finish()
-        }
+        Handler().postDelayed(
+            {
+                startActivity(Intent(this, RoleActivity::class.java))
+                finish()
+            }, 3000
+        )
     }
 
     override fun navigateToHomeParent() {
-        Handler().postDelayed(3000) {
-            startActivity(Intent(this, HomeParentActivity::class.java))
-            finish()
-        }
+        startActivity(Intent(this, HomeParentActivity::class.java))
+        finish()
     }
 
     override fun navigateToHomeChild() {
-        Handler().postDelayed(3000) {
-            startActivity(Intent(this, HomeChildActivity::class.java))
-            finish()
-        }
+        startActivity(Intent(this, HomeChildActivity::class.java))
+        finish()
+    }
+
+    override fun showFailedMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        finish()
     }
 }

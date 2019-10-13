@@ -4,6 +4,7 @@ interface SplashViewContract {
     fun navigateToSelectRole()
     fun navigateToHomeParent()
     fun navigateToHomeChild()
+    fun showFailedMessage(message: String)
 }
 
 interface SplashPresenterContract{

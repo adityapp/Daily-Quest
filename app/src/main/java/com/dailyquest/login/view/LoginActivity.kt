@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity(), LoginViewContract, View.OnClickListen
 
     override fun onClick(v: View?) {
         when (v) {
-            b_masuk -> presenter.login(et_email.value(), et_kata_sandi.value())
+            b_masuk -> presenter.login(et_email.value(), et_kata_sandi.value(), role)
         }
     }
 
@@ -47,16 +47,21 @@ class LoginActivity : AppCompatActivity(), LoginViewContract, View.OnClickListen
     }
 
     override fun navigateToHomeChild() {
-        startActivity(Intent(this, HomeChildActivity::class.java))
+        val intent = Intent(this, HomeChildActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
         finish()
     }
 
     override fun navigateToHomeParent() {
-        startActivity(Intent(this, HomeParentActivity::class.java))
+        val intent = Intent(this, HomeParentActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
         finish()
     }
 
     override fun showFailedMessage(message: String) {
+        dismissLoadingDialog()
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
