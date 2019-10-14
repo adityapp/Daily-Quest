@@ -6,8 +6,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dailyquest.*
-import com.dailyquest.homeChild.view.HomeChildActivity
-import com.dailyquest.homeParent.view.HomeParentActivity
+import com.dailyquest.mainChild.view.MainChildActivity
+import com.dailyquest.mainParent.view.MainParentActivity
 import com.dailyquest.register.RegisterPresenterContract
 import com.dailyquest.register.RegisterViewContract
 import com.dailyquest.register.presenter.RegisterPresenter
@@ -42,14 +42,14 @@ class RegisterActivity : AppCompatActivity(), RegisterViewContract, View.OnClick
     }
 
     override fun navigateToHomeParent() {
-        val intent = Intent(this, HomeParentActivity::class.java)
+        val intent = Intent(this, MainParentActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()
     }
 
     override fun navigateToHomeChild() {
-        val intent = Intent(this, HomeChildActivity::class.java)
+        val intent = Intent(this, MainChildActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()

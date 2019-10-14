@@ -6,8 +6,8 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dailyquest.R
-import com.dailyquest.homeChild.view.HomeChildActivity
-import com.dailyquest.homeParent.view.HomeParentActivity
+import com.dailyquest.mainChild.view.MainChildActivity
+import com.dailyquest.mainParent.view.MainParentActivity
 import com.dailyquest.role.view.RoleActivity
 import com.dailyquest.splash.SplashPresenterContract
 import com.dailyquest.splash.SplashViewContract
@@ -34,12 +34,12 @@ class SplashActivity : AppCompatActivity(), SplashViewContract {
     }
 
     override fun navigateToHomeParent() {
-        startActivity(Intent(this, HomeParentActivity::class.java))
+        startActivity(Intent(this, MainParentActivity::class.java))
         finish()
     }
 
     override fun navigateToHomeChild() {
-        startActivity(Intent(this, HomeChildActivity::class.java))
+        startActivity(Intent(this, MainChildActivity::class.java))
         finish()
     }
 

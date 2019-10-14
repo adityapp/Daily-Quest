@@ -18,4 +18,9 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <style name="ToolbarColored" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
+        <item name="actionMenuTextColor">@color/colorPrimary</item>
+    </style>
 </resources>

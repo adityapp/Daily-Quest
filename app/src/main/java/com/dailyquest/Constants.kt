@@ -4,7 +4,7 @@ class Constants {
     companion object {
         const val ORANG_TUA = "Orang Tua"
         const val ANAK = "Anak"
-        const val ROLE = "Role"
+        const val ROLE = "role"
 
         const val EMAIL_PATTERN =
             "(?:[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*|\"(?:" +

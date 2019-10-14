@@ -15,7 +15,7 @@ class SplashPresenter(private val view: SplashViewContract) : SplashPresenterCon
 
     override fun auth() {
         firebaseAuth.currentUser?.let { user ->
-            firebaseDatabase.getReference(Constants.DATABASE_USER).child(user.uid).child("role")
+            firebaseDatabase.getReference(Constants.DATABASE_USER).child(user.uid).child(Constants.ROLE)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(databaseError: DatabaseError) {
                         view.showFailedMessage(databaseError.message)

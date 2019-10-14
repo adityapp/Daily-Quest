@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".register.view.RegisterActivity"></activity>
-        <activity android:name=".homeChild.view.HomeChildActivity" />
-        <activity android:name=".homeParent.view.HomeParentActivity" />
+        <activity android:name=".mainChild.view.MainChildActivity" />
+        <activity android:name=".mainParent.view.MainParentActivity" />
         <activity android:name=".login.view.LoginActivity" />
         <activity android:name=".role.view.RoleActivity" />
         <activity
