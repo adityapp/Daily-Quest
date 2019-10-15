@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".register.view.RegisterActivity"></activity>
+        <activity android:name=".questList.view.QuestListActivity"></activity>
+        <activity android:name=".register.view.RegisterActivity" />
         <activity android:name=".mainChild.view.MainChildActivity" />
         <activity android:name=".mainParent.view.MainParentActivity" />
         <activity android:name=".login.view.LoginActivity" />

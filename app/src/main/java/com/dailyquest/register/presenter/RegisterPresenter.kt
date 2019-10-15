@@ -5,7 +5,7 @@ import com.dailyquest.isEmailValid
 import com.dailyquest.isPasswordValid
 import com.dailyquest.register.RegisterPresenterContract
 import com.dailyquest.register.RegisterViewContract
-import com.dailyquest.register.model.UserModel
+import com.dailyquest.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 

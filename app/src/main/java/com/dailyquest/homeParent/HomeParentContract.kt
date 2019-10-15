@@ -1,11 +1,11 @@
 package com.dailyquest.homeParent
 
 interface HomeParentViewContract{
-    fun showQuestList(list: List<Any>)
-    fun openNewQuestDialog()
+    fun showChildrenList(list: List<Any>)
+    fun openNewChildrenDialog()
 }
 
 interface HomeParentPresenterContract{
-    fun addNewQuest()
-    fun getQuestList()
+    fun addNewChildren()
+    fun getChildrenList()
 }

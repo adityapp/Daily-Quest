@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/quest"
-        android:title="Quest" />
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/children"
+            android:title="Anak">
+        </item>
+        <item
+            android:id="@+id/profile"
+            android:title="Profil">
+        </item>
+    </group>
 
-    <item
-        android:id="@+id/logout"
-        android:title="Keluar" />
+    <group android:id="@+id/group2">
+        <item
+            android:id="@+id/logout"
+            android:title="Keluar" />
+    </group>
 </menu>

@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dailyquest.R
+import com.dailyquest.adapter.ChildrenListAdapter
 import com.dailyquest.homeParent.HomeParentPresenterContract
 import com.dailyquest.homeParent.HomeParentViewContract
-import com.dailyquest.homeParent.adapter.QuestListAdapter
 import com.dailyquest.homeParent.presenter.HomeParentPresenter
 import kotlinx.android.synthetic.main.fragment_home_parent.*
 import kotlinx.android.synthetic.main.fragment_home_parent.view.*
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_home_parent.view.*
 class HomeParentFragment : Fragment(), HomeParentViewContract, View.OnClickListener {
     private lateinit var presenter: HomeParentPresenterContract
     private lateinit var view: RelativeLayout
-    private lateinit var adapter: QuestListAdapter
+    private lateinit var adapter: ChildrenListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,31 +29,31 @@ class HomeParentFragment : Fragment(), HomeParentViewContract, View.OnClickListe
         view = inflater.inflate(R.layout.fragment_home_parent, container, false) as RelativeLayout
         presenter = HomeParentPresenter(this)
 
-        view.fab_add_quest.setOnClickListener(this)
+        view.fab_add_children.setOnClickListener(this)
 
         return view
     }
 
     override fun onClick(v: View?) {
         when (v) {
-            fab_add_quest -> presenter.addNewQuest()
+            fab_add_children -> presenter.addNewChildren()
         }
     }
 
-    override fun showQuestList(list: List<Any>) {
+    override fun showChildrenList(list: List<Any>) {
         context?.let {
-            adapter = QuestListAdapter(it, list)
+            adapter = ChildrenListAdapter(it, list)
+            view.rv_children.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
+            view.rv_children.adapter = adapter
         }
-        view.rv_quest.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        view.rv_quest.adapter = adapter
     }
 
-    override fun openNewQuestDialog() {
+    override fun openNewChildrenDialog() {
 
     }
 
     override fun onResume() {
         super.onResume()
-        presenter.getQuestList()
+        presenter.getChildrenList()
     }
 }

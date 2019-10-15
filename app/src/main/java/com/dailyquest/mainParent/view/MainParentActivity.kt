@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.get
 import com.dailyquest.R
 import com.dailyquest.homeParent.view.HomeParentFragment
 import com.dailyquest.mainParent.MainParentPresenterContract
@@ -39,6 +40,7 @@ class MainParentActivity : AppCompatActivity(), MainParentViewContract {
         supportFragmentManager.beginTransaction().replace(R.id.fragment_frame,
             HomeParentFragment()
         ).commit()
+        drawer.setCheckedItem(R.id.children)
 
         pageConfig()
     }
@@ -46,7 +48,7 @@ class MainParentActivity : AppCompatActivity(), MainParentViewContract {
     private fun pageConfig() {
         drawer.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.quest -> supportFragmentManager.beginTransaction().replace(R.id.fragment_frame,
+                R.id.children -> supportFragmentManager.beginTransaction().replace(R.id.fragment_frame,
                     HomeParentFragment()
                 ).commit()
                 R.id.logout -> {
