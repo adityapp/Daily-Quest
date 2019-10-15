@@ -21,5 +21,7 @@ class Constants {
         const val SHAREDPREFERENCES = "SharedPreference Daily Quest"
         const val PREF_PARENT_UID = "pref parent uid"
         const val PREF_ROLE = "pref role"
+
+        const val CAMERA_REQ_CODE = 9001
     }
 }
