@@ -1,31 +1,34 @@
 package com.dailyquest.login.presenter
 
-import com.dailyquest.Constants
-import com.dailyquest.isEmailValid
-import com.dailyquest.isPasswordValid
 import com.dailyquest.login.LoginPresenterContract
 import com.dailyquest.login.LoginViewContract
+import com.dailyquest.utils.Constants
+import com.dailyquest.utils.SessionManager
+import com.dailyquest.utils.isEmailValid
+import com.dailyquest.utils.isPasswordValid
 import com.google.firebase.auth.FirebaseAuth
 
-class LoginPresenter(private val view: LoginViewContract) : LoginPresenterContract {
+class LoginPresenter(private val view: LoginViewContract, private val pref: SessionManager) :
+    LoginPresenterContract {
     private val firebaseAuth = FirebaseAuth.getInstance()
 
-    override fun login(email: String, password: String, role: String) {
+    override fun login(email: String, password: String, role: String, parentUid: String?) {
         view.showLoadingDialog()
         when {
             !email.isEmailValid() -> view.showFailedMessage("E-mail tidak valid!")
             !password.isPasswordValid() -> view.showFailedMessage("Kata sandi yang dimasukan salah!")
-            else -> auth(email, password, role)
+            else -> auth(email, password, role, "")
         }
     }
 
-    private fun auth(email: String, password: String, role: String){
+    private fun auth(email: String, password: String, role: String, parentUid: String) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
-            when(role){
+            pref.setSession(parentUid, role)
+            when (role) {
                 Constants.ANAK -> view.navigateToHomeChild()
                 Constants.ORANG_TUA -> view.navigateToHomeParent()
             }
-        }.addOnFailureListener {e ->
+        }.addOnFailureListener { e ->
             view.showFailedMessage(e.message.toString())
         }
     }

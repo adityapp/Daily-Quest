@@ -1,8 +1,8 @@
 package com.dailyquest.register.presenter
 
-import com.dailyquest.Constants
-import com.dailyquest.isEmailValid
-import com.dailyquest.isPasswordValid
+import com.dailyquest.utils.Constants
+import com.dailyquest.utils.isEmailValid
+import com.dailyquest.utils.isPasswordValid
 import com.dailyquest.register.RegisterPresenterContract
 import com.dailyquest.register.RegisterViewContract
 import com.dailyquest.model.UserModel

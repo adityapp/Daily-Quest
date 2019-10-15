@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.dailyquest.Constants
+import com.dailyquest.utils.Constants
 import com.dailyquest.R
 import com.dailyquest.login.view.LoginActivity
 import com.dailyquest.register.view.RegisterActivity

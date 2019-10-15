@@ -5,18 +5,20 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.dailyquest.*
-import com.dailyquest.mainChild.view.MainChildActivity
-import com.dailyquest.mainParent.view.MainParentActivity
+import com.dailyquest.R
 import com.dailyquest.login.LoginPresenterContract
 import com.dailyquest.login.LoginViewContract
 import com.dailyquest.login.presenter.LoginPresenter
+import com.dailyquest.mainChild.view.MainChildActivity
+import com.dailyquest.mainParent.view.MainParentActivity
+import com.dailyquest.utils.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.dialog_loading.*
 
 class LoginActivity : AppCompatActivity(), LoginViewContract, View.OnClickListener {
     private lateinit var role: String
     private lateinit var presenter: LoginPresenterContract
+    private var parenUid: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +27,9 @@ class LoginActivity : AppCompatActivity(), LoginViewContract, View.OnClickListen
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Login"
 
-        presenter = LoginPresenter(this)
+        presenter = LoginPresenter(this, SessionManager(this))
         role = intent.getStringExtra(Constants.ROLE)
+        parenUid = intent.getStringExtra(Constants.PARENT_UID)
 
         b_masuk.setOnClickListener(this)
 
@@ -34,7 +37,7 @@ class LoginActivity : AppCompatActivity(), LoginViewContract, View.OnClickListen
 
     override fun onClick(v: View?) {
         when (v) {
-            b_masuk -> presenter.login(et_email.value(), et_kata_sandi.value(), role)
+            b_masuk -> presenter.login(et_email.value(), et_kata_sandi.value(), role, parenUid)
         }
     }
 

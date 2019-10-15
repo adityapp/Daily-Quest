@@ -1,10 +1,11 @@
-package com.dailyquest
+package com.dailyquest.utils
 
 class Constants {
     companion object {
         const val ORANG_TUA = "Orang Tua"
         const val ANAK = "Anak"
         const val ROLE = "role"
+        const val PARENT_UID = "parent uid"
 
         const val EMAIL_PATTERN =
             "(?:[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*|\"(?:" +
@@ -16,5 +17,9 @@ class Constants {
                     "\\x0b\\x0c\\x0e-\\x7f])+)\\])"
 
         const val DATABASE_USER = "User"
+
+        const val SHAREDPREFERENCES = "SharedPreference Daily Quest"
+        const val PREF_PARENT_UID = "pref parent uid"
+        const val PREF_ROLE = "pref role"
     }
 }

@@ -1,6 +1,6 @@
 package com.dailyquest.splash.presenter
 
-import com.dailyquest.Constants
+import com.dailyquest.utils.Constants
 import com.dailyquest.splash.SplashPresenterContract
 import com.dailyquest.splash.SplashViewContract
 import com.google.firebase.auth.FirebaseAuth
@@ -15,7 +15,8 @@ class SplashPresenter(private val view: SplashViewContract) : SplashPresenterCon
 
     override fun auth() {
         firebaseAuth.currentUser?.let { user ->
-            firebaseDatabase.getReference(Constants.DATABASE_USER).child(user.uid).child(Constants.ROLE)
+            firebaseDatabase.getReference(Constants.DATABASE_USER).child(user.uid).child(
+                Constants.ROLE)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(databaseError: DatabaseError) {
                         view.showFailedMessage(databaseError.message)

@@ -9,5 +9,5 @@ interface LoginViewContract {
 }
 
 interface LoginPresenterContract {
-    fun login(email: String, password: String, role: String)
+    fun login(email: String, password: String, role: String, parentUid: String?)
 }

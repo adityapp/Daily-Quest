@@ -11,6 +11,9 @@ import com.dailyquest.mainParent.view.MainParentActivity
 import com.dailyquest.register.RegisterPresenterContract
 import com.dailyquest.register.RegisterViewContract
 import com.dailyquest.register.presenter.RegisterPresenter
+import com.dailyquest.utils.remove
+import com.dailyquest.utils.show
+import com.dailyquest.utils.value
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.dialog_loading.*
 

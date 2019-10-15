@@ -4,8 +4,8 @@
         android:id="@+id/group1"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/children"
-            android:title="Anak">
+            android:id="@+id/quest"
+            android:title="Quest">
         </item>
         <item
             android:id="@+id/profile"

@@ -3,17 +3,17 @@ package com.dailyquest.mainParent.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.core.view.get
 import com.dailyquest.R
 import com.dailyquest.homeParent.view.HomeParentFragment
 import com.dailyquest.mainParent.MainParentPresenterContract
 import com.dailyquest.mainParent.MainParentViewContract
 import com.dailyquest.mainParent.presenter.MainParentPresenter
 import com.dailyquest.role.view.RoleActivity
-import com.google.firebase.auth.FirebaseAuth
+import com.dailyquest.utils.SessionManager
 import kotlinx.android.synthetic.main.activity_main_parent.*
 
 class MainParentActivity : AppCompatActivity(), MainParentViewContract {
@@ -26,9 +26,9 @@ class MainParentActivity : AppCompatActivity(), MainParentViewContract {
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        presenter = MainParentPresenter(this)
+        presenter = MainParentPresenter(this, SessionManager(this))
 
-        drawerToggle  = ActionBarDrawerToggle(
+        drawerToggle = ActionBarDrawerToggle(
             this,
             drawer_layout,
             R.string.navigation_drawer_open,
@@ -37,10 +37,11 @@ class MainParentActivity : AppCompatActivity(), MainParentViewContract {
 
         drawer_layout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_frame,
+        supportFragmentManager.beginTransaction().replace(
+            R.id.fragment_frame,
             HomeParentFragment()
         ).commit()
-        drawer.setCheckedItem(R.id.children)
+        drawer.setCheckedItem(R.id.quest)
 
         pageConfig()
     }
@@ -48,9 +49,11 @@ class MainParentActivity : AppCompatActivity(), MainParentViewContract {
     private fun pageConfig() {
         drawer.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.children -> supportFragmentManager.beginTransaction().replace(R.id.fragment_frame,
+                R.id.quest -> supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_frame,
                     HomeParentFragment()
                 ).commit()
+                R.id.profile -> Toast.makeText(this, "Belum Tersedia", Toast.LENGTH_SHORT).show()
                 R.id.logout -> {
                     presenter.logout()
                 }
