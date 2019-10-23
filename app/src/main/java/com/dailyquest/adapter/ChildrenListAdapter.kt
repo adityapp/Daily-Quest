@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dailyquest.R
-import com.dailyquest.questList.view.QuestListActivity
+import com.dailyquest.feature.common.questList.view.QuestListActivity
 import kotlinx.android.synthetic.main.card_children_list.view.*
 
 class ChildrenListAdapter(private val context: Context, private val dataSet: List<Any>) :

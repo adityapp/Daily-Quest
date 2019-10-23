@@ -12,15 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".scanUid.view.ScanUidActivity"></activity>
-        <activity android:name=".questList.view.QuestListActivity" />
-        <activity android:name=".register.view.RegisterActivity" />
-        <activity android:name=".mainChild.view.MainChildActivity" />
-        <activity android:name=".mainParent.view.MainParentActivity" />
-        <activity android:name=".login.view.LoginActivity" />
-        <activity android:name=".role.view.RoleActivity" />
+        <activity android:name="com.dailyquest.feature.child.scanUid.view.ScanUidActivity"></activity>
+        <activity android:name="com.dailyquest.feature.common.questList.view.QuestListActivity" />
+        <activity android:name="com.dailyquest.feature.common.register.view.RegisterActivity" />
+        <activity android:name="com.dailyquest.feature.child.main.view.MainChildActivity" />
+        <activity android:name="com.dailyquest.feature.parent.main.view.MainParentActivity" />
+        <activity android:name="com.dailyquest.feature.common.login.view.LoginActivity" />
+        <activity android:name="com.dailyquest.feature.common.role.view.RoleActivity" />
         <activity
-            android:name=".splash.view.SplashActivity"
+            android:name="com.dailyquest.feature.common.splash.view.SplashActivity"
             android:theme="@style/NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
