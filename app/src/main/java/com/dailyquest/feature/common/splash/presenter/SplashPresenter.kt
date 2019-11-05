@@ -1,8 +1,8 @@
-package com.dailyquest.feature.splash.presenter
+package com.dailyquest.feature.common.splash.presenter
 
 import com.dailyquest.utils.Constants
-import com.dailyquest.feature.splash.SplashPresenterContract
-import com.dailyquest.feature.splash.SplashViewContract
+import com.dailyquest.feature.common.splash.SplashPresenterContract
+import com.dailyquest.feature.common.splash.SplashViewContract
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

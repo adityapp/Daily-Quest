@@ -1,4 +1,6 @@
-package com.dailyquest.feature.login
+package com.dailyquest.feature.common.login
+
+import com.dailyquest.base.BasePresenter
 
 interface LoginViewContract {
     fun showLoadingDialog()
@@ -8,6 +10,6 @@ interface LoginViewContract {
     fun showFailedMessage(message: String)
 }
 
-interface LoginPresenterContract {
+interface LoginPresenterContract: BasePresenter {
     fun login(email: String, password: String, role: String, parentUid: String?)
 }

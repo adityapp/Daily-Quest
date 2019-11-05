@@ -1,4 +1,4 @@
-package com.dailyquest.feature.questList.view
+package com.dailyquest.feature.common.questList.view
 
 import android.os.Bundle
 import android.view.View
@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dailyquest.R
 import com.dailyquest.adapter.QuestListAdapter
-import com.dailyquest.feature.questList.QuestListPresenterContract
-import com.dailyquest.feature.questList.QuestListViewContract
-import com.dailyquest.feature.questList.presenter.QuestListPresenter
+import com.dailyquest.feature.common.questList.QuestListPresenterContract
+import com.dailyquest.feature.common.questList.QuestListViewContract
+import com.dailyquest.feature.common.questList.presenter.QuestListPresenter
 import kotlinx.android.synthetic.main.activity_quest_list.*
 
 class QuestListActivity : AppCompatActivity(), View.OnClickListener, QuestListViewContract {

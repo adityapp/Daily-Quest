@@ -1,4 +1,4 @@
-package com.dailyquest.feature.scanUid
+package com.dailyquest.feature.child.scanUid
 
 interface ScanUidViewContract {
     fun navigateToLogin(parentUid: String)

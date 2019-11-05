@@ -1,52 +1,28 @@
-package com.dailyquest.feature.login.view
+package com.dailyquest.feature.common.login.view
 
 import android.content.Intent
-import android.os.Bundle
-import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.dailyquest.R
-import com.dailyquest.feature.login.LoginPresenterContract
-import com.dailyquest.feature.login.LoginViewContract
-import com.dailyquest.feature.login.presenter.LoginPresenter
-import com.dailyquest.feature.child.mainChild.view.MainChildActivity
-import com.dailyquest.feature.parent.mainParent.view.MainParentActivity
+import com.dailyquest.base.BaseActivity
+import com.dailyquest.feature.child.main.view.MainChildActivity
+import com.dailyquest.feature.common.login.LoginPresenterContract
+import com.dailyquest.feature.common.login.LoginViewContract
+import com.dailyquest.feature.common.login.presenter.LoginPresenter
+import com.dailyquest.feature.parent.main.view.MainParentActivity
 import com.dailyquest.utils.*
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.dialog_loading.*
 
-class LoginActivity : AppCompatActivity(), LoginViewContract, View.OnClickListener {
+class LoginActivity : BaseActivity<LoginPresenterContract>(), LoginViewContract {
     private lateinit var role: String
-    private lateinit var presenter: LoginPresenterContract
     private var parenUid: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Login"
+    override fun layoutId(): Int = R.layout.activity_login
 
-        presenter = LoginPresenter(this, SessionManager(this))
-        role = intent.getStringExtra(Constants.ROLE)
-        parenUid = intent.getStringExtra(Constants.PARENT_UID)
-
-        b_masuk.setOnClickListener(this)
-
-    }
-
-    override fun onClick(v: View?) {
-        when (v) {
-            b_masuk -> presenter.login(et_email.value(), et_kata_sandi.value(), role, parenUid)
-        }
-    }
-
-    override fun showLoadingDialog() {
-        loading_dialog.show()
-    }
-
-    override fun dismissLoadingDialog() {
-        loading_dialog.remove()
+    override fun setupView() {
+        beginWith { setupActionBarAndToolbar() }
+            .then { setupPresenter() }
+            .then { getExtra() }
+            .then { setupOnClick() }
     }
 
     override fun navigateToHomeChild() {
@@ -72,4 +48,30 @@ class LoginActivity : AppCompatActivity(), LoginViewContract, View.OnClickListen
         onBackPressed()
         return super.onSupportNavigateUp()
     }
+
+    private fun setupActionBarAndToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            title = "Login"
+        }
+    }
+
+    private fun setupOnClick() {
+        b_masuk.setOnClickListener { doLogin() }
+    }
+
+    private fun setupPresenter() {
+        presenter = LoginPresenter(this, SessionManager(this))
+    }
+
+    private fun doLogin() {
+        presenter.login(et_email.value(), et_kata_sandi.value(), role, parenUid)
+    }
+
+    private fun getExtra() {
+        role = intent.getStringExtra(Constants.ROLE)
+        parenUid = intent.getStringExtra(Constants.PARENT_UID)
+    }
+
 }

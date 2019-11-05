@@ -1,4 +1,4 @@
-package com.dailyquest.feature.parent.homeParent
+package com.dailyquest.feature.parent.home
 
 interface HomeParentViewContract{
     fun showChildrenList(list: List<Any>)

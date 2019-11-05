@@ -1,7 +1,7 @@
-package com.dailyquest.feature.scanUid.presenter
+package com.dailyquest.feature.child.scanUid.presenter
 
-import com.dailyquest.feature.scanUid.ScanUidPresenterContract
-import com.dailyquest.feature.scanUid.ScanUidViewContract
+import com.dailyquest.feature.child.scanUid.ScanUidPresenterContract
+import com.dailyquest.feature.child.scanUid.ScanUidViewContract
 import com.dailyquest.utils.Constants
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError   

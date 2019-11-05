@@ -1,4 +1,4 @@
-package com.dailyquest.feature.parent.mainParent.view
+package com.dailyquest.feature.parent.main.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,10 +8,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.dailyquest.R
-import com.dailyquest.feature.parent.homeParent.view.HomeParentFragment
-import com.dailyquest.feature.parent.mainParent.MainParentPresenterContract
-import com.dailyquest.feature.parent.mainParent.MainParentViewContract
-import com.dailyquest.feature.parent.mainParent.presenter.MainParentPresenter
+import com.dailyquest.feature.parent.home.view.HomeParentFragment
+import com.dailyquest.feature.parent.main.MainParentPresenterContract
+import com.dailyquest.feature.parent.main.MainParentViewContract
+import com.dailyquest.feature.parent.main.presenter.MainParentPresenter
 import com.dailyquest.feature.common.role.view.RoleActivity
 import com.dailyquest.utils.SessionManager
 import kotlinx.android.synthetic.main.activity_main_parent.*

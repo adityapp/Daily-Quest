@@ -1,7 +1,7 @@
-package com.dailyquest.feature.questList.presenter
+package com.dailyquest.feature.common.questList.presenter
 
-import com.dailyquest.feature.questList.QuestListPresenterContract
-import com.dailyquest.feature.questList.QuestListViewContract
+import com.dailyquest.feature.common.questList.QuestListPresenterContract
+import com.dailyquest.feature.common.questList.QuestListViewContract
 
 class QuestListPresenter(private val view: QuestListViewContract) : QuestListPresenterContract {
     override fun addNewQuest() {

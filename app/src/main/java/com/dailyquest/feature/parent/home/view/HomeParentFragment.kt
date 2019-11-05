@@ -1,4 +1,4 @@
-package com.dailyquest.feature.parent.homeParent.view
+package com.dailyquest.feature.parent.home.view
 
 
 import android.os.Bundle
@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dailyquest.R
 import com.dailyquest.adapter.ChildrenListAdapter
-import com.dailyquest.feature.parent.homeParent.HomeParentPresenterContract
-import com.dailyquest.feature.parent.homeParent.HomeParentViewContract
-import com.dailyquest.feature.parent.homeParent.presenter.HomeParentPresenter
+import com.dailyquest.feature.parent.home.HomeParentPresenterContract
+import com.dailyquest.feature.parent.home.HomeParentViewContract
+import com.dailyquest.feature.parent.home.presenter.HomeParentPresenter
 import kotlinx.android.synthetic.main.fragment_home_parent.*
 import kotlinx.android.synthetic.main.fragment_home_parent.view.*
 

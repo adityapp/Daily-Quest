@@ -1,4 +1,4 @@
-package com.dailyquest.feature.parent.mainParent
+package com.dailyquest.feature.parent.main
 
 interface MainParentViewContract{
     fun navigateToRole()

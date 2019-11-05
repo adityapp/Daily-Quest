@@ -1,7 +1,7 @@
-package com.dailyquest.feature.parent.mainParent.presenter
+package com.dailyquest.feature.parent.main.presenter
 
-import com.dailyquest.feature.parent.mainParent.MainParentPresenterContract
-import com.dailyquest.feature.parent.mainParent.MainParentViewContract
+import com.dailyquest.feature.parent.main.MainParentPresenterContract
+import com.dailyquest.feature.parent.main.MainParentViewContract
 import com.dailyquest.utils.SessionManager
 import com.google.firebase.auth.FirebaseAuth
 

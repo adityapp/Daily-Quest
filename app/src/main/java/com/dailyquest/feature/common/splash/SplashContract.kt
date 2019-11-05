@@ -1,4 +1,6 @@
-package com.dailyquest.feature.splash
+package com.dailyquest.feature.common.splash
+
+import com.dailyquest.base.BasePresenter
 
 interface SplashViewContract {
     fun navigateToSelectRole()
@@ -7,6 +9,6 @@ interface SplashViewContract {
     fun showFailedMessage(message: String)
 }
 
-interface SplashPresenterContract{
+interface SplashPresenterContract: BasePresenter{
     fun auth()
 }

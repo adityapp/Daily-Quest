@@ -1,78 +1,73 @@
-package com.dailyquest.feature.register.view
+package com.dailyquest.feature.common.register.view
 
 import android.content.Intent
-import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.dailyquest.*
-import com.dailyquest.feature.child.mainChild.view.MainChildActivity
-import com.dailyquest.feature.parent.mainParent.view.MainParentActivity
-import com.dailyquest.feature.register.RegisterPresenterContract
-import com.dailyquest.feature.register.RegisterViewContract
-import com.dailyquest.feature.register.presenter.RegisterPresenter
-import com.dailyquest.utils.remove
-import com.dailyquest.utils.show
+import com.dailyquest.R
+import com.dailyquest.base.BaseActivity
+import com.dailyquest.feature.child.main.view.MainChildActivity
+import com.dailyquest.feature.common.register.RegisterPresenterContract
+import com.dailyquest.feature.common.register.RegisterViewContract
+import com.dailyquest.feature.common.register.presenter.RegisterPresenter
+import com.dailyquest.feature.parent.main.view.MainParentActivity
+import com.dailyquest.utils.beginWith
+import com.dailyquest.utils.startAndFinish
+import com.dailyquest.utils.then
 import com.dailyquest.utils.value
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.dialog_loading.*
 
-class RegisterActivity : AppCompatActivity(), RegisterViewContract, View.OnClickListener {
-    private lateinit var presenter: RegisterPresenterContract
+class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterViewContract {
+    override fun layoutId() = R.layout.activity_register
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Register"
-
-        presenter = RegisterPresenter(this)
-
-        b_daftar.setOnClickListener(this)
-    }
-
-    override fun onClick(v: View?) {
-        when (v) {
-            b_daftar -> presenter.register(
-                et_nama_lengkap.value(),
-                et_email.value(),
-                et_kata_sandi.value(),
-                et_konfirmasi_kata_sandi.value(),
-                s_role.value()
-            )
-        }
+    override fun setupView() {
+        beginWith { setupActionBarAndToolbar() }
+            .then { setupPresenter() }
+            .then { setupOnClick() }
     }
 
     override fun navigateToHomeParent() {
-        val intent = Intent(this, MainParentActivity::class.java)
+        val intent = Intent(this@RegisterActivity, MainParentActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        finish()
+        startAndFinish(intent)
     }
 
     override fun navigateToHomeChild() {
-        val intent = Intent(this, MainChildActivity::class.java)
+        val intent = Intent(this@RegisterActivity, MainChildActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        finish()
+        startAndFinish(intent)
     }
 
     override fun showFailedMessage(message: String) {
         dismissLoadingDialog()
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun showLoadingDialog() {
-        loading_dialog.show()
-    }
-
-    override fun dismissLoadingDialog() {
-        loading_dialog.remove()
+        showError(message)
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()
+    }
+
+    private fun setupActionBarAndToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            title = "Register"
+        }
+    }
+
+    private fun setupOnClick() {
+        b_daftar.setOnClickListener { doRegistration() }
+    }
+
+    private fun setupPresenter() {
+        presenter = RegisterPresenter(this)
+    }
+
+    private fun doRegistration() {
+        presenter.register(
+            et_nama_lengkap.value(),
+            et_email.value(),
+            et_kata_sandi.value(),
+            et_konfirmasi_kata_sandi.value(),
+            s_role.value()
+        )
     }
 }

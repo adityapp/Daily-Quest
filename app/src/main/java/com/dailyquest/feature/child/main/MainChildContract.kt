@@ -1,4 +1,4 @@
-package com.dailyquest.feature.child.mainChild
+package com.dailyquest.feature.child.main
 
 interface HomeChildViewContract{
 

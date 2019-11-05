@@ -1,14 +1,14 @@
-package com.dailyquest.feature.scanUid.view
+package com.dailyquest.feature.child.scanUid.view
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dailyquest.R
-import com.dailyquest.feature.login.view.LoginActivity
-import com.dailyquest.feature.scanUid.ScanUidPresenterContract
-import com.dailyquest.feature.scanUid.ScanUidViewContract
-import com.dailyquest.feature.scanUid.presenter.ScanUidPresenter
+import com.dailyquest.feature.common.login.view.LoginActivity
+import com.dailyquest.feature.child.scanUid.ScanUidPresenterContract
+import com.dailyquest.feature.child.scanUid.ScanUidViewContract
+import com.dailyquest.feature.child.scanUid.presenter.ScanUidPresenter
 import com.dailyquest.utils.Constants
 import com.google.zxing.Result
 import kotlinx.android.synthetic.main.activity_scan_uid.*

@@ -1,4 +1,4 @@
-package com.dailyquest.feature.splash.view
+package com.dailyquest.feature.common.splash.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,22 +6,22 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dailyquest.R
-import com.dailyquest.feature.child.mainChild.view.MainChildActivity
-import com.dailyquest.feature.parent.mainParent.view.MainParentActivity
-import com.dailyquest.feature.role.view.RoleActivity
-import com.dailyquest.feature.splash.SplashPresenterContract
-import com.dailyquest.feature.splash.SplashViewContract
-import com.dailyquest.feature.splash.presenter.SplashPresenter
+import com.dailyquest.base.BaseActivity
+import com.dailyquest.feature.child.main.view.MainChildActivity
+import com.dailyquest.feature.parent.main.view.MainParentActivity
+import com.dailyquest.feature.common.role.view.RoleActivity
+import com.dailyquest.feature.common.splash.SplashPresenterContract
+import com.dailyquest.feature.common.splash.SplashViewContract
+import com.dailyquest.feature.common.splash.presenter.SplashPresenter
+import com.dailyquest.utils.beginWith
+import com.dailyquest.utils.then
 
-class SplashActivity : AppCompatActivity(), SplashViewContract {
-    private lateinit var presenter: SplashPresenterContract
+class SplashActivity : BaseActivity<SplashPresenterContract>(), SplashViewContract {
+    override fun layoutId() = R.layout.activity_splash
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-
-        presenter = SplashPresenter(this)
-        presenter.auth()
+    override fun setupView() {
+        beginWith { setupPresenter() }
+            .then { presenter.auth() }
     }
 
     override fun navigateToSelectRole() {
@@ -44,7 +44,10 @@ class SplashActivity : AppCompatActivity(), SplashViewContract {
     }
 
     override fun showFailedMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-        finish()
+        showError(message)
+    }
+
+    private fun setupPresenter(){
+        presenter = SplashPresenter(this)
     }
 }

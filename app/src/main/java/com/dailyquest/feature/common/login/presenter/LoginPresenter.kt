@@ -1,7 +1,7 @@
-package com.dailyquest.feature.login.presenter
+package com.dailyquest.feature.common.login.presenter
 
-import com.dailyquest.feature.login.LoginPresenterContract
-import com.dailyquest.feature.login.LoginViewContract
+import com.dailyquest.feature.common.login.LoginPresenterContract
+import com.dailyquest.feature.common.login.LoginViewContract
 import com.dailyquest.utils.Constants
 import com.dailyquest.utils.SessionManager
 import com.dailyquest.utils.isEmailValid

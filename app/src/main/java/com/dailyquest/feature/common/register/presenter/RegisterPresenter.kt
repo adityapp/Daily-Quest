@@ -1,10 +1,10 @@
-package com.dailyquest.feature.register.presenter
+package com.dailyquest.feature.common.register.presenter
 
 import com.dailyquest.utils.Constants
 import com.dailyquest.utils.isEmailValid
 import com.dailyquest.utils.isPasswordValid
-import com.dailyquest.feature.register.RegisterPresenterContract
-import com.dailyquest.feature.register.RegisterViewContract
+import com.dailyquest.feature.common.register.RegisterPresenterContract
+import com.dailyquest.feature.common.register.RegisterViewContract
 import com.dailyquest.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase

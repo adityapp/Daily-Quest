@@ -1,4 +1,6 @@
-package com.dailyquest.feature.register
+package com.dailyquest.feature.common.register
+
+import com.dailyquest.base.BasePresenter
 
 interface RegisterViewContract {
     fun navigateToHomeParent()
@@ -8,7 +10,7 @@ interface RegisterViewContract {
     fun dismissLoadingDialog()
 }
 
-interface RegisterPresenterContract {
+interface RegisterPresenterContract: BasePresenter {
     fun register(
         fullName: String,
         email: String,

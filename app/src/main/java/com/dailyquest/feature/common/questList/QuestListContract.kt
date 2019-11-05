@@ -1,4 +1,4 @@
-package com.dailyquest.feature.questList
+package com.dailyquest.feature.common.questList
 
 interface QuestListViewContract{
     fun showQuestList(list: List<Any>)

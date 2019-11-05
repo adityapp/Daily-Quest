@@ -1,11 +1,11 @@
-package com.dailyquest.feature.child.mainChild.view
+package com.dailyquest.feature.child.main.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.dailyquest.R
-import com.dailyquest.feature.child.mainChild.HomeChildPresenterContract
-import com.dailyquest.feature.child.mainChild.HomeChildViewContract
-import com.dailyquest.feature.child.mainChild.presenter.MainChildPresenter
+import com.dailyquest.feature.child.main.HomeChildPresenterContract
+import com.dailyquest.feature.child.main.HomeChildViewContract
+import com.dailyquest.feature.child.main.presenter.MainChildPresenter
 
 class MainChildActivity : AppCompatActivity(), HomeChildViewContract {
     private lateinit var presenter: HomeChildPresenterContract
