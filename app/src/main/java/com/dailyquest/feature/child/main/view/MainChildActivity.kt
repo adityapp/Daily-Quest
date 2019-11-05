@@ -1,19 +1,20 @@
 package com.dailyquest.feature.child.main.view
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.dailyquest.R
+import com.dailyquest.base.BaseActivity
 import com.dailyquest.feature.child.main.HomeChildPresenterContract
 import com.dailyquest.feature.child.main.HomeChildViewContract
 import com.dailyquest.feature.child.main.presenter.MainChildPresenter
+import com.dailyquest.utils.beginWith
 
-class MainChildActivity : AppCompatActivity(), HomeChildViewContract {
-    private lateinit var presenter: HomeChildPresenterContract
+class MainChildActivity : BaseActivity<HomeChildPresenterContract>(), HomeChildViewContract {
+    override fun layoutId() = R.layout.activity_main_child
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_child)
+    override fun setupView() {
+        beginWith { setupPresenter() }
+    }
 
+    private fun setupPresenter() {
         presenter = MainChildPresenter(this)
     }
 }

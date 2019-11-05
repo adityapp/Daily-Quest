@@ -1,4 +1,3 @@
 package com.dailyquest.base
 
-interface BasePresenter {
-}
+interface BasePresenter

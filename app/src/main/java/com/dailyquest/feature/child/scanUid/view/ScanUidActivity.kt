@@ -1,37 +1,33 @@
 package com.dailyquest.feature.child.scanUid.view
 
 import android.content.Intent
-import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.dailyquest.R
-import com.dailyquest.feature.common.login.view.LoginActivity
+import com.dailyquest.base.BaseActivity
 import com.dailyquest.feature.child.scanUid.ScanUidPresenterContract
 import com.dailyquest.feature.child.scanUid.ScanUidViewContract
 import com.dailyquest.feature.child.scanUid.presenter.ScanUidPresenter
+import com.dailyquest.feature.common.login.view.LoginActivity
 import com.dailyquest.utils.Constants
+import com.dailyquest.utils.beginWith
+import com.dailyquest.utils.then
 import com.google.zxing.Result
 import kotlinx.android.synthetic.main.activity_scan_uid.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
-class ScanUidActivity : AppCompatActivity(), ZXingScannerView.ResultHandler, ScanUidViewContract {
+class ScanUidActivity : BaseActivity<ScanUidPresenterContract>(), ZXingScannerView.ResultHandler,
+    ScanUidViewContract {
+
     private lateinit var scanner: ZXingScannerView
-    private lateinit var presenter: ScanUidPresenterContract
     private lateinit var role: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scan_uid)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    override fun layoutId() = R.layout.activity_scan_uid
 
-        presenter = ScanUidPresenter(this)
-        role = intent.getStringExtra(Constants.ROLE)
-
-        scanner = ZXingScannerView(this)
-        scanner.resumeCameraPreview(this)
-        scanner.setAutoFocus(true)
-        frame_scanner.addView(scanner)
+    override fun setupView() {
+        beginWith { setupActionBar() }
+            .then { setupPresenter() }
+            .then { getExtra() }
+            .then { setupScanner() }
     }
 
     override fun onResume() {
@@ -65,5 +61,25 @@ class ScanUidActivity : AppCompatActivity(), ZXingScannerView.ResultHandler, Sca
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()
+    }
+
+    private fun setupActionBar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun setupPresenter() {
+        presenter = ScanUidPresenter(this)
+    }
+
+    private fun getExtra() {
+        role = intent.getStringExtra(Constants.ROLE)
+    }
+
+    private fun setupScanner() {
+        scanner = ZXingScannerView(this)
+        scanner.resumeCameraPreview(this)
+        scanner.setAutoFocus(true)
+        frame_scanner.addView(scanner)
     }
 }

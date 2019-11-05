@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.dailyquest.feature.child.scanUid.view.ScanUidActivity"></activity>
-        <activity android:name="com.dailyquest.feature.common.questList.view.QuestListActivity" />
+        <activity android:name="com.dailyquest.feature.parent.questList.view.QuestListActivity" />
         <activity android:name="com.dailyquest.feature.common.register.view.RegisterActivity" />
         <activity android:name="com.dailyquest.feature.child.main.view.MainChildActivity" />
         <activity android:name="com.dailyquest.feature.parent.main.view.MainParentActivity" />

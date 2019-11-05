@@ -8,42 +8,27 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.dailyquest.R
+import com.dailyquest.base.BaseActivity
 import com.dailyquest.feature.parent.home.view.HomeParentFragment
 import com.dailyquest.feature.parent.main.MainParentPresenterContract
 import com.dailyquest.feature.parent.main.MainParentViewContract
 import com.dailyquest.feature.parent.main.presenter.MainParentPresenter
 import com.dailyquest.feature.common.role.view.RoleActivity
 import com.dailyquest.utils.SessionManager
+import com.dailyquest.utils.beginWith
+import com.dailyquest.utils.then
 import kotlinx.android.synthetic.main.activity_main_parent.*
 
-class MainParentActivity : AppCompatActivity(), MainParentViewContract {
+class MainParentActivity : BaseActivity<MainParentPresenterContract>(), MainParentViewContract {
+
     private lateinit var drawerToggle: ActionBarDrawerToggle
-    private lateinit var presenter: MainParentPresenterContract
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_parent)
+    override fun layoutId(): Int = R.layout.activity_main_parent
 
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        presenter = MainParentPresenter(this, SessionManager(this))
-
-        drawerToggle = ActionBarDrawerToggle(
-            this,
-            drawer_layout,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
-
-        drawer_layout.addDrawerListener(drawerToggle)
-        drawerToggle.syncState()
-        supportFragmentManager.beginTransaction().replace(
-            R.id.fragment_frame,
-            HomeParentFragment()
-        ).commit()
-        drawer.setCheckedItem(R.id.quest)
-
-        pageConfig()
+    override fun setupView() {
+        beginWith { setupActionBar() }
+            .then { setupPresenter() }
+            .then { setupDrawer() }
     }
 
     private fun pageConfig() {
@@ -75,5 +60,33 @@ class MainParentActivity : AppCompatActivity(), MainParentViewContract {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupActionBar(){
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun setupPresenter(){
+        presenter = MainParentPresenter(this, SessionManager(this))
+    }
+
+    private fun setupDrawer(){
+        drawerToggle = ActionBarDrawerToggle(
+            this,
+            drawer_layout,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+
+        drawer_layout.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
+        supportFragmentManager.beginTransaction().replace(
+            R.id.fragment_frame,
+            HomeParentFragment()
+        ).commit()
+        drawer.setCheckedItem(R.id.quest)
+
+        pageConfig()
     }
 }
