@@ -18,7 +18,8 @@ class RegisterPresenter(private val view: RegisterViewContract) : RegisterPresen
         email: String,
         password: String,
         confirmationPassword: String,
-        role: String
+        role: String,
+        parentUid: String
     ) {
         view.showLoadingDialog()
         when {
@@ -27,6 +28,7 @@ class RegisterPresenter(private val view: RegisterViewContract) : RegisterPresen
             !password.isPasswordValid() -> view.showFailedMessage("Kata sandi harus lebih dari 6 karakter!")
             !confirmationPassword.isPasswordValid() -> view.showFailedMessage("Kata sandi harus lebih dari 6 karakter!")
             confirmationPassword != password -> view.showFailedMessage("Kata sandi tidak sama!")
+            role == Constants.ANAK && parentUid.isBlank() -> view.showFailedMessage("Silahkan Lakukan Scan Orang Tua!")
             else -> createNewAccount(fullName, email, password, role)
         }
     }

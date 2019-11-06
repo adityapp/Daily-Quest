@@ -20,6 +20,7 @@ class ScanUidActivity : BaseActivity<ScanUidPresenterContract>(), ZXingScannerVi
 
     private lateinit var scanner: ZXingScannerView
     private lateinit var role: String
+    private lateinit var sourceActivity: String
 
     override fun layoutId() = R.layout.activity_scan_uid
 
@@ -42,7 +43,10 @@ class ScanUidActivity : BaseActivity<ScanUidPresenterContract>(), ZXingScannerVi
 
     override fun handleResult(rawResult: Result?) {
         rawResult?.text?.let { uid ->
-            presenter.validateParentUid(uid)
+            when(sourceActivity){
+                "RoleActivity" -> presenter.validateParentUid(uid)
+                "RegisterActivity" -> {}
+            }
         }
     }
 
@@ -74,6 +78,7 @@ class ScanUidActivity : BaseActivity<ScanUidPresenterContract>(), ZXingScannerVi
 
     private fun getExtra() {
         role = intent.getStringExtra(Constants.ROLE)
+        sourceActivity = intent.getStringExtra(Constants.SOURCE_ACTIVITY)
     }
 
     private fun setupScanner() {

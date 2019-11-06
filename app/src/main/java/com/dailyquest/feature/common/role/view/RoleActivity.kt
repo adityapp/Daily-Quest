@@ -23,6 +23,7 @@ class RoleActivity : BaseActivity<RolePresenterContract>(), RoleViewContract {
 
     override fun setupView() {
         beginWith { setupPresenter() }
+            .then { setupPermission() }
             .then { setupOnClick() }
     }
 
@@ -33,6 +34,7 @@ class RoleActivity : BaseActivity<RolePresenterContract>(), RoleViewContract {
             ) {
                 val intent = Intent(this, ScanUidActivity::class.java)
                 intent.putExtra(Constants.ROLE, Constants.ANAK)
+                intent.putExtra(Constants.SOURCE_ACTIVITY, this::class.java.simpleName)
                 startActivity(intent)
             } else {
                 ActivityCompat.requestPermissions(
@@ -50,7 +52,21 @@ class RoleActivity : BaseActivity<RolePresenterContract>(), RoleViewContract {
         tv_daftar.setOnClickListener { startActivity(Intent(this, RegisterActivity::class.java)) }
     }
 
-    private fun setupPresenter(){
+    private fun setupPresenter() {
         presenter = RolePresenter(this)
+    }
+
+    private fun setupPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_DENIED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA),
+                Constants.CAMERA_REQ_CODE
+            )
+        }
     }
 }

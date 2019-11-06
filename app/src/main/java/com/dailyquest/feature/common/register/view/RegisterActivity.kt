@@ -1,25 +1,32 @@
 package com.dailyquest.feature.common.register.view
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.view.View
+import android.widget.AdapterView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
 import com.dailyquest.feature.child.main.view.MainChildActivity
+import com.dailyquest.feature.child.scanUid.view.ScanUidActivity
 import com.dailyquest.feature.common.register.RegisterPresenterContract
 import com.dailyquest.feature.common.register.RegisterViewContract
 import com.dailyquest.feature.common.register.presenter.RegisterPresenter
 import com.dailyquest.feature.parent.main.view.MainParentActivity
-import com.dailyquest.utils.beginWith
-import com.dailyquest.utils.startAndFinish
-import com.dailyquest.utils.then
-import com.dailyquest.utils.value
+import com.dailyquest.utils.*
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterViewContract {
+    private var parentUid = ""
+
     override fun layoutId() = R.layout.activity_register
 
     override fun setupView() {
         beginWith { setupActionBarAndToolbar() }
             .then { setupPresenter() }
+            .then { setupOnSelected() }
             .then { setupOnClick() }
     }
 
@@ -45,6 +52,16 @@ class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterView
         return super.onSupportNavigateUp()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when(requestCode){
+            Constants.CAMERA_REQ_CODE -> {
+
+            }
+        }
+    }
+
     private fun setupActionBarAndToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.let {
@@ -55,10 +72,45 @@ class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterView
 
     private fun setupOnClick() {
         b_daftar.setOnClickListener { doRegistration() }
+        b_scan_uid.setOnClickListener { doScanning() }
+    }
+
+    private fun setupOnSelected() {
+        s_role.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                //Not implement needed
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (position == 0) b_scan_uid.show() else b_scan_uid.remove()
+            }
+
+        }
     }
 
     private fun setupPresenter() {
         presenter = RegisterPresenter(this)
+    }
+
+    private fun doScanning() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            != PackageManager.PERMISSION_DENIED
+        ) {
+            val intent = Intent(this, ScanUidActivity::class.java)
+            intent.putExtra(Constants.SOURCE_ACTIVITY, this::class.java.simpleName)
+            startActivity(intent)
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA),
+                Constants.CAMERA_REQ_CODE
+            )
+        }
     }
 
     private fun doRegistration() {
@@ -67,7 +119,8 @@ class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterView
             et_email.value(),
             et_kata_sandi.value(),
             et_konfirmasi_kata_sandi.value(),
-            s_role.value()
+            s_role.value(),
+            parentUid
         )
     }
 }

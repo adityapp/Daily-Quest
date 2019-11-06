@@ -16,6 +16,7 @@ interface RegisterPresenterContract: BasePresenter {
         email: String,
         password: String,
         confirmationPassword: String,
-        role: String
+        role: String,
+        parentUid: String
     )
 }
