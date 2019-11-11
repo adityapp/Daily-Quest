@@ -4,7 +4,7 @@ package com.dailyquest.feature.parent.home.view
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dailyquest.R
-import com.dailyquest.adapter.ChildrenListAdapter
+import com.dailyquest.adapter.QuestListAdapter
 import com.dailyquest.base.BaseFragment
 import com.dailyquest.feature.parent.home.HomeParentPresenterContract
 import com.dailyquest.feature.parent.home.HomeParentViewContract
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_home_parent.view.*
 
 class HomeParentFragment : BaseFragment<HomeParentPresenterContract>(), HomeParentViewContract {
 
-    private lateinit var adapter: ChildrenListAdapter
+    private lateinit var adapter: QuestListAdapter
 
     override fun layoutId(): Int = R.layout.fragment_home_parent
 
@@ -24,21 +24,17 @@ class HomeParentFragment : BaseFragment<HomeParentPresenterContract>(), HomePare
             .then { setupOnClick() }
     }
 
-    override fun showChildrenList(list: List<Any>) {
+    override fun showAllQuestList(list: List<Any>) {
         context?.let {
-            adapter = ChildrenListAdapter(it, list)
-            view.rv_children.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
-            view.rv_children.adapter = adapter
+            adapter = QuestListAdapter(it, list)
+            view.rv_quest.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
+            view.rv_quest.adapter = adapter
         }
-    }
-
-    override fun openNewChildrenDialog() {
-
     }
 
     override fun onResume() {
         super.onResume()
-        presenter.getChildrenList()
+        presenter.getAllQuestList()
     }
 
     private fun setupPresenter() {
@@ -46,6 +42,6 @@ class HomeParentFragment : BaseFragment<HomeParentPresenterContract>(), HomePare
     }
 
     private fun setupOnClick() {
-        view.fab_add_children.setOnClickListener { presenter.addNewChildren() }
+
     }
 }

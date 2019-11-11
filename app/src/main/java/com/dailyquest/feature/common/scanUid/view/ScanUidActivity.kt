@@ -1,13 +1,12 @@
-package com.dailyquest.feature.child.scanUid.view
+package com.dailyquest.feature.common.scanUid.view
 
 import android.content.Intent
-import android.widget.Toast
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
-import com.dailyquest.feature.child.scanUid.ScanUidPresenterContract
-import com.dailyquest.feature.child.scanUid.ScanUidViewContract
-import com.dailyquest.feature.child.scanUid.presenter.ScanUidPresenter
 import com.dailyquest.feature.common.login.view.LoginActivity
+import com.dailyquest.feature.common.scanUid.ScanUidPresenterContract
+import com.dailyquest.feature.common.scanUid.ScanUidViewContract
+import com.dailyquest.feature.common.scanUid.presenter.ScanUidPresenter
 import com.dailyquest.utils.Constants
 import com.dailyquest.utils.beginWith
 import com.dailyquest.utils.then
@@ -43,10 +42,7 @@ class ScanUidActivity : BaseActivity<ScanUidPresenterContract>(), ZXingScannerVi
 
     override fun handleResult(rawResult: Result?) {
         rawResult?.text?.let { uid ->
-            when(sourceActivity){
-                "RoleActivity" -> presenter.validateParentUid(uid)
-                "RegisterActivity" -> {}
-            }
+            presenter.validateParentUid(uid, sourceActivity)
         }
     }
 
@@ -55,10 +51,15 @@ class ScanUidActivity : BaseActivity<ScanUidPresenterContract>(), ZXingScannerVi
         intent.putExtra(Constants.ROLE, role)
         intent.putExtra(Constants.PARENT_UID, parentUid)
         startActivity(intent)
+        finish()
+    }
+
+    override fun navigateToRegister(parentUid: String) {
+        startActivityForResult(intent, Constants.CAMERA_REQ_CODE)
     }
 
     override fun showFailedMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        showError(message)
         scanner.resumeCameraPreview(this)
     }
 

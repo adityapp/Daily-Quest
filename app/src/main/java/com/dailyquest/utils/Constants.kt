@@ -25,5 +25,7 @@ class Constants {
         const val CAMERA_REQ_CODE = 9001
 
         const val SOURCE_ACTIVITY = "source activity"
+
+        const val BARCODE_BASE_URL = "http://api.qrserver.com/v1/create-qr-code/?size=300x300&data="
     }
 }

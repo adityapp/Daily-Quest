@@ -7,7 +7,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
-import com.dailyquest.feature.child.scanUid.view.ScanUidActivity
+import com.dailyquest.feature.common.scanUid.view.ScanUidActivity
 import com.dailyquest.feature.common.login.view.LoginActivity
 import com.dailyquest.feature.common.register.view.RegisterActivity
 import com.dailyquest.feature.common.role.RolePresenterContract

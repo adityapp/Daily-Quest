@@ -46,4 +46,8 @@ dependencies {
 
     //barcodescanner
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
 }
