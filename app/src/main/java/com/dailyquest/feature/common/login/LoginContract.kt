@@ -5,8 +5,7 @@ import com.dailyquest.base.BasePresenter
 interface LoginViewContract {
     fun showLoadingDialog()
     fun dismissLoadingDialog()
-    fun navigateToHomeChild()
-    fun navigateToHomeParent()
+    fun navigateToHome()
     fun showFailedMessage(message: String)
 }
 

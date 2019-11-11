@@ -68,7 +68,7 @@ class RegisterPresenter(private val view: RegisterViewContract, private val pref
             .addOnSuccessListener {
                 pref.setSession(parentUid, role)
                 view.dismissLoadingDialog()
-                view.navigateToHomeChild()
+                view.navigateToHome()
             }
             .addOnFailureListener { e ->
                 view.showFailedMessage(e.message.toString())
@@ -80,7 +80,7 @@ class RegisterPresenter(private val view: RegisterViewContract, private val pref
             .setValue(UserModel(fullName, role)).addOnSuccessListener {
                 pref.setSession(null, role)
                 view.dismissLoadingDialog()
-                view.navigateToHomeParent()
+                view.navigateToHome()
             }
             .addOnFailureListener { e ->
                 view.showFailedMessage(e.message.toString())

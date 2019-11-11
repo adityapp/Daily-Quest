@@ -1,4 +1,4 @@
-package com.dailyquest.feature.parent.home
+package com.dailyquest.feature.common.home
 
 import com.dailyquest.base.BasePresenter
 

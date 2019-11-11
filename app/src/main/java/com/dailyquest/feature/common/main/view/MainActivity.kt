@@ -1,4 +1,4 @@
-package com.dailyquest.feature.parent.main.view
+package com.dailyquest.feature.common.main.view
 
 import android.content.Intent
 import android.view.MenuItem
@@ -10,24 +10,27 @@ import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
 import com.dailyquest.feature.common.role.view.RoleActivity
 import com.dailyquest.feature.parent.children.view.ChildrenFragment
-import com.dailyquest.feature.parent.home.view.HomeParentFragment
-import com.dailyquest.feature.parent.main.MainParentPresenterContract
-import com.dailyquest.feature.parent.main.MainParentViewContract
-import com.dailyquest.feature.parent.main.presenter.MainParentPresenter
+import com.dailyquest.feature.common.home.view.HomeFragment
+import com.dailyquest.feature.common.main.MainParentPresenterContract
+import com.dailyquest.feature.common.main.MainParentViewContract
+import com.dailyquest.feature.common.main.presenter.MainPresenter
+import com.dailyquest.utils.Constants
 import com.dailyquest.utils.SessionManager
 import com.dailyquest.utils.beginWith
 import com.dailyquest.utils.then
-import kotlinx.android.synthetic.main.activity_main_parent.*
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainParentActivity : BaseActivity<MainParentPresenterContract>(), MainParentViewContract {
+class MainActivity : BaseActivity<MainParentPresenterContract>(), MainParentViewContract {
 
     private lateinit var drawerToggle: ActionBarDrawerToggle
+    private lateinit var pref: SessionManager
 
-    override fun layoutId(): Int = R.layout.activity_main_parent
+    override fun layoutId(): Int = R.layout.activity_main
 
     override fun setupView() {
         beginWith { setupActionBar() }
             .then { setupPresenter() }
+            .then { setupSession() }
             .then { setupDrawer() }
     }
 
@@ -51,7 +54,11 @@ class MainParentActivity : BaseActivity<MainParentPresenterContract>(), MainPare
     }
 
     private fun setupPresenter() {
-        presenter = MainParentPresenter(this, SessionManager(this))
+        presenter = MainPresenter(this, SessionManager(this))
+    }
+
+    private fun setupSession(){
+        pref = SessionManager(this)
     }
 
     private fun setupDrawer() {
@@ -62,10 +69,13 @@ class MainParentActivity : BaseActivity<MainParentPresenterContract>(), MainPare
             R.string.navigation_drawer_close
         )
 
+        if (pref.getRole() == Constants.ANAK){
+            drawer.menu.getItem(1).isVisible = false
+        }
         drawer_layout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
 
-        fragmentTransaction(HomeParentFragment())
+        fragmentTransaction(HomeFragment())
         drawer.setCheckedItem(R.id.home)
 
         pageConfig()
@@ -74,7 +84,7 @@ class MainParentActivity : BaseActivity<MainParentPresenterContract>(), MainPare
     private fun pageConfig() {
         drawer.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.home -> fragmentTransaction(HomeParentFragment())
+                R.id.home -> fragmentTransaction(HomeFragment())
 
                 R.id.quest -> fragmentTransaction(ChildrenFragment())
 

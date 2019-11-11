@@ -16,7 +16,7 @@
         <activity android:name="com.dailyquest.feature.parent.questList.view.QuestListActivity" />
         <activity android:name="com.dailyquest.feature.common.register.view.RegisterActivity" />
         <activity android:name="com.dailyquest.feature.child.main.view.MainChildActivity" />
-        <activity android:name="com.dailyquest.feature.parent.main.view.MainParentActivity" />
+        <activity android:name="com.dailyquest.feature.common.main.view.MainActivity" />
         <activity android:name="com.dailyquest.feature.common.login.view.LoginActivity" />
         <activity android:name="com.dailyquest.feature.common.role.view.RoleActivity" />
         <activity

@@ -4,8 +4,7 @@ import com.dailyquest.base.BasePresenter
 
 interface SplashViewContract {
     fun navigateToSelectRole()
-    fun navigateToHomeParent()
-    fun navigateToHomeChild()
+    fun navigateToHome()
     fun showFailedMessage(message: String)
 }
 

@@ -3,7 +3,6 @@ package com.dailyquest.feature.common.register.view
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.view.View
 import android.widget.AdapterView
@@ -11,12 +10,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
-import com.dailyquest.feature.child.main.view.MainChildActivity
-import com.dailyquest.feature.common.scanUid.view.ScanUidActivity
+import com.dailyquest.feature.common.main.view.MainActivity
 import com.dailyquest.feature.common.register.RegisterPresenterContract
 import com.dailyquest.feature.common.register.RegisterViewContract
 import com.dailyquest.feature.common.register.presenter.RegisterPresenter
-import com.dailyquest.feature.parent.main.view.MainParentActivity
+import com.dailyquest.feature.common.scanUid.view.ScanUidActivity
 import com.dailyquest.utils.*
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -32,14 +30,8 @@ class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterView
             .then { setupOnClick() }
     }
 
-    override fun navigateToHomeParent() {
-        val intent = Intent(this@RegisterActivity, MainParentActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        startAndFinish(intent)
-    }
-
-    override fun navigateToHomeChild() {
-        val intent = Intent(this@RegisterActivity, MainChildActivity::class.java)
+    override fun navigateToHome() {
+        val intent = Intent(this@RegisterActivity, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         startAndFinish(intent)
     }
@@ -57,13 +49,13 @@ class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterView
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        when(requestCode){
+        when (requestCode) {
             Constants.CAMERA_REQ_CODE -> {
-                if (resultCode == Activity.RESULT_OK){
+                if (resultCode == Activity.RESULT_OK) {
                     data?.let {
                         parentUid = it.getStringExtra(Constants.PARENT_UID)
                     }
-                }else{
+                } else {
                     showToast("Batal!")
                 }
             }

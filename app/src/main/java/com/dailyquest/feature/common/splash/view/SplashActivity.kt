@@ -4,8 +4,7 @@ import android.content.Intent
 import android.os.Handler
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
-import com.dailyquest.feature.child.main.view.MainChildActivity
-import com.dailyquest.feature.parent.main.view.MainParentActivity
+import com.dailyquest.feature.common.main.view.MainActivity
 import com.dailyquest.feature.common.role.view.RoleActivity
 import com.dailyquest.feature.common.splash.SplashPresenterContract
 import com.dailyquest.feature.common.splash.SplashViewContract
@@ -30,13 +29,8 @@ class SplashActivity : BaseActivity<SplashPresenterContract>(), SplashViewContra
         )
     }
 
-    override fun navigateToHomeParent() {
-        startActivity(Intent(this, MainParentActivity::class.java))
-        finish()
-    }
-
-    override fun navigateToHomeChild() {
-        startActivity(Intent(this, MainChildActivity::class.java))
+    override fun navigateToHome() {
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 

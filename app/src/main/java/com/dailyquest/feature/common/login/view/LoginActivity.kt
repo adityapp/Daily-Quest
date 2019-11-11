@@ -4,11 +4,10 @@ import android.content.Intent
 import android.widget.Toast
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
-import com.dailyquest.feature.child.main.view.MainChildActivity
 import com.dailyquest.feature.common.login.LoginPresenterContract
 import com.dailyquest.feature.common.login.LoginViewContract
 import com.dailyquest.feature.common.login.presenter.LoginPresenter
-import com.dailyquest.feature.parent.main.view.MainParentActivity
+import com.dailyquest.feature.common.main.view.MainActivity
 import com.dailyquest.utils.*
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -25,15 +24,8 @@ class LoginActivity : BaseActivity<LoginPresenterContract>(), LoginViewContract 
             .then { setupOnClick() }
     }
 
-    override fun navigateToHomeChild() {
-        val intent = Intent(this, MainChildActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        finish()
-    }
-
-    override fun navigateToHomeParent() {
-        val intent = Intent(this, MainParentActivity::class.java)
+    override fun navigateToHome() {
+        val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()

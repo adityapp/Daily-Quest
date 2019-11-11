@@ -23,10 +23,7 @@ class SplashPresenter(private val view: SplashViewContract) : SplashPresenterCon
                     }
 
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        when (dataSnapshot.value) {
-                            Constants.ANAK -> view.navigateToHomeChild()
-                            Constants.ORANG_TUA -> view.navigateToHomeParent()
-                        }
+                        view.navigateToHome()
                     }
                 })
         } ?: run {
