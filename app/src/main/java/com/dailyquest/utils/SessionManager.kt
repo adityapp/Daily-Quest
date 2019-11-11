@@ -3,7 +3,7 @@ package com.dailyquest.utils
 import android.content.Context
 
 class SessionManager(private val context: Context) {
-    val sharedPreferences =
+    private val sharedPreferences =
         context.getSharedPreferences(Constants.SHAREDPREFERENCES, Context.MODE_PRIVATE)
 
     fun setSession(uidParent: String?, role: String) {

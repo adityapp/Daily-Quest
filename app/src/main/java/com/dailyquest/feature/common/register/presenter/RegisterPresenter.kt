@@ -4,12 +4,14 @@ import com.dailyquest.feature.common.register.RegisterPresenterContract
 import com.dailyquest.feature.common.register.RegisterViewContract
 import com.dailyquest.model.UserModel
 import com.dailyquest.utils.Constants
+import com.dailyquest.utils.SessionManager
 import com.dailyquest.utils.isEmailValid
 import com.dailyquest.utils.isPasswordValid
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class RegisterPresenter(private val view: RegisterViewContract) : RegisterPresenterContract {
+class RegisterPresenter(private val view: RegisterViewContract, private val pref: SessionManager) :
+    RegisterPresenterContract {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val firebaseDatabase = FirebaseDatabase.getInstance()
 
@@ -61,11 +63,11 @@ class RegisterPresenter(private val view: RegisterViewContract) : RegisterPresen
         parentUid: String
     ) {
         firebaseDatabase.getReference(Constants.DATABASE_USER)
-            .child(userUid).child(Constants.ANAK).child(parentUid)
+            .child(parentUid).child(Constants.ANAK).child(userUid)
             .setValue(UserModel(fullName, role))
             .addOnSuccessListener {
+                pref.setSession(parentUid, role)
                 view.dismissLoadingDialog()
-                //add shared preference
                 view.navigateToHomeChild()
             }
             .addOnFailureListener { e ->
@@ -76,6 +78,7 @@ class RegisterPresenter(private val view: RegisterViewContract) : RegisterPresen
     private fun registerAsParent(fullName: String, role: String, userUid: String) {
         firebaseDatabase.getReference(Constants.DATABASE_USER).child(userUid)
             .setValue(UserModel(fullName, role)).addOnSuccessListener {
+                pref.setSession(null, role)
                 view.dismissLoadingDialog()
                 view.navigateToHomeParent()
             }

@@ -27,6 +27,6 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BasePresen
 
     fun dismissLoadingDialog() = loading_dialog.remove()
 
-    fun showError(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    fun showToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 

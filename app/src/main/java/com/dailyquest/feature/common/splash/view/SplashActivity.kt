@@ -1,10 +1,7 @@
 package com.dailyquest.feature.common.splash.view
 
 import android.content.Intent
-import android.os.Bundle
 import android.os.Handler
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
 import com.dailyquest.feature.child.main.view.MainChildActivity
@@ -44,7 +41,7 @@ class SplashActivity : BaseActivity<SplashPresenterContract>(), SplashViewContra
     }
 
     override fun showFailedMessage(message: String) {
-        showError(message)
+        showToast(message)
     }
 
     private fun setupPresenter(){

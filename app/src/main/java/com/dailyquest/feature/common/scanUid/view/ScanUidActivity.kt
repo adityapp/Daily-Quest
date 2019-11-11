@@ -1,5 +1,6 @@
 package com.dailyquest.feature.common.scanUid.view
 
+import android.app.Activity
 import android.content.Intent
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
@@ -55,11 +56,14 @@ class ScanUidActivity : BaseActivity<ScanUidPresenterContract>(), ZXingScannerVi
     }
 
     override fun navigateToRegister(parentUid: String) {
-        startActivityForResult(intent, Constants.CAMERA_REQ_CODE)
+        val intent = Intent()
+        intent.putExtra(Constants.PARENT_UID, parentUid)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 
     override fun showFailedMessage(message: String) {
-        showError(message)
+        showToast(message)
         scanner.resumeCameraPreview(this)
     }
 

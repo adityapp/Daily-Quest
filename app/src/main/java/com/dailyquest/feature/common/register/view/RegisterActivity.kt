@@ -1,7 +1,9 @@
 package com.dailyquest.feature.common.register.view
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.view.View
 import android.widget.AdapterView
@@ -44,7 +46,7 @@ class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterView
 
     override fun showFailedMessage(message: String) {
         dismissLoadingDialog()
-        showError(message)
+        showToast(message)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -57,7 +59,13 @@ class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterView
 
         when(requestCode){
             Constants.CAMERA_REQ_CODE -> {
-
+                if (resultCode == Activity.RESULT_OK){
+                    data?.let {
+                        parentUid = it.getStringExtra(Constants.PARENT_UID)
+                    }
+                }else{
+                    showToast("Batal!")
+                }
             }
         }
     }
@@ -94,7 +102,7 @@ class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterView
     }
 
     private fun setupPresenter() {
-        presenter = RegisterPresenter(this)
+        presenter = RegisterPresenter(this, SessionManager(this))
     }
 
     private fun doScanning() {
@@ -102,8 +110,9 @@ class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterView
             != PackageManager.PERMISSION_DENIED
         ) {
             val intent = Intent(this, ScanUidActivity::class.java)
+            intent.putExtra(Constants.ROLE, Constants.ANAK)
             intent.putExtra(Constants.SOURCE_ACTIVITY, this::class.java.simpleName)
-            startActivity(intent)
+            startActivityForResult(intent, Constants.CAMERA_REQ_CODE)
         } else {
             ActivityCompat.requestPermissions(
                 this,
