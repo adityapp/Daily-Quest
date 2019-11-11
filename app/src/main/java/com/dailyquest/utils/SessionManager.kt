@@ -6,7 +6,7 @@ class SessionManager(private val context: Context) {
     private val sharedPreferences =
         context.getSharedPreferences(Constants.SHAREDPREFERENCES, Context.MODE_PRIVATE)
 
-    fun setSession(uidParent: String?, role: String) {
+    fun setSession(uidParent: String, role: String) {
         val editor = sharedPreferences.edit()
         editor.putString(Constants.PREF_PARENT_UID, uidParent)
         editor.putString(Constants.PREF_ROLE, role)

@@ -11,8 +11,8 @@ import com.dailyquest.base.BaseActivity
 import com.dailyquest.feature.common.role.view.RoleActivity
 import com.dailyquest.feature.parent.children.view.ChildrenFragment
 import com.dailyquest.feature.common.home.view.HomeFragment
-import com.dailyquest.feature.common.main.MainParentPresenterContract
-import com.dailyquest.feature.common.main.MainParentViewContract
+import com.dailyquest.feature.common.main.MainPresenterContract
+import com.dailyquest.feature.common.main.MainViewContract
 import com.dailyquest.feature.common.main.presenter.MainPresenter
 import com.dailyquest.utils.Constants
 import com.dailyquest.utils.SessionManager
@@ -20,7 +20,7 @@ import com.dailyquest.utils.beginWith
 import com.dailyquest.utils.then
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity<MainParentPresenterContract>(), MainParentViewContract {
+class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
 
     private lateinit var drawerToggle: ActionBarDrawerToggle
     private lateinit var pref: SessionManager

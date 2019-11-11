@@ -47,7 +47,7 @@ class RegisterPresenter(private val view: RegisterViewContract, private val pref
                 auth?.user?.let { user ->
                     when (role) {
                         Constants.ANAK -> registerAsChildren(fullName, role, user.uid, parentUid)
-                        Constants.ORANG_TUA -> registerAsParent(fullName, role, user.uid)
+                        Constants.ORANG_TUA -> registerAsParent(fullName, role, user.uid, user.uid)
                     }
                 }
             }
@@ -75,10 +75,15 @@ class RegisterPresenter(private val view: RegisterViewContract, private val pref
             }
     }
 
-    private fun registerAsParent(fullName: String, role: String, userUid: String) {
+    private fun registerAsParent(
+        fullName: String,
+        role: String,
+        userUid: String,
+        parentUid: String
+    ) {
         firebaseDatabase.getReference(Constants.DATABASE_USER).child(userUid)
             .setValue(UserModel(fullName, role)).addOnSuccessListener {
-                pref.setSession(null, role)
+                pref.setSession(parentUid, role)
                 view.dismissLoadingDialog()
                 view.navigateToHome()
             }

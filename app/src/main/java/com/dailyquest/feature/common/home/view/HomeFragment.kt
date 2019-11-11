@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dailyquest.R
 import com.dailyquest.adapter.QuestListAdapter
 import com.dailyquest.base.BaseFragment
-import com.dailyquest.feature.common.home.HomeParentPresenterContract
-import com.dailyquest.feature.common.home.HomeParentViewContract
+import com.dailyquest.feature.common.home.HomePresenterContract
+import com.dailyquest.feature.common.home.HomeViewContract
 import com.dailyquest.feature.common.home.presenter.HomePresenter
 import com.dailyquest.utils.beginWith
 import com.dailyquest.utils.then
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
-class HomeFragment : BaseFragment<HomeParentPresenterContract>(), HomeParentViewContract {
+class HomeFragment : BaseFragment<HomePresenterContract>(), HomeViewContract {
 
     private lateinit var adapter: QuestListAdapter
 

@@ -8,6 +8,5 @@ interface ChildrenViewContract {
 }
 
 interface ChildrenPresenterContract : BasePresenter{
-    fun addNewChildren()
     fun getChildrenList()
 }

@@ -2,10 +2,10 @@ package com.dailyquest.feature.common.main
 
 import com.dailyquest.base.BasePresenter
 
-interface MainParentViewContract{
+interface MainViewContract{
     fun navigateToRole()
 }
 
-interface MainParentPresenterContract: BasePresenter{
+interface MainPresenterContract: BasePresenter{
     fun logout()
 }

@@ -23,7 +23,13 @@ class LoginPresenter(private val view: LoginViewContract, private val pref: Sess
 
     private fun auth(email: String, password: String, role: String, parentUid: String) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
-            pref.setSession(parentUid, role)
+            it.user?.let { user ->
+                if (role == Constants.ANAK) {
+                    pref.setSession(parentUid, role)
+                } else {
+                    pref.setSession(user.uid, role)
+                }
+            }
             view.navigateToHome()
         }.addOnFailureListener { e ->
             view.showFailedMessage(e.message.toString())

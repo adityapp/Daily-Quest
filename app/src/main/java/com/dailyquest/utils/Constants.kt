@@ -26,6 +26,6 @@ class Constants {
 
         const val SOURCE_ACTIVITY = "source activity"
 
-        const val BARCODE_BASE_URL = "http://api.qrserver.com/v1/create-qr-code/?size=300x300&data="
+        const val BARCODE_BASE_URL = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="
     }
 }
