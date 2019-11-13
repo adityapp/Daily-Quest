@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dailyquest.R
 import com.dailyquest.adapter.ChildrenListAdapter
 import com.dailyquest.base.BaseFragment
-import com.dailyquest.feature.common.dialog.BarcodeDialog
+import com.dailyquest.dialog.BarcodeDialog
 import com.dailyquest.feature.parent.children.ChildrenPresenterContract
 import com.dailyquest.feature.parent.children.ChildrenViewContract
 import com.dailyquest.feature.parent.children.presenter.ChildrenPresenter

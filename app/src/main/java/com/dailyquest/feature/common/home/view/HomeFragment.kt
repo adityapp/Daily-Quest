@@ -9,6 +9,7 @@ import com.dailyquest.base.BaseFragment
 import com.dailyquest.feature.common.home.HomePresenterContract
 import com.dailyquest.feature.common.home.HomeViewContract
 import com.dailyquest.feature.common.home.presenter.HomePresenter
+import com.dailyquest.utils.SessionManager
 import com.dailyquest.utils.beginWith
 import com.dailyquest.utils.then
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -16,17 +17,18 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 class HomeFragment : BaseFragment<HomePresenterContract>(), HomeViewContract {
 
     private lateinit var adapter: QuestListAdapter
+    private lateinit var pref: SessionManager
 
     override fun layoutId(): Int = R.layout.fragment_home
 
     override fun setupView() {
         beginWith { setupPresenter() }
-            .then { setupOnClick() }
+            .then { setupSession() }
     }
 
     override fun showAllQuestList(list: List<Any>) {
         context?.let {
-            adapter = QuestListAdapter(it, list)
+            adapter = QuestListAdapter(it, list, pref)
             view.rv_quest.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
             view.rv_quest.adapter = adapter
         }
@@ -41,7 +43,9 @@ class HomeFragment : BaseFragment<HomePresenterContract>(), HomeViewContract {
         presenter = HomePresenter(this)
     }
 
-    private fun setupOnClick() {
-
+    private fun setupSession(){
+        context?.let {
+            pref = SessionManager(it)
+        }
     }
 }

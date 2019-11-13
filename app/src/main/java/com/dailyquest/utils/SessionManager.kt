@@ -17,11 +17,11 @@ class SessionManager(private val context: Context) {
         return sharedPreferences.getString(Constants.PREF_PARENT_UID, null)
     }
 
-    fun getRole(): String{
+    fun getRole(): String?{
         return sharedPreferences.getString(Constants.PREF_ROLE, Constants.ANAK)
     }
 
     fun clear(){
-        sharedPreferences.edit().clear().commit()
+        sharedPreferences.edit().clear().apply()
     }
 }
