@@ -14,6 +14,8 @@ class BarcodeDialog(context: Context, private val pref: SessionManager) : BaseDi
     override fun layoutId() = R.layout.dialog_barcode
 
     override fun setupView() {
+        super.setupView()
+
         beginWith { setupContent() }
             .then { setupOnClick() }
     }

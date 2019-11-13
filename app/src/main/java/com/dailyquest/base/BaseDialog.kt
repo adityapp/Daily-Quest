@@ -10,6 +10,7 @@ abstract class BaseDialog(context: Context): Dialog(context){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(layoutId())
         setupWindows()
         setupView()
@@ -17,7 +18,10 @@ abstract class BaseDialog(context: Context): Dialog(context){
 
     @LayoutRes abstract fun layoutId(): Int
 
-    abstract fun setupView()
+    open fun setupView(){
+        setCancelable(false)
+
+    }
 
     private fun setupWindows(){
         window?.let {
