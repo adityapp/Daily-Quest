@@ -26,13 +26,14 @@ class ChildrenPresenter(private val view: ChildrenViewContract, private val pref
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {
-                        var childrens = arrayListOf<ChildrenModel>()
+                        var childrenList = arrayListOf<ChildrenModel>()
                         for (children in p0.children) {
                             children.getValue(ChildrenModel::class.java)?.let {
-                                childrens.add(it)
+                                it.uid = children.key ?: ""
+                                childrenList.add(it)
                             }
                         }
-                        view.showChildrenList(childrens)
+                        view.showChildrenList(childrenList)
                     }
                 })
         }

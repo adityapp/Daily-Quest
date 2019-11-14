@@ -58,10 +58,10 @@ class ChildrenFragment : BaseFragment<ChildrenPresenterContract>(), ChildrenView
     }
 
     private fun setupOnClick() {
-        view.fab_add_children.setOnClickListener { showDialog() }
+        view.fab_add_children.setOnClickListener { openBarcodeDialog() }
     }
 
-    private fun showDialog() {
+    private fun openBarcodeDialog() {
         context?.let {
             BarcodeDialog(it, pref).show()
         }

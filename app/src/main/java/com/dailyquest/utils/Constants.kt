@@ -17,6 +17,7 @@ class Constants {
                     "\\x0b\\x0c\\x0e-\\x7f])+)\\])"
 
         const val DATABASE_USER = "User"
+        const val DATABASE_QUEST = "quest"
 
         const val SHAREDPREFERENCES = "SharedPreference Daily Quest"
         const val PREF_PARENT_UID = "pref parent uid"

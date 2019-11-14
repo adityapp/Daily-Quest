@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dailyquest.R
 import com.dailyquest.dialog.DetailQuestDialog
+import com.dailyquest.model.QuestModel
 import com.dailyquest.utils.SessionManager
 import kotlinx.android.synthetic.main.card_quest_list.view.*
 
 class QuestListAdapter(
     private val context: Context,
-    private val dataSet: List<Any>,
+    private val dataSet: List<QuestModel>,
     private val pref: SessionManager
 ) :
     RecyclerView.Adapter<QuestListAdapter.ViewHolder>() {
@@ -25,13 +26,17 @@ class QuestListAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return dataSet.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.apply {
-            cv_quest.setOnClickListener {
-                dialog.show()
+        dataSet[position].let {
+            holder.itemView.apply {
+                tv_quest_list_title.text = it.title
+                tv_quest_list_description.text = it.description
+                cv_quest.setOnClickListener {
+                    dialog.show()
+                }
             }
         }
     }

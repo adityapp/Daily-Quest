@@ -9,6 +9,7 @@ import com.dailyquest.base.BaseFragment
 import com.dailyquest.feature.common.home.HomePresenterContract
 import com.dailyquest.feature.common.home.HomeViewContract
 import com.dailyquest.feature.common.home.presenter.HomePresenter
+import com.dailyquest.model.QuestModel
 import com.dailyquest.utils.SessionManager
 import com.dailyquest.utils.beginWith
 import com.dailyquest.utils.then
@@ -26,7 +27,7 @@ class HomeFragment : BaseFragment<HomePresenterContract>(), HomeViewContract {
             .then { setupSession() }
     }
 
-    override fun showAllQuestList(list: List<Any>) {
+    override fun showAllQuestList(list: List<QuestModel>) {
         context?.let {
             adapter = QuestListAdapter(it, list, pref)
             view.rv_quest.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
