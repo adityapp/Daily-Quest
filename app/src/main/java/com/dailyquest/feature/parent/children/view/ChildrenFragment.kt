@@ -10,6 +10,7 @@ import com.dailyquest.dialog.BarcodeDialog
 import com.dailyquest.feature.parent.children.ChildrenPresenterContract
 import com.dailyquest.feature.parent.children.ChildrenViewContract
 import com.dailyquest.feature.parent.children.presenter.ChildrenPresenter
+import com.dailyquest.model.ChildrenModel
 import com.dailyquest.utils.SessionManager
 import com.dailyquest.utils.beginWith
 import com.dailyquest.utils.then
@@ -22,21 +23,23 @@ class ChildrenFragment : BaseFragment<ChildrenPresenterContract>(), ChildrenView
     override fun layoutId() = R.layout.fragment_children
 
     override fun setupView() {
-        beginWith { setupPresenter() }
-            .then { setupSession() }
+        beginWith { setupSession() }
+            .then { setupPresenter() }
             .then { setupOnClick() }
     }
 
-    override fun showChildrenList(list: List<Any>) {
+    override fun showChildrenList(list: List<ChildrenModel>) {
         context?.let {
             adapter = ChildrenListAdapter(it, list)
             view.rv_children.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
             view.rv_children.adapter = adapter
         }
+        dismissLoadingDialog()
     }
 
-    override fun openNewChildrenDialog() {
-        //open dialog
+    override fun showFailedMessage(message: String) {
+        showToast(message)
+        dismissLoadingDialog()
     }
 
     override fun onResume() {
@@ -45,7 +48,7 @@ class ChildrenFragment : BaseFragment<ChildrenPresenterContract>(), ChildrenView
     }
 
     private fun setupPresenter() {
-        presenter = ChildrenPresenter(this)
+        presenter = ChildrenPresenter(this, pref)
     }
 
     private fun setupSession() {

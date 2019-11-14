@@ -14,10 +14,7 @@ import com.dailyquest.feature.common.home.view.HomeFragment
 import com.dailyquest.feature.common.main.MainPresenterContract
 import com.dailyquest.feature.common.main.MainViewContract
 import com.dailyquest.feature.common.main.presenter.MainPresenter
-import com.dailyquest.utils.Constants
-import com.dailyquest.utils.SessionManager
-import com.dailyquest.utils.beginWith
-import com.dailyquest.utils.then
+import com.dailyquest.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
@@ -37,8 +34,7 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
     override fun navigateToRole() {
         val intent = Intent(this, RoleActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(intent)
-        finish()
+        startAndFinish(intent)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

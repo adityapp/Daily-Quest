@@ -63,7 +63,7 @@ class RegisterPresenter(private val view: RegisterViewContract, private val pref
         parentUid: String
     ) {
         firebaseDatabase.getReference(Constants.DATABASE_USER)
-            .child(parentUid).child(Constants.ANAK).child(userUid)
+            .child(parentUid).child(Constants.ANAK.toLowerCase()).child(userUid)
             .setValue(UserModel(fullName, role))
             .addOnSuccessListener {
                 pref.setSession(parentUid, role)

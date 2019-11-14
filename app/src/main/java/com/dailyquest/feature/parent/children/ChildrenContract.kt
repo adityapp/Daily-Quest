@@ -1,12 +1,15 @@
 package com.dailyquest.feature.parent.children
 
 import com.dailyquest.base.BasePresenter
+import com.dailyquest.model.ChildrenModel
 
 interface ChildrenViewContract {
-    fun showChildrenList(list: List<Any>)
-    fun openNewChildrenDialog()
+    fun showChildrenList(list: List<ChildrenModel>)
+    fun showFailedMessage(message: String)
+    fun showLoadingDialog()
+    fun dismissLoadingDialog()
 }
 
-interface ChildrenPresenterContract : BasePresenter{
+interface ChildrenPresenterContract : BasePresenter {
     fun getChildrenList()
 }
