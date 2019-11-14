@@ -33,5 +33,7 @@ class Constants {
         const val STATUS_ONGOING = "Sedang Dikerjakan"
         const val STATUS_FINISH = "Selesai"
         const val STATUS_CLOSE = "Telah Berakhir"
+
+        const val DATE_FORMAT = "dd/MM/yyyy  HH:mm"
     }
 }

@@ -39,7 +39,7 @@ class NewQuestDialog(context: Context, private val addListener: (QuestModel) -> 
                     description = et_description.value(),
                     startTime = et_start_time.value().dateToTimestamp(),
                     endTime = et_end_time.value().dateToTimestamp(),
-                    createdAt = calendar.timeInMillis / 1000,
+                    createdAt = calendar.timeInMillis,
                     reward = et_reward.value().toInt(),
                     hideReward = cb_hide_reward.isChecked
                 )

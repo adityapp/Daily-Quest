@@ -9,6 +9,7 @@ import com.dailyquest.R
 import com.dailyquest.dialog.DetailQuestDialog
 import com.dailyquest.model.QuestModel
 import com.dailyquest.utils.SessionManager
+import com.dailyquest.utils.timestampToDate
 import kotlinx.android.synthetic.main.card_quest_list.view.*
 
 class QuestListAdapter(
@@ -34,6 +35,8 @@ class QuestListAdapter(
             holder.itemView.apply {
                 tv_quest_list_title.text = it.title
                 tv_quest_list_description.text = it.description
+                tv_quest_list_time.text = it.createdAt.timestampToDate()
+
                 cv_quest.setOnClickListener {
                     dialog.show()
                 }

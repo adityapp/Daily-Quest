@@ -37,7 +37,12 @@ fun Spinner.value(): String {
     return this.selectedItem.toString()
 }
 
-fun String.dateToTimestamp(): Long{
-    val formatter = SimpleDateFormat("dd/MM/yyyy  HH:mm")
-    return (formatter.parse(this) as Date).time/1000
+fun String.dateToTimestamp(): Long {
+    val formatter = SimpleDateFormat(Constants.DATE_FORMAT)
+    return (formatter.parse(this) as Date).time
+}
+
+fun Long.timestampToDate(): String {
+    val formatter = SimpleDateFormat(Constants.DATE_FORMAT)
+    return formatter.format(Date(this))
 }
