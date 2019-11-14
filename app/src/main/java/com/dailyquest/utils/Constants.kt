@@ -28,5 +28,10 @@ class Constants {
         const val SOURCE_ACTIVITY = "source activity"
 
         const val BARCODE_BASE_URL = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="
+
+        const val STATUS_OPEN = "Belum Dikerjakan"
+        const val STATUS_ONGOING = "Sedang Dikerjakan"
+        const val STATUS_FINISH = "Selesai"
+        const val STATUS_CLOSE = "Telah Berakhir"
     }
 }
