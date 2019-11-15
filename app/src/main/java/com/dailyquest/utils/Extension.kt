@@ -1,10 +1,14 @@
 package com.dailyquest.utils
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.widget.EditText
 import android.widget.Spinner
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import com.dailyquest.R
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
@@ -46,4 +50,18 @@ fun String.dateToTimestamp(): Long {
 fun Long.timestampToDate(): String {
     val formatter = SimpleDateFormat(Constants.DATE_FORMAT)
     return formatter.format(Date(this))
+}
+
+fun CardView.setStatusIndicator(context: Context, status: String){
+    setCardBackgroundColor(
+        ContextCompat.getColor(
+            context,
+            when (status) {
+                Constants.STATUS_OPEN -> R.color.colorPrimary
+                Constants.STATUS_ONGOING -> R.color.green
+                Constants.STATUS_CLOSE -> R.color.red
+                else -> R.color.gray
+            }
+        )
+    )
 }

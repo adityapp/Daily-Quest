@@ -57,7 +57,7 @@ class LoginActivity : BaseActivity<LoginPresenterContract>(), LoginViewContract 
     }
 
     private fun doLogin() {
-        presenter.login(et_email.value(), et_kata_sandi.value(), role, parenUid)
+        presenter.login(et_email.value(), et_kata_sandi.value(), role, parenUid ?: "")
     }
 
     private fun getExtra() {

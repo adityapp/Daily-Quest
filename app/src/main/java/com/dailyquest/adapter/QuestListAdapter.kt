@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dailyquest.R
 import com.dailyquest.dialog.DetailQuestDialog
 import com.dailyquest.model.QuestModel
-import com.dailyquest.utils.SessionManager
-import com.dailyquest.utils.timestampToDate
+import com.dailyquest.utils.*
 import kotlinx.android.synthetic.main.card_quest_list.view.*
 
 class QuestListAdapter(
@@ -33,9 +32,15 @@ class QuestListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         dataSet[position].let { quest ->
             holder.itemView.apply {
+                when {
+                    quest.fullName.isNullOrBlank() -> tv_quest_list_name.remove()
+                    else -> tv_quest_list_name.text = quest.fullName
+                }
+
                 tv_quest_list_title.text = quest.title
                 tv_quest_list_description.text = quest.description
                 tv_quest_list_time.text = quest.createdAt.timestampToDate()
+                cv_status_indicator.setStatusIndicator(context, quest.status)
 
                 cv_quest.setOnClickListener {
                     dialog.quest = quest

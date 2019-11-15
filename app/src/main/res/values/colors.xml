@@ -8,4 +8,7 @@
     <color name="middleYellowRed">#EBA880</color>
 
     <color name="black_50">#80000000</color>
+    <color name="gray">#757575</color>
+    <color name="red">#f50057</color>
+    <color name="green">#00c853</color>
 </resources>

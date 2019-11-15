@@ -12,12 +12,12 @@ class LoginPresenter(private val view: LoginViewContract, private val pref: Sess
     LoginPresenterContract {
     private val firebaseAuth = FirebaseAuth.getInstance()
 
-    override fun login(email: String, password: String, role: String, parentUid: String?) {
+    override fun login(email: String, password: String, role: String, parentUid: String) {
         view.showLoadingDialog()
         when {
             !email.isEmailValid() -> view.showFailedMessage("E-mail tidak valid!")
             !password.isPasswordValid() -> view.showFailedMessage("Kata sandi yang dimasukan salah!")
-            else -> auth(email, password, role, "")
+            else -> auth(email, password, role, parentUid)
         }
     }
 

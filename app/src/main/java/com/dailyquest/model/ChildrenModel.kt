@@ -6,5 +6,6 @@ data class ChildrenModel(
     var uid: String? = null,
     var fullName: String = "",
     var role: String = "",
-    var reward: Int = 0
+    var reward: Int = 0,
+    var quest: HashMap<String, QuestModel> = hashMapOf()
 ) : Serializable

@@ -18,26 +18,49 @@
         android:padding="16dp"
         android:background="@color/middleYellowRed">
 
-        <TextView
-            android:id="@+id/tv_quest_list_time"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="12 Nov 2019 15:00"
-            android:textSize="10sp"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_status_indicator"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/tv_quest_list_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="12 Nov 2019 15:00"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_quest_list_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Name"
+            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/tv_quest_list_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Title"/>
+            android:text="Title" />
 
         <TextView
             android:id="@+id/tv_quest_list_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:text="Description"/>
+            android:text="Description" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
