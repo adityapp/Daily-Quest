@@ -30,12 +30,14 @@
             android:id="@+id/tv_quest_list_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
             android:text="Title"/>
 
         <TextView
             android:id="@+id/tv_quest_list_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
             android:text="Description"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

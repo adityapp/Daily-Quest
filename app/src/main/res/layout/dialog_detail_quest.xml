@@ -39,7 +39,7 @@
                     android:textSize="16sp"/>
 
                 <RelativeLayout
-                    android:id="@+id/rv_status"
+                    android:id="@+id/rl_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_background_blue"
@@ -92,7 +92,7 @@
                     android:textColor="@color/middleYellowRed"/>
 
                 <TextView
-                    android:id="@+id/tv_close_time"
+                    android:id="@+id/tv_end_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Waktu Selesai"

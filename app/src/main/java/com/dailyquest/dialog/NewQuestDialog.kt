@@ -62,7 +62,7 @@ class NewQuestDialog(context: Context, private val addListener: (QuestModel) -> 
 
     private fun showDatePickerDialog(editText: EditText) {
         val listener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-            showTimePickerDialog(editText, "$dayOfMonth/$month/$year")
+            showTimePickerDialog(editText, "$dayOfMonth/${month+1}/$year")
         }
 
         DatePickerDialog(

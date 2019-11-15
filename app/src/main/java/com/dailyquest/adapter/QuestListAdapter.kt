@@ -31,13 +31,14 @@ class QuestListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        dataSet[position].let {
+        dataSet[position].let { quest ->
             holder.itemView.apply {
-                tv_quest_list_title.text = it.title
-                tv_quest_list_description.text = it.description
-                tv_quest_list_time.text = it.createdAt.timestampToDate()
+                tv_quest_list_title.text = quest.title
+                tv_quest_list_description.text = quest.description
+                tv_quest_list_time.text = quest.createdAt.timestampToDate()
 
                 cv_quest.setOnClickListener {
+                    dialog.quest = quest
                     dialog.show()
                 }
             }

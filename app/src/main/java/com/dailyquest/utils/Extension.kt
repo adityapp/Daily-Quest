@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.View
 import android.widget.EditText
 import android.widget.Spinner
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
@@ -39,7 +40,7 @@ fun Spinner.value(): String {
 
 fun String.dateToTimestamp(): Long {
     val formatter = SimpleDateFormat(Constants.DATE_FORMAT)
-    return (formatter.parse(this) as Date).time
+    return Timestamp(formatter.parse(this).time).time
 }
 
 fun Long.timestampToDate(): String {
