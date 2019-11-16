@@ -35,7 +35,7 @@ class QuestListActivity : BaseActivity<QuestListPresenterContract>(), QuestListV
     }
 
     override fun showQuestList(list: List<QuestModel>) {
-        adapter = QuestListAdapter(this, list, pref)
+        adapter = QuestListAdapter(this, list, pref) {}
         rv_quest.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rv_quest.adapter = adapter
         dismissLoadingDialog()

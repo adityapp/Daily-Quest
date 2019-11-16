@@ -14,11 +14,10 @@ import kotlinx.android.synthetic.main.card_quest_list.view.*
 class QuestListAdapter(
     private val context: Context,
     private val dataSet: List<QuestModel>,
-    private val pref: SessionManager
+    private val pref: SessionManager,
+    private val listener: (QuestModel) -> Unit
 ) :
     RecyclerView.Adapter<QuestListAdapter.ViewHolder>() {
-
-    private val dialog: DetailQuestDialog by lazy { DetailQuestDialog(context, pref) }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.card_quest_list, parent, false)
@@ -43,8 +42,9 @@ class QuestListAdapter(
                 cv_status_indicator.setStatusIndicator(context, quest.status)
 
                 cv_quest.setOnClickListener {
-                    dialog.quest = quest
-                    dialog.show()
+                    DetailQuestDialog(context, pref, quest) {
+                        listener.invoke(quest)
+                    }.show()
                 }
             }
         }

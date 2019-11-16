@@ -7,8 +7,12 @@ import com.dailyquest.model.QuestModel
 import com.dailyquest.utils.*
 import kotlinx.android.synthetic.main.dialog_detail_quest.*
 
-class DetailQuestDialog(context: Context, private val pref: SessionManager) : BaseDialog(context) {
-    var quest = QuestModel()
+class DetailQuestDialog(
+    context: Context,
+    private val pref: SessionManager,
+    private val quest: QuestModel,
+    private val listener: () -> Unit
+) : BaseDialog(context) {
 
     override fun layoutId() = R.layout.dialog_detail_quest
 
@@ -20,6 +24,9 @@ class DetailQuestDialog(context: Context, private val pref: SessionManager) : Ba
     }
 
     private fun setupContent() {
+        pref.getRole()?.let {
+            if (it == Constants.ORANG_TUA) b_status.remove() else changeButtonText(quest.status)
+        }
         tv_create_time.text = quest.createdAt.timestampToDate()
         tv_title.text = quest.title
         setStatus(quest.status)
@@ -29,7 +36,11 @@ class DetailQuestDialog(context: Context, private val pref: SessionManager) : Ba
     }
 
     private fun setupOnClick() {
-        b_ok.setOnClickListener { dismiss() }
+        b_status.setOnClickListener {
+            listener.invoke()
+            dismiss()
+        }
+        iv_close.setOnClickListener { dismiss() }
     }
 
     private fun setStatus(status: String) {
@@ -43,5 +54,13 @@ class DetailQuestDialog(context: Context, private val pref: SessionManager) : Ba
                 else -> R.drawable.rounded_background_gray
             }
         )
+    }
+
+    private fun changeButtonText(status: String) {
+        when (status) {
+            Constants.STATUS_OPEN -> b_status.text = "Jalankan tugas"
+            Constants.STATUS_ONGOING -> b_status.text = "Selesaikan tugas"
+            else -> b_status.remove()
+        }
     }
 }
