@@ -6,8 +6,8 @@ import com.dailyquest.model.QuestModel
 interface HomeViewContract {
     fun showQuestList(list: List<QuestModel>)
     fun showFailedMessage(message: String)
-    fun showLoadingDialog()
-    fun dismissLoadingDialog()
+    fun showLoadingDialog(): Unit?
+    fun dismissLoadingDialog(): Unit?
 }
 
 interface HomePresenterContract : BasePresenter {

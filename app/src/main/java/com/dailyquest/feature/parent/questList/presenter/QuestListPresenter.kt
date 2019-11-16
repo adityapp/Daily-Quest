@@ -25,6 +25,7 @@ class QuestListPresenter(
 
             view.openNewQuestDialog {
                 view.showLoadingDialog()
+
                 firebaseDatabase.getReference(Constants.DATABASE_USER).child(uid)
                     .child(Constants.ANAK.toLowerCase()).child(childrenUid)
                     .child(Constants.DATABASE_QUEST).child(uuid).setValue(it)
@@ -40,15 +41,18 @@ class QuestListPresenter(
 
     override fun getQuestList() {
         pref.getParentUid()?.let { uid ->
+            view.showLoadingDialog()
+
             firebaseDatabase.getReference(Constants.DATABASE_USER).child(uid)
-                .child(Constants.ANAK.toLowerCase()).child(childrenUid).child(Constants.DATABASE_QUEST).addValueEventListener(object : ValueEventListener{
+                .child(Constants.ANAK.toLowerCase()).child(childrenUid)
+                .child(Constants.DATABASE_QUEST).addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
                         view.showFailedMessage(p0.message)
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {
                         val questList = arrayListOf<QuestModel>()
-                        for (quest in p0.children){
+                        for (quest in p0.children) {
                             quest.getValue(QuestModel::class.java)?.let {
                                 it.id = quest.key
                                 questList.add(it)
@@ -58,6 +62,5 @@ class QuestListPresenter(
                     }
                 })
         }
-        view.showQuestList(listOf())
     }
 }

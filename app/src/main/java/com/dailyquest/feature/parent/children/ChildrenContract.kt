@@ -6,8 +6,8 @@ import com.dailyquest.model.ChildrenModel
 interface ChildrenViewContract {
     fun showChildrenList(list: List<ChildrenModel>)
     fun showFailedMessage(message: String)
-    fun showLoadingDialog()
-    fun dismissLoadingDialog()
+    fun showLoadingDialog(): Unit?
+    fun dismissLoadingDialog(): Unit?
 }
 
 interface ChildrenPresenterContract : BasePresenter {

@@ -1,5 +1,6 @@
 package com.dailyquest.feature.parent.questList.view
 
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dailyquest.R
