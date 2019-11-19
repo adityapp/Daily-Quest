@@ -67,7 +67,6 @@ class HomePresenter(private val view: HomeViewContract, private val pref: Sessio
                                     questList.add(it)
                                 }
                             }
-                            Log.d("Hello", "$uid - $parentUid")
                             view.showQuestList(questList)
                         }
                     })

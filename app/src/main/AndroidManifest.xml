@@ -12,10 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <service
+            android:name=".utils.MessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity android:name="com.dailyquest.feature.common.scanUid.view.ScanUidActivity"></activity>
         <activity android:name="com.dailyquest.feature.parent.questList.view.QuestListActivity" />
         <activity android:name="com.dailyquest.feature.common.register.view.RegisterActivity" />
-        <activity android:name="com.dailyquest.feature.child.main.view.MainChildActivity" />
         <activity android:name="com.dailyquest.feature.common.main.view.MainActivity" />
         <activity android:name="com.dailyquest.feature.common.login.view.LoginActivity" />
         <activity android:name="com.dailyquest.feature.common.role.view.RoleActivity" />
@@ -29,5 +37,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
