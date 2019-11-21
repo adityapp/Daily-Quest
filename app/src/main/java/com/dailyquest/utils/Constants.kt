@@ -18,6 +18,7 @@ class Constants {
 
         const val DATABASE_USER = "User"
         const val DATABASE_QUEST = "quest"
+        const val DATABASE_TOKEN = "token"
 
         const val SHAREDPREFERENCES = "SharedPreference Daily Quest"
         const val PREF_PARENT_UID = "pref parent uid"
@@ -35,5 +36,7 @@ class Constants {
         const val STATUS_CLOSE = "Telah Berakhir"
 
         const val DATE_FORMAT = "dd/MM/yyyy  HH:mm"
+
+        const val DEFAULT_CHANNEL_ID = "daily-quest"
     }
 }

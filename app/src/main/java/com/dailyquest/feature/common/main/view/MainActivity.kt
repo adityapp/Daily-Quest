@@ -8,12 +8,12 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
-import com.dailyquest.feature.common.role.view.RoleActivity
-import com.dailyquest.feature.parent.children.view.ChildrenFragment
 import com.dailyquest.feature.common.home.view.HomeFragment
 import com.dailyquest.feature.common.main.MainPresenterContract
 import com.dailyquest.feature.common.main.MainViewContract
 import com.dailyquest.feature.common.main.presenter.MainPresenter
+import com.dailyquest.feature.common.role.view.RoleActivity
+import com.dailyquest.feature.parent.children.view.ChildrenFragment
 import com.dailyquest.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -27,6 +27,7 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
     override fun setupView() {
         beginWith { setupActionBar() }
             .then { setupPresenter() }
+            .then { setupToken() }
             .then { setupSession() }
             .then { setupDrawer() }
     }
@@ -53,7 +54,11 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
         presenter = MainPresenter(this, SessionManager(this))
     }
 
-    private fun setupSession(){
+    private fun setupToken() {
+        presenter.sendTokenToDatabase()
+    }
+
+    private fun setupSession() {
         pref = SessionManager(this)
     }
 
@@ -65,7 +70,7 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
             R.string.navigation_drawer_close
         )
 
-        if (pref.getRole() == Constants.ANAK){
+        if (pref.getRole() == Constants.ANAK) {
             drawer.menu.getItem(1).isVisible = false
         }
         drawer_layout.addDrawerListener(drawerToggle)

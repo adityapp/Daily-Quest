@@ -8,4 +8,5 @@ interface MainViewContract{
 
 interface MainPresenterContract: BasePresenter{
     fun logout()
+    fun sendTokenToDatabase()
 }
