@@ -9,6 +9,7 @@ interface LoginViewContract {
     fun showFailedMessage(message: String)
 }
 
-interface LoginPresenterContract: BasePresenter {
+interface LoginPresenterContract : BasePresenter {
     fun login(email: String, password: String, role: String, parentUid: String)
+    fun sendTokenToDatabase()
 }

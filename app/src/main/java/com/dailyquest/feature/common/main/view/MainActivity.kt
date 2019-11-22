@@ -27,7 +27,6 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
     override fun setupView() {
         beginWith { setupActionBar() }
             .then { setupPresenter() }
-            .then { setupToken() }
             .then { setupSession() }
             .then { setupDrawer() }
     }
@@ -52,10 +51,6 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
 
     private fun setupPresenter() {
         presenter = MainPresenter(this, SessionManager(this))
-    }
-
-    private fun setupToken() {
-        presenter.sendTokenToDatabase()
     }
 
     private fun setupSession() {
