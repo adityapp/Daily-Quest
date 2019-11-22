@@ -73,32 +73,4 @@ class HomePresenter(private val view: HomeViewContract, private val pref: Sessio
             }
         }
     }
-
-    override fun updateQuest(quest: QuestModel) {
-        view.showLoadingDialog()
-
-        firebaseAuth.uid?.let { uid ->
-            pref.getParentUid()?.let { parentUid ->
-                quest.id?.let { id ->
-                    firebaseDatabase.getReference(Constants.DATABASE_USER).child(parentUid)
-                        .child(Constants.ANAK.toLowerCase()).child(uid)
-                        .child(Constants.DATABASE_QUEST).child(id)
-                        .updateChildren(mapOf("status" to updateStatus(quest.status)))
-                        .addOnSuccessListener {
-                            view.dismissLoadingDialog()
-                        }
-                        .addOnFailureListener {
-                            view.showFailedMessage(it.message.toString())
-                        }
-                }
-            }
-        }
-    }
-
-    private fun updateStatus(status: String): String {
-        return when (status) {
-            Constants.STATUS_OPEN -> Constants.STATUS_ONGOING
-            else -> Constants.STATUS_FINISH
-        }
-    }
 }

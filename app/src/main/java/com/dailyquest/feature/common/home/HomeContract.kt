@@ -13,5 +13,4 @@ interface HomeViewContract {
 interface HomePresenterContract : BasePresenter {
     fun getAllQuestList()
     fun getQuestList()
-    fun updateQuest(quest: QuestModel)
 }

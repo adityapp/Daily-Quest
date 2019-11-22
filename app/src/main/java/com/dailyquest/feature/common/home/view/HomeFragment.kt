@@ -30,9 +30,7 @@ class HomeFragment : BaseFragment<HomePresenterContract>(), HomeViewContract {
 
     override fun showQuestList(list: List<QuestModel>) {
         context?.let {
-            adapterQuest = QuestListAdapter(it, list, pref){ quest ->
-                presenter.updateQuest(quest)
-            }
+            adapterQuest = QuestListAdapter(it, list)
             view.rv_quest.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
             view.rv_quest.adapter = adapterQuest
         }

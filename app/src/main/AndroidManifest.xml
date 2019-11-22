@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".feature.common.detailQuest.view.DetailQuestActivity"></activity>
 
         <service
             android:name=".utils.MessagingService"
@@ -21,14 +23,14 @@
             </intent-filter>
         </service>
 
-        <activity android:name="com.dailyquest.feature.common.scanUid.view.ScanUidActivity"></activity>
-        <activity android:name="com.dailyquest.feature.parent.questList.view.QuestListActivity" />
-        <activity android:name="com.dailyquest.feature.common.register.view.RegisterActivity" />
-        <activity android:name="com.dailyquest.feature.common.main.view.MainActivity" />
-        <activity android:name="com.dailyquest.feature.common.login.view.LoginActivity" />
-        <activity android:name="com.dailyquest.feature.common.role.view.RoleActivity" />
+        <activity android:name=".feature.common.scanUid.view.ScanUidActivity" />
+        <activity android:name=".feature.parent.questList.view.QuestListActivity" />
+        <activity android:name=".feature.common.register.view.RegisterActivity" />
+        <activity android:name=".feature.common.main.view.MainActivity" />
+        <activity android:name=".feature.common.login.view.LoginActivity" />
+        <activity android:name=".feature.common.role.view.RoleActivity" />
         <activity
-            android:name="com.dailyquest.feature.common.splash.view.SplashActivity"
+            android:name=".feature.common.splash.view.SplashActivity"
             android:theme="@style/NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,4 +39,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

@@ -1,6 +1,5 @@
 package com.dailyquest.feature.parent.questList.view
 
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dailyquest.R
@@ -35,7 +34,7 @@ class QuestListActivity : BaseActivity<QuestListPresenterContract>(), QuestListV
     }
 
     override fun showQuestList(list: List<QuestModel>) {
-        adapter = QuestListAdapter(this, list, pref) {}
+        adapter = QuestListAdapter(this, list)
         rv_quest.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rv_quest.adapter = adapter
         dismissLoadingDialog()

@@ -1,21 +1,23 @@
 package com.dailyquest.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dailyquest.R
-import com.dailyquest.dialog.DetailQuestDialog
+import com.dailyquest.feature.common.detailQuest.view.DetailQuestActivity
 import com.dailyquest.model.QuestModel
-import com.dailyquest.utils.*
+import com.dailyquest.utils.Constants
+import com.dailyquest.utils.remove
+import com.dailyquest.utils.setStatusIndicator
+import com.dailyquest.utils.timestampToDate
 import kotlinx.android.synthetic.main.card_quest_list.view.*
 
 class QuestListAdapter(
     private val context: Context,
-    private val dataSet: List<QuestModel>,
-    private val pref: SessionManager,
-    private val listener: (QuestModel) -> Unit
+    private val dataSet: List<QuestModel>
 ) :
     RecyclerView.Adapter<QuestListAdapter.ViewHolder>() {
 
@@ -42,9 +44,9 @@ class QuestListAdapter(
                 cv_status_indicator.setStatusIndicator(context, quest.status)
 
                 cv_quest.setOnClickListener {
-                    DetailQuestDialog(context, pref, quest) {
-                        listener.invoke(quest)
-                    }.show()
+                    val intent = Intent(context, DetailQuestActivity::class.java)
+                    intent.putExtra(Constants.DATABASE_QUEST, quest)
+                    context.startActivity(intent)
                 }
             }
         }
