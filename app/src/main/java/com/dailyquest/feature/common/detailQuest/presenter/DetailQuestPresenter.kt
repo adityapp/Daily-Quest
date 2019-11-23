@@ -1,6 +1,5 @@
 package com.dailyquest.feature.common.detailQuest.presenter
 
-import android.util.Log
 import com.dailyquest.feature.common.detailQuest.DetailQuestPresenterContract
 import com.dailyquest.feature.common.detailQuest.DetailQuestViewContract
 import com.dailyquest.model.QuestModel

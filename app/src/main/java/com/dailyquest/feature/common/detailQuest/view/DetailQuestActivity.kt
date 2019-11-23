@@ -1,10 +1,11 @@
 package com.dailyquest.feature.common.detailQuest.view
 
+import android.app.Activity
 import android.content.Intent
-import android.provider.MediaStore
-import android.util.Log
+import android.net.Uri
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
+import com.dailyquest.dialog.PickImageDialog
 import com.dailyquest.feature.common.detailQuest.DetailQuestPresenterContract
 import com.dailyquest.feature.common.detailQuest.DetailQuestViewContract
 import com.dailyquest.feature.common.detailQuest.presenter.DetailQuestPresenter
@@ -16,6 +17,8 @@ import kotlinx.android.synthetic.main.activity_detail_quest.*
 class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), DetailQuestViewContract {
     private lateinit var pref: SessionManager
     private lateinit var quest: QuestModel
+    private var selectedImage: Uri? = null
+    private lateinit var imagePicker: PickImageDialog
 
     override fun layoutId() = R.layout.activity_detail_quest
 
@@ -25,6 +28,7 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
             .then { setupSession() }
             .then { setupPresenter() }
             .then { setupQuest() }
+            .then { setupImagePickerDialog() }
             .then { setupOnClick() }
     }
 
@@ -52,6 +56,19 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         dismissLoadingDialog()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            Constants.IMAGE_PICKER_CODE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    selectedImage = data?.data
+                    tv_file_upload.text = "Ubah Foto"
+                    imagePicker.dismiss()
+                }
+            }
+        }
+    }
+
     private fun setupActionBar() {
         setSupportActionBar(toolbar)
         title = "Daily Quest"
@@ -70,8 +87,8 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         presenter = DetailQuestPresenter(this, pref)
     }
 
-    private fun setupQuest(){
-        quest.id?.let {id ->
+    private fun setupQuest() {
+        quest.id?.let { id ->
             presenter.getQuest(id)
         }
     }
@@ -80,7 +97,11 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         b_status.setOnClickListener {
             presenter.updateQuest(quest)
         }
-        rl_upload_image.setOnClickListener { pickImageFromGallery() }
+        rl_upload_image.setOnClickListener { imagePicker.show() }
+    }
+
+    private fun setupImagePickerDialog() {
+        imagePicker = PickImageDialog(this)
     }
 
     private fun setStatus(status: String) {
@@ -94,19 +115,6 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
                 else -> R.drawable.rounded_background_gray
             }
         )
-    }
-
-    private fun pickImageFromGallery() {
-        startActivityForResult(
-            Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            ), Constants.PICK_IMAGE_FROM_GALLERY
-        )
-    }
-
-    private fun pickImageFromCamera() {
-        startActivityForResult(Intent(MediaStore.ACTION_IMAGE_CAPTURE), 0)
     }
 
     private fun changeStatusState(status: String) {

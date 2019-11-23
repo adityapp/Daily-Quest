@@ -20,7 +20,6 @@ abstract class BaseDialog(context: Context): Dialog(context){
 
     open fun setupView(){
         setCancelable(false)
-
     }
 
     private fun setupWindows(){
