@@ -25,6 +25,8 @@ class Constants {
         const val PREF_ROLE = "pref role"
 
         const val CAMERA_REQ_CODE = 9001
+        const val PICK_IMAGE_FROM_GALLERY = 9991
+        const val PICK_IMAGE_FROM_CAMERA = 9992
 
         const val SOURCE_ACTIVITY = "source activity"
 
