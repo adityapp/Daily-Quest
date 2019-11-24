@@ -36,6 +36,7 @@ class HomePresenter(private val view: HomeViewContract, private val pref: Sessio
                                 for ((key, value) in it.quest) {
                                     value.id = key
                                     value.fullName = child.fullName
+                                    value.childrenUid = children.key
                                     allQuest.add(value)
                                 }
                             }

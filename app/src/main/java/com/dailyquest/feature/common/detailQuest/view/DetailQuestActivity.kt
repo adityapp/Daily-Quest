@@ -2,7 +2,6 @@ package com.dailyquest.feature.common.detailQuest.view
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
@@ -92,7 +91,7 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
 
     private fun setupQuest() {
         quest.id?.let { id ->
-            presenter.getQuest(id)
+            presenter.getQuest(id, quest.childrenUid.toString())
         }
     }
 
@@ -151,11 +150,11 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         }
     }
 
-    private fun changeStateStatusButton(){
-        if (selectedImage == null){
+    private fun changeStateStatusButton() {
+        if (selectedImage == null) {
             b_status.isClickable = false
             b_status.setBackgroundResource(R.drawable.rounded_background_gray)
-        }else{
+        } else {
             b_status.isClickable = true
             b_status.setBackgroundResource(R.drawable.button_background)
         }

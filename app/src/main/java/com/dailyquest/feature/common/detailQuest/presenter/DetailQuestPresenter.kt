@@ -30,13 +30,14 @@ class DetailQuestPresenter(
         }
     }
 
-    override fun getQuest(id: String) {
+    override fun getQuest(id: String, childrenUid: String) {
         firebaseAuth.uid?.let { uid ->
             pref.getParentUid()?.let { parentUid ->
                 view.showLoadingDialog()
 
                 firebaseDatabase.getReference(Constants.DATABASE_USER).child(parentUid)
-                    .child(Constants.ANAK.toLowerCase()).child(uid)
+                    .child(Constants.ANAK.toLowerCase())
+                    .child(if (pref.getRole() == Constants.ANAK) uid else childrenUid)
                     .child(Constants.DATABASE_QUEST).child(id)
                     .addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError) {
@@ -66,7 +67,7 @@ class DetailQuestPresenter(
                         .child(Constants.DATABASE_QUEST).child(id)
                         .updateChildren(mapOf("status" to updateStatus(quest.status)))
                         .addOnSuccessListener {
-                            getQuest(id)
+                            getQuest(id, quest.childrenUid.toString())
                         }
                         .addOnFailureListener {
                             view.showFailedMessage(it.message.toString())
@@ -90,13 +91,14 @@ class DetailQuestPresenter(
                                 it.metadata?.reference?.downloadUrl?.addOnSuccessListener { uriResult ->
                                     quest.image = uriResult.toString()
                                     quest.status = updateStatus(quest.status)
+                                    quest.id = null
                                     firebaseDatabase.getReference(Constants.DATABASE_USER)
                                         .child(parentUid)
                                         .child(Constants.ANAK.toLowerCase()).child(uid)
                                         .child(Constants.DATABASE_QUEST).child(id)
                                         .setValue(quest)
                                         .addOnSuccessListener {
-                                            getQuest(id)
+                                            getQuest(id, quest.childrenUid.toString())
                                         }
                                         .addOnFailureListener { e ->
                                             view.showFailedMessage(e.message.toString())

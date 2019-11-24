@@ -6,6 +6,7 @@ import java.io.Serializable
 data class QuestModel(
     var id: String? = null,
     var fullName: String? = null,
+    var childrenUid: String? = null,
     var title: String = "",
     var description: String = "",
     var startTime: Long = 0,
