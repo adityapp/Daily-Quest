@@ -14,5 +14,6 @@ data class QuestModel(
     var reward: Int = 0,
     var hideReward: Boolean = false,
     var status: String = Constants.STATUS_OPEN,
-    var opened: Boolean = false
+    var opened: Boolean = false,
+    var image: String? = null
 ) : Serializable

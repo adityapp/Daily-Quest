@@ -24,23 +24,9 @@ class DetailQuestPresenter(
     private val firebaseStorage = FirebaseStorage.getInstance()
 
     override fun updateQuest(quest: QuestModel, selectImage: Uri?) {
-        firebaseAuth.uid?.let { uid ->
-            pref.getParentUid()?.let { parentUid ->
-                quest.id?.let { id ->
-                    view.showLoadingDialog()
-
-                    firebaseDatabase.getReference(Constants.DATABASE_USER).child(parentUid)
-                        .child(Constants.ANAK.toLowerCase()).child(uid)
-                        .child(Constants.DATABASE_QUEST).child(id)
-                        .updateChildren(mapOf("status" to updateStatus(quest.status)))
-                        .addOnSuccessListener {
-                            getQuest(id)
-                        }
-                        .addOnFailureListener {
-                            view.showFailedMessage(it.message.toString())
-                        }
-                }
-            }
+        when (quest.status) {
+            Constants.STATUS_OPEN -> setToOngoingStatus(quest)
+            else -> setToFinishStatus(quest, selectImage)
         }
     }
 
@@ -65,6 +51,65 @@ class DetailQuestPresenter(
                             }
                         }
                     })
+            }
+        }
+    }
+
+    private fun setToOngoingStatus(quest: QuestModel) {
+        firebaseAuth.uid?.let { uid ->
+            pref.getParentUid()?.let { parentUid ->
+                quest.id?.let { id ->
+                    view.showLoadingDialog()
+
+                    firebaseDatabase.getReference(Constants.DATABASE_USER).child(parentUid)
+                        .child(Constants.ANAK.toLowerCase()).child(uid)
+                        .child(Constants.DATABASE_QUEST).child(id)
+                        .updateChildren(mapOf("status" to updateStatus(quest.status)))
+                        .addOnSuccessListener {
+                            getQuest(id)
+                        }
+                        .addOnFailureListener {
+                            view.showFailedMessage(it.message.toString())
+                        }
+                }
+            }
+        }
+    }
+
+    private fun setToFinishStatus(quest: QuestModel, imageUri: Uri?) {
+        firebaseAuth.uid?.let { uid ->
+            pref.getParentUid()?.let { parentUid ->
+                quest.id?.let { id ->
+                    view.showLoadingDialog()
+
+                    imageUri?.let { uri ->
+                        firebaseStorage.getReference(Constants.DATABASE_QUEST_IMAGE).child(uid)
+                            .child(id)
+                            .putFile(uri)
+                            .addOnSuccessListener {
+                                it.metadata?.reference?.downloadUrl?.addOnSuccessListener { uriResult ->
+                                    quest.image = uriResult.toString()
+                                    quest.status = updateStatus(quest.status)
+                                    firebaseDatabase.getReference(Constants.DATABASE_USER)
+                                        .child(parentUid)
+                                        .child(Constants.ANAK.toLowerCase()).child(uid)
+                                        .child(Constants.DATABASE_QUEST).child(id)
+                                        .setValue(quest)
+                                        .addOnSuccessListener {
+                                            getQuest(id)
+                                        }
+                                        .addOnFailureListener { e ->
+                                            view.showFailedMessage(e.message.toString())
+                                        }
+                                }?.addOnFailureListener { e ->
+                                    view.showFailedMessage(e.message.toString())
+                                }
+                            }
+                            .addOnFailureListener { e ->
+                                view.showFailedMessage(e.message.toString())
+                            }
+                    }
+                }
             }
         }
     }

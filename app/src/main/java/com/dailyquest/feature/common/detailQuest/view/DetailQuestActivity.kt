@@ -54,6 +54,7 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         tv_start_time.text = newQuest.startTime.timestampToDate()
         tv_end_time.text = newQuest.endTime.timestampToDate()
         quest = newQuest
+        rl_image.remove()
         dismissLoadingDialog()
     }
 
