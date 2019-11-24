@@ -29,6 +29,7 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
             .then { setupPresenter() }
             .then { setupSession() }
             .then { setupDrawer() }
+            .then { createService() }
     }
 
     override fun navigateToRole() {
@@ -102,6 +103,7 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
                 R.id.profile -> Toast.makeText(this, "Belum Tersedia", Toast.LENGTH_SHORT).show()
 
                 R.id.logout -> {
+                    destroyService()
                     presenter.logout()
                 }
             }
@@ -115,5 +117,13 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
             R.id.fragment_frame,
             fragment
         ).commit()
+    }
+
+    private fun createService(){
+        startService(Intent(this, LocationTrackingService::class.java))
+    }
+
+    private fun destroyService(){
+        stopService(Intent(this, LocationTrackingService::class.java))
     }
 }

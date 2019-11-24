@@ -22,7 +22,7 @@ class Constants {
         const val DATABASE_REWARD = "reward"
         const val DATABASE_QUEST_IMAGE = "quest_image"
 
-        const val SHAREDPREFERENCES = "SharedPreference Daily Quest"
+        const val SHAREDPREFERENCES = "com.dailyquest"
         const val PREF_PARENT_UID = "pref parent uid"
         const val PREF_ROLE = "pref role"
 

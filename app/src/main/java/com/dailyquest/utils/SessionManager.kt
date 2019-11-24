@@ -2,7 +2,7 @@ package com.dailyquest.utils
 
 import android.content.Context
 
-class SessionManager(private val context: Context) {
+class SessionManager(context: Context) {
     private val sharedPreferences =
         context.getSharedPreferences(Constants.SHAREDPREFERENCES, Context.MODE_PRIVATE)
 
