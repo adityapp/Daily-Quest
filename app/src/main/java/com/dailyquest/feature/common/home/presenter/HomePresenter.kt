@@ -1,6 +1,5 @@
 package com.dailyquest.feature.common.home.presenter
 
-import android.util.Log
 import com.dailyquest.feature.common.home.HomePresenterContract
 import com.dailyquest.feature.common.home.HomeViewContract
 import com.dailyquest.model.ChildrenModel

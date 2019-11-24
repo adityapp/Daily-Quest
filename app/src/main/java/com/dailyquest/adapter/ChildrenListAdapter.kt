@@ -11,7 +11,6 @@ import com.dailyquest.feature.parent.questList.view.QuestListActivity
 import com.dailyquest.model.ChildrenModel
 import com.dailyquest.utils.Constants
 import kotlinx.android.synthetic.main.card_children_list.view.*
-import java.io.Serializable
 
 class ChildrenListAdapter(private val context: Context, private val dataSet: List<ChildrenModel>) :
     RecyclerView.Adapter<ChildrenListAdapter.ViewHolder>() {
@@ -26,11 +25,11 @@ class ChildrenListAdapter(private val context: Context, private val dataSet: Lis
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        dataSet[position].let {children ->
+        dataSet[position].let { children ->
             holder.itemView.apply {
                 tv_fullname.text = children.fullName
                 cv_children.setOnClickListener {
-                    val intent =Intent(context, QuestListActivity::class.java)
+                    val intent = Intent(context, QuestListActivity::class.java)
                     intent.putExtra(Constants.ANAK, children)
                     context.startActivity(intent)
                 }
@@ -38,5 +37,5 @@ class ChildrenListAdapter(private val context: Context, private val dataSet: Lis
         }
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

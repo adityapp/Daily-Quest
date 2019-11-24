@@ -1,5 +1,6 @@
 package com.dailyquest.feature.common.detailQuest.presenter
 
+import android.net.Uri
 import com.dailyquest.feature.common.detailQuest.DetailQuestPresenterContract
 import com.dailyquest.feature.common.detailQuest.DetailQuestViewContract
 import com.dailyquest.model.QuestModel
@@ -10,6 +11,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 
 class DetailQuestPresenter(
     private val view: DetailQuestViewContract,
@@ -19,12 +21,9 @@ class DetailQuestPresenter(
 
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val firebaseDatabase = FirebaseDatabase.getInstance()
+    private val firebaseStorage = FirebaseStorage.getInstance()
 
-    override fun uploadImageToDatabse() {
-
-    }
-
-    override fun updateQuest(quest: QuestModel) {
+    override fun updateQuest(quest: QuestModel, selectImage: Uri?) {
         firebaseAuth.uid?.let { uid ->
             pref.getParentUid()?.let { parentUid ->
                 quest.id?.let { id ->
@@ -43,6 +42,10 @@ class DetailQuestPresenter(
                 }
             }
         }
+    }
+
+    override fun uploadImageToDatabse() {
+        firebaseStorage.getReference("")
     }
 
     override fun getQuest(id: String) {

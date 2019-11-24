@@ -95,7 +95,7 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
 
     private fun setupOnClick() {
         b_status.setOnClickListener {
-            presenter.updateQuest(quest)
+            presenter.updateQuest(quest, selectedImage)
         }
         rl_upload_image.setOnClickListener { imagePicker.show() }
     }

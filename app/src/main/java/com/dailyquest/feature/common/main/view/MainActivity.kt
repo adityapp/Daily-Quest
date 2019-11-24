@@ -44,6 +44,21 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun showReward(reward: Int) {
+        cv_reward.show()
+        dismissLoadingDialog()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.getReward()
+    }
+
+    override fun showFailedMessage(message: String) {
+        showToast(message)
+        dismissLoadingDialog()
+    }
+
     private fun setupActionBar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
