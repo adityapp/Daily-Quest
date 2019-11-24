@@ -2,6 +2,7 @@ package com.dailyquest.feature.common.detailQuest.view
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
@@ -105,6 +106,7 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
             selectedImage = null
             rl_image.remove()
             tv_file_upload.text = "Unggah Bukti Foto"
+            changeStateStatusButton()
         }
     }
 
@@ -116,6 +118,7 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         image?.let {
             iv_image.setImageURI(it)
             rl_image.show()
+            changeStateStatusButton()
         }
     }
 
@@ -136,6 +139,7 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         when (status) {
             Constants.STATUS_OPEN -> b_status.text = "Jalankan tugas"
             Constants.STATUS_ONGOING -> {
+                changeStateStatusButton()
                 b_status.text = "Selesaikan tugas"
                 rl_upload_image.show()
             }
@@ -143,6 +147,16 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
                 b_status.remove()
                 rl_upload_image.remove()
             }
+        }
+    }
+
+    private fun changeStateStatusButton(){
+        if (selectedImage == null){
+            b_status.isClickable = false
+            b_status.setBackgroundResource(R.drawable.rounded_background_gray)
+        }else{
+            b_status.isClickable = true
+            b_status.setBackgroundResource(R.drawable.button_background)
         }
     }
 }
