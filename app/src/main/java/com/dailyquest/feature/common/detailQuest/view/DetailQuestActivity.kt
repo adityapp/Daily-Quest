@@ -3,6 +3,8 @@ package com.dailyquest.feature.common.detailQuest.view
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
+import com.bumptech.glide.Glide
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
 import com.dailyquest.dialog.PickImageDialog
@@ -46,6 +48,11 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         pref.getRole()?.let {
             if (it == Constants.ORANG_TUA) b_status.remove() else changeStatusState(newQuest.status)
         }
+        newQuest.image?.let {
+            iv_delete_image.remove()
+            Glide.with(this).load(it).into(iv_image)
+            rl_image.show()
+        }
         tv_create_time.text = newQuest.createdAt.timestampToDate()
         tv_title.text = newQuest.title
         setStatus(newQuest.status)
@@ -53,7 +60,6 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         tv_start_time.text = newQuest.startTime.timestampToDate()
         tv_end_time.text = newQuest.endTime.timestampToDate()
         quest = newQuest
-        rl_image.remove()
         dismissLoadingDialog()
     }
 

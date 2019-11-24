@@ -55,6 +55,7 @@ class QuestListPresenter(
                         for (quest in p0.children) {
                             quest.getValue(QuestModel::class.java)?.let {
                                 it.id = quest.key
+                                it.childrenUid = childrenUid
                                 questList.add(it)
                             }
                         }
