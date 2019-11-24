@@ -44,10 +44,6 @@ class DetailQuestPresenter(
         }
     }
 
-    override fun uploadImageToDatabse() {
-        firebaseStorage.getReference("")
-    }
-
     override fun getQuest(id: String) {
         firebaseAuth.uid?.let { uid ->
             pref.getParentUid()?.let { parentUid ->

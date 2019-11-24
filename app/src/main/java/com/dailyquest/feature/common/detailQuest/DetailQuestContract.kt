@@ -12,7 +12,6 @@ interface DetailQuestViewContract {
 }
 
 interface DetailQuestPresenterContract : BasePresenter {
-    fun uploadImageToDatabse()
     fun updateQuest(quest: QuestModel, selectImage: Uri?)
     fun getQuest(id: String)
 }

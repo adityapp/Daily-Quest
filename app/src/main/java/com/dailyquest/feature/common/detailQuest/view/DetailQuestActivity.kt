@@ -63,6 +63,7 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
                 if (resultCode == Activity.RESULT_OK) {
                     selectedImage = data?.data
                     tv_file_upload.text = "Ubah Foto"
+                    showImage(selectedImage)
                     imagePicker.dismiss()
                 }
             }
@@ -97,11 +98,25 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         b_status.setOnClickListener {
             presenter.updateQuest(quest, selectedImage)
         }
+
         rl_upload_image.setOnClickListener { imagePicker.show() }
+
+        iv_delete_image.setOnClickListener {
+            selectedImage = null
+            rl_image.remove()
+            tv_file_upload.text = "Unggah Bukti Foto"
+        }
     }
 
     private fun setupImagePickerDialog() {
         imagePicker = PickImageDialog(this)
+    }
+
+    private fun showImage(image: Uri?) {
+        image?.let {
+            iv_image.setImageURI(it)
+            rl_image.show()
+        }
     }
 
     private fun setStatus(status: String) {
