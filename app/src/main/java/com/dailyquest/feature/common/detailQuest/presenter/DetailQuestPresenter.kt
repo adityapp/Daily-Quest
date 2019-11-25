@@ -24,9 +24,20 @@ class DetailQuestPresenter(
     private val firebaseStorage = FirebaseStorage.getInstance()
 
     override fun updateQuest(quest: QuestModel, selectImage: Uri?) {
-        when (quest.status) {
-            Constants.STATUS_OPEN -> setToOngoingStatus(quest)
-            else -> setToFinishStatus(quest, selectImage)
+        pref.getRole()?.let { role ->
+            when {
+                role == Constants.ANAK && Constants.STATUS_OPEN == quest.status -> {
+                    setToOngoingStatus(quest)
+                }
+
+                role == Constants.ANAK && Constants.STATUS_ONGOING == quest.status -> {
+                    setToFinishStatus(quest, selectImage)
+                }
+
+                role == Constants.ORANG_TUA && Constants.STATUS_FINISH == quest.status -> {
+                    setToCloseStatus(quest)
+                }
+            }
         }
     }
 
@@ -48,6 +59,7 @@ class DetailQuestPresenter(
                             val quest = p0.getValue(QuestModel::class.java)
                             quest?.let {
                                 quest.id = p0.key
+                                quest.childrenUid = childrenUid
                                 view.setupContent(it)
                             }
                         }
@@ -59,11 +71,9 @@ class DetailQuestPresenter(
     private fun setToOngoingStatus(quest: QuestModel) {
         firebaseAuth.uid?.let { uid ->
             pref.getParentUid()?.let { parentUid ->
-                quest.id?.let { id ->
-                    view.showLoadingDialog()
+                view.showLoadingDialog()
 
-                    updateQuestDatabase(parentUid, uid, quest, null)
-                }
+                updateQuestDatabase(parentUid, uid, quest, null)
             }
         }
     }
@@ -71,26 +81,60 @@ class DetailQuestPresenter(
     private fun setToFinishStatus(quest: QuestModel, imageUri: Uri?) {
         firebaseAuth.uid?.let { uid ->
             pref.getParentUid()?.let { parentUid ->
-                quest.id?.let { id ->
-                    view.showLoadingDialog()
+                view.showLoadingDialog()
 
-                    imageUri?.let { uri ->
-                        firebaseStorage.getReference(Constants.DATABASE_QUEST_IMAGE).child(uid)
-                            .child(id)
-                            .putFile(uri)
-                            .addOnSuccessListener {
-                                it.metadata?.reference?.downloadUrl?.addOnSuccessListener { uriResult ->
-                                    updateQuestDatabase(parentUid, uid, quest, uriResult)
-                                }?.addOnFailureListener { e ->
-                                    view.showFailedMessage(e.message.toString())
-                                }
-                            }
-                            .addOnFailureListener { e ->
+                imageUri?.let { uri ->
+                    firebaseStorage.getReference(Constants.DATABASE_QUEST_IMAGE).child(uid)
+                        .child(quest.id.toString())
+                        .putFile(uri)
+                        .addOnSuccessListener {
+                            it.metadata?.reference?.downloadUrl?.addOnSuccessListener { uriResult ->
+                                updateQuestDatabase(parentUid, uid, quest, uriResult)
+                            }?.addOnFailureListener { e ->
                                 view.showFailedMessage(e.message.toString())
                             }
-                    }
+                        }
+                        .addOnFailureListener { e ->
+                            view.showFailedMessage(e.message.toString())
+                        }
                 }
             }
+        }
+    }
+
+    private fun setToCloseStatus(quest: QuestModel) {
+        firebaseAuth.uid?.let { uid ->
+            view.showLoadingDialog()
+
+            firebaseDatabase.getReference(Constants.DATABASE_USER).child(uid)
+                .child(Constants.ANAK.toLowerCase())
+                .child(quest.childrenUid.toString())
+                .child(Constants.DATABASE_REWARD)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        view.showFailedMessage(p0.message)
+                    }
+
+                    override fun onDataChange(p0: DataSnapshot) {
+                        p0.getValue(Int::class.java)?.let { currentReward ->
+                            firebaseDatabase.getReference(Constants.DATABASE_USER).child(uid)
+                                .child(Constants.ANAK.toLowerCase())
+                                .child(quest.childrenUid.toString())
+                                .updateChildren(mapOf(Constants.DATABASE_REWARD to currentReward + quest.reward))
+                                .addOnSuccessListener {
+                                    updateQuestDatabase(
+                                        uid,
+                                        quest.childrenUid.toString(),
+                                        quest,
+                                        Uri.parse(quest.image)
+                                    )
+                                }
+                                .addOnFailureListener { e ->
+                                    view.showFailedMessage(e.message.toString())
+                                }
+                        }
+                    }
+                })
         }
     }
 
@@ -120,7 +164,8 @@ class DetailQuestPresenter(
     private fun updateStatus(status: String): String {
         return when (status) {
             Constants.STATUS_OPEN -> Constants.STATUS_ONGOING
-            else -> Constants.STATUS_FINISH
+            Constants.STATUS_ONGOING -> Constants.STATUS_FINISH
+            else -> Constants.STATUS_CLOSE
         }
     }
 }
