@@ -23,14 +23,10 @@ class LocationTrackingService : Service() {
     )
 
     inner class LocationListener(provider: String) : android.location.LocationListener {
-        private var mLastLocation: Location
-
-        init {
-            Log.e(TAG, "LocationListener $provider")
-            mLastLocation = Location(provider)
-        }
+        private var mLastLocation: Location = Location(provider)
 
         override fun onLocationChanged(location: Location) {
+            Log.d(TAG, "${location.latitude} ${location.longitude}")
             mLastLocation.set(location)
 
             pref?.let {

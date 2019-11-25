@@ -28,6 +28,7 @@ class Constants {
 
         const val CAMERA_REQ_CODE = 9001
         const val IMAGE_PICKER_CODE = 9991
+        const val LOCATION_REQ_CODE = 8001
 
         const val SOURCE_ACTIVITY = "source activity"
 
