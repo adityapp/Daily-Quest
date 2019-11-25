@@ -1,5 +1,6 @@
 package com.dailyquest.feature.common.main.presenter
 
+import android.util.Log
 import com.dailyquest.feature.common.main.MainPresenterContract
 import com.dailyquest.feature.common.main.MainViewContract
 import com.dailyquest.utils.Constants
@@ -37,8 +38,7 @@ class MainPresenter(private val view: MainViewContract, private val pref: Sessio
                                 }
 
                                 override fun onDataChange(p0: DataSnapshot) {
-                                    val reward = p0.getValue(Int::class.java)
-                                    reward?.let {
+                                    p0.getValue(Int::class.java)?.let {
                                         view.showReward(it)
                                     }
                                 }

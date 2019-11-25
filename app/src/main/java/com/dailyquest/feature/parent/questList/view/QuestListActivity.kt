@@ -60,8 +60,9 @@ class QuestListActivity : BaseActivity<QuestListPresenterContract>(), QuestListV
     }
 
     private fun setupActionBar() {
+        tv_title.text = children.fullName
+        tv_reward.text = children.reward.toString()
         setSupportActionBar(toolbar)
-        title = children.fullName
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

@@ -46,6 +46,7 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
     }
 
     override fun showReward(reward: Int) {
+        tv_reward.text = reward.toString()
         cv_reward.show()
         dismissLoadingDialog()
     }

@@ -2,7 +2,6 @@ package com.dailyquest.utils
 
 import android.app.NotificationManager
 import android.content.Context
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.dailyquest.R
 import com.dailyquest.utils.Constants.Companion.DEFAULT_CHANNEL_ID
@@ -14,7 +13,6 @@ class MessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(p0: RemoteMessage) {
         super.onMessageReceived(p0)
-        Log.d("Hello", "haiiii")
         p0.notification?.let { it ->
             val notification = NotificationCompat.Builder(this, it.channelId ?: DEFAULT_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
