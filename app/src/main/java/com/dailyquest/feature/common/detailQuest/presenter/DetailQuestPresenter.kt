@@ -150,7 +150,7 @@ class DetailQuestPresenter(
             .updateChildren(
                 mapOf(
                     "status" to updateStatus(quest.status),
-                    "image" to imageUri.toString()
+                    "image" to imageUri?.toString()
                 )
             )
             .addOnSuccessListener {

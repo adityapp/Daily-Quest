@@ -33,7 +33,7 @@ class ChildrenPresenter(private val view: ChildrenViewContract, private val pref
                                 childrenList.add(it)
                             }
                         }
-                        view.showChildrenList(childrenList)
+                        view.showChildrenList(childrenList.sortedBy { it.fullName.toLowerCase() })
                     }
                 })
         }

@@ -107,7 +107,7 @@
 
                 <RelativeLayout
                     android:id="@+id/rl_image"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
                     android:background="@color/black_50"

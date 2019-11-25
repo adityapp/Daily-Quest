@@ -41,7 +41,7 @@ class HomePresenter(private val view: HomeViewContract, private val pref: Sessio
                                 }
                             }
                         }
-                        view.showQuestList(allQuest.sortedBy { it.createdAt })
+                        view.showQuestList(allQuest.sortedByDescending { it.createdAt })
                     }
                 })
         }
@@ -67,7 +67,7 @@ class HomePresenter(private val view: HomeViewContract, private val pref: Sessio
                                     questList.add(it)
                                 }
                             }
-                            view.showQuestList(questList)
+                            view.showQuestList(questList.sortedByDescending { it.createdAt })
                         }
                     })
             }

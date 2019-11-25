@@ -59,7 +59,7 @@ class QuestListPresenter(
                                 questList.add(it)
                             }
                         }
-                        view.showQuestList(questList)
+                        view.showQuestList(questList.sortedByDescending { it.createdAt })
                     }
                 })
         }

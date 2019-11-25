@@ -30,7 +30,7 @@ class ChildrenFragment : BaseFragment<ChildrenPresenterContract>(), ChildrenView
 
     override fun showChildrenList(list: List<ChildrenModel>) {
         context?.let {
-            adapter = ChildrenListAdapter(it, list.reversed())
+            adapter = ChildrenListAdapter(it, list)
             view.rv_children.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
             view.rv_children.adapter = adapter
         }
