@@ -3,7 +3,6 @@ package com.dailyquest.feature.common.detailQuest.view
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import com.bumptech.glide.Glide
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
@@ -45,9 +44,7 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
     }
 
     override fun setupContent(newQuest: QuestModel) {
-        pref.getRole()?.let {
-            if (it == Constants.ORANG_TUA) b_status.remove() else changeStatusState(newQuest.status)
-        }
+        changeStatusState(newQuest.status, pref.getRole().toString())
         newQuest.image?.let {
             iv_delete_image.remove()
             Glide.with(this).load(it).into(iv_image)
@@ -135,20 +132,28 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
             when (status) {
                 Constants.STATUS_OPEN -> R.drawable.rounded_background_blue
                 Constants.STATUS_ONGOING -> R.drawable.rounded_background_green
-                Constants.STATUS_CLOSE -> R.drawable.rounded_background_red
+                Constants.STATUS_FINISH -> R.drawable.rounded_background_red
                 else -> R.drawable.rounded_background_gray
             }
         )
     }
 
-    private fun changeStatusState(status: String) {
-        when (status) {
-            Constants.STATUS_OPEN -> b_status.text = "Jalankan tugas"
-            Constants.STATUS_ONGOING -> {
+    private fun changeStatusState(status: String, role: String) {
+        when {
+            role == Constants.ANAK && status == Constants.STATUS_OPEN -> {
+                b_status.text = "Jalankan tugas"
+            }
+
+            role == Constants.ANAK && status == Constants.STATUS_ONGOING -> {
                 changeStateStatusButton()
                 b_status.text = "Selesaikan tugas"
                 rl_upload_image.show()
             }
+
+            role == Constants.ORANG_TUA && status == Constants.STATUS_FINISH -> {
+                b_status.text = "Tugas berhasil"
+            }
+
             else -> {
                 b_status.remove()
                 rl_upload_image.remove()

@@ -59,7 +59,7 @@ fun CardView.setStatusIndicator(context: Context, status: String){
             when (status) {
                 Constants.STATUS_OPEN -> R.color.colorPrimary
                 Constants.STATUS_ONGOING -> R.color.green
-                Constants.STATUS_CLOSE -> R.color.red
+                Constants.STATUS_FINISH -> R.color.red
                 else -> R.color.gray
             }
         )

@@ -62,16 +62,7 @@ class DetailQuestPresenter(
                 quest.id?.let { id ->
                     view.showLoadingDialog()
 
-                    firebaseDatabase.getReference(Constants.DATABASE_USER).child(parentUid)
-                        .child(Constants.ANAK.toLowerCase()).child(uid)
-                        .child(Constants.DATABASE_QUEST).child(id)
-                        .updateChildren(mapOf("status" to updateStatus(quest.status)))
-                        .addOnSuccessListener {
-                            getQuest(id, quest.childrenUid.toString())
-                        }
-                        .addOnFailureListener {
-                            view.showFailedMessage(it.message.toString())
-                        }
+                    updateQuestDatabase(parentUid, uid, quest, null)
                 }
             }
         }
@@ -89,20 +80,7 @@ class DetailQuestPresenter(
                             .putFile(uri)
                             .addOnSuccessListener {
                                 it.metadata?.reference?.downloadUrl?.addOnSuccessListener { uriResult ->
-                                    quest.image = uriResult.toString()
-                                    quest.status = updateStatus(quest.status)
-                                    quest.id = null
-                                    firebaseDatabase.getReference(Constants.DATABASE_USER)
-                                        .child(parentUid)
-                                        .child(Constants.ANAK.toLowerCase()).child(uid)
-                                        .child(Constants.DATABASE_QUEST).child(id)
-                                        .setValue(quest)
-                                        .addOnSuccessListener {
-                                            getQuest(id, quest.childrenUid.toString())
-                                        }
-                                        .addOnFailureListener { e ->
-                                            view.showFailedMessage(e.message.toString())
-                                        }
+                                    updateQuestDatabase(parentUid, uid, quest, uriResult)
                                 }?.addOnFailureListener { e ->
                                     view.showFailedMessage(e.message.toString())
                                 }
@@ -114,6 +92,29 @@ class DetailQuestPresenter(
                 }
             }
         }
+    }
+
+    private fun updateQuestDatabase(
+        parentUid: String,
+        userUid: String,
+        quest: QuestModel,
+        imageUri: Uri?
+    ) {
+        firebaseDatabase.getReference(Constants.DATABASE_USER).child(parentUid)
+            .child(Constants.ANAK.toLowerCase()).child(userUid)
+            .child(Constants.DATABASE_QUEST).child(quest.id.toString())
+            .updateChildren(
+                mapOf(
+                    "status" to updateStatus(quest.status),
+                    "image" to imageUri.toString()
+                )
+            )
+            .addOnSuccessListener {
+                getQuest(quest.id.toString(), quest.childrenUid.toString())
+            }
+            .addOnFailureListener {
+                view.showFailedMessage(it.message.toString())
+            }
     }
 
     private fun updateStatus(status: String): String {
