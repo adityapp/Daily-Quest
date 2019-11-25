@@ -152,6 +152,7 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
 
             role == Constants.ORANG_TUA && status == Constants.STATUS_FINISH -> {
                 b_status.text = "Tugas berhasil"
+                b_status.show()
             }
 
             else -> {

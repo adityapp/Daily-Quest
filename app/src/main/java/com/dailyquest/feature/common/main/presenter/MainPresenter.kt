@@ -32,7 +32,7 @@ class MainPresenter(private val view: MainViewContract, private val pref: Sessio
                         firebaseDatabase.getReference(Constants.DATABASE_USER).child(parentUid)
                             .child(Constants.ANAK.toLowerCase()).child(uid)
                             .child(Constants.DATABASE_REWARD)
-                            .addListenerForSingleValueEvent(object : ValueEventListener {
+                            .addValueEventListener(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {
                                     view.showFailedMessage(p0.message)
                                 }

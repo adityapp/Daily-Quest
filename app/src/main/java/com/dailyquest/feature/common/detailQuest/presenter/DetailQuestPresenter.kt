@@ -50,7 +50,7 @@ class DetailQuestPresenter(
                     .child(Constants.ANAK.toLowerCase())
                     .child(if (pref.getRole() == Constants.ANAK) uid else childrenUid)
                     .child(Constants.DATABASE_QUEST).child(id)
-                    .addListenerForSingleValueEvent(object : ValueEventListener {
+                    .addValueEventListener(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError) {
                             view.showFailedMessage(p0.message)
                         }
