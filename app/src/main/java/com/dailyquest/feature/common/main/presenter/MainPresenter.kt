@@ -1,6 +1,5 @@
 package com.dailyquest.feature.common.main.presenter
 
-import android.util.Log
 import com.dailyquest.feature.common.main.MainPresenterContract
 import com.dailyquest.feature.common.main.MainViewContract
 import com.dailyquest.utils.Constants

@@ -4,9 +4,10 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 
-abstract class BaseDialog(context: Context): Dialog(context){
+abstract class BaseDialog(context: Context) : Dialog(context) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,13 +17,14 @@ abstract class BaseDialog(context: Context): Dialog(context){
         setupView()
     }
 
-    @LayoutRes abstract fun layoutId(): Int
+    @LayoutRes
+    abstract fun layoutId(): Int
 
-    open fun setupView(){
+    open fun setupView() {
         setCancelable(false)
     }
 
-    private fun setupWindows(){
+    private fun setupWindows() {
         window?.let {
             it.setBackgroundDrawableResource(android.R.color.transparent)
             it.setLayout(
@@ -32,4 +34,6 @@ abstract class BaseDialog(context: Context): Dialog(context){
 
         }
     }
+
+    fun showToast(message: String) = Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }

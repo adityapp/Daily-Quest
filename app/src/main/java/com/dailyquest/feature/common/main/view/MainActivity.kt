@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
+import com.dailyquest.dialog.RewardDialog
 import com.dailyquest.feature.common.home.view.HomeFragment
 import com.dailyquest.feature.common.main.MainPresenterContract
 import com.dailyquest.feature.common.main.MainViewContract
@@ -30,6 +31,7 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
             .then { setupSession() }
             .then { setupDrawer() }
             .then { createService() }
+            .then { setupOnClick() }
     }
 
     override fun navigateToRole() {
@@ -59,6 +61,12 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
     override fun showFailedMessage(message: String) {
         showToast(message)
         dismissLoadingDialog()
+    }
+
+    private fun setupOnClick(){
+        cv_reward.setOnClickListener {
+            showRewardDialog()
+        }
     }
 
     private fun setupActionBar() {
@@ -120,11 +128,17 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
         ).commit()
     }
 
-    private fun createService(){
+    private fun createService() {
         startService(Intent(this, LocationTrackingService::class.java))
     }
 
-    private fun destroyService(){
+    private fun destroyService() {
         stopService(Intent(this, LocationTrackingService::class.java))
+    }
+
+    private fun showRewardDialog() {
+        pref.getParentUid()?.let {
+            RewardDialog(this, it).show()
+        }
     }
 }
