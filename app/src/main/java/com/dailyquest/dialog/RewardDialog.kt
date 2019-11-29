@@ -41,7 +41,8 @@ class RewardDialog(context: Context, private val parentUid: String) : BaseDialog
                             if (it > 0) {
                                 ll_barcode.show()
                                 Glide.with(context)
-                                    .load(Constants.BARCODE_BASE_URL + uid + "-" + it).into(iv_barcode)
+                                    .load(Constants.BARCODE_BASE_URL + uid + "-" + it)
+                                    .into(iv_barcode)
                             } else {
                                 ll_barcode.remove()
                             }

@@ -1,5 +1,6 @@
 package com.dailyquest.feature.common.main.view
 
+import android.app.Activity
 import android.content.Intent
 import android.view.MenuItem
 import android.widget.Toast
@@ -8,6 +9,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
+import com.dailyquest.dialog.ExchangeSuccessDialog
 import com.dailyquest.dialog.RewardDialog
 import com.dailyquest.feature.common.home.view.HomeFragment
 import com.dailyquest.feature.common.main.MainPresenterContract
@@ -15,6 +17,7 @@ import com.dailyquest.feature.common.main.MainViewContract
 import com.dailyquest.feature.common.main.presenter.MainPresenter
 import com.dailyquest.feature.common.role.view.RoleActivity
 import com.dailyquest.feature.parent.children.view.ChildrenFragment
+import com.dailyquest.feature.parent.scanReward.view.ScanRewardActivity
 import com.dailyquest.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -31,6 +34,7 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
             .then { setupSession() }
             .then { setupDrawer() }
             .then { createService() }
+            .then { showScanner() }
             .then { setupOnClick() }
     }
 
@@ -58,14 +62,44 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
         presenter.getReward()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when (requestCode) {
+            Constants.QR_SCAN_REQ_CODE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    data?.let {
+                        ExchangeSuccessDialog(
+                            this,
+                            it.getStringExtra(Constants.DATABASE_REWARD)
+                        ).show()
+                    }
+                }
+            }
+        }
+    }
+
     override fun showFailedMessage(message: String) {
         showToast(message)
         dismissLoadingDialog()
     }
 
-    private fun setupOnClick(){
+    private fun showScanner() {
+        if (Constants.ORANG_TUA == pref.getRole()) {
+            iv_qr_scan.show()
+        }
+    }
+
+    private fun setupOnClick() {
         cv_reward.setOnClickListener {
             showRewardDialog()
+        }
+
+        iv_qr_scan.setOnClickListener {
+            startActivityForResult(
+                Intent(this, ScanRewardActivity::class.java),
+                Constants.QR_SCAN_REQ_CODE
+            )
         }
     }
 

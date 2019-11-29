@@ -3,12 +3,12 @@ package com.dailyquest.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.View
 import android.widget.EditText
 import android.widget.Spinner
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import com.dailyquest.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
@@ -52,16 +52,17 @@ fun Long.timestampToDate(): String {
     return formatter.format(Date(this))
 }
 
-fun CardView.setStatusIndicator(context: Context, status: String){
-    setCardBackgroundColor(
-        ContextCompat.getColor(
-            context,
-            when (status) {
-                Constants.STATUS_OPEN -> R.color.colorPrimary
-                Constants.STATUS_ONGOING -> R.color.green
-                Constants.STATUS_FINISH -> R.color.red
-                else -> R.color.gray
-            }
-        )
-    )
+fun FloatingActionButton.setStatusIndicator(context: Context, status: String) {
+    val color = when (status) {
+        Constants.STATUS_OPEN -> R.color.colorPrimary
+        Constants.STATUS_ONGOING -> R.color.green
+        Constants.STATUS_FINISH -> R.color.red
+        else -> R.color.gray
+    }
+
+    backgroundTintList = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        resources.getColorStateList(color, context.theme)
+    } else {
+        resources.getColorStateList(color)
+    }
 }

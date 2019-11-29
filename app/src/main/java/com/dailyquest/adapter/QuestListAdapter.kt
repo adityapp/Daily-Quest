@@ -41,7 +41,7 @@ class QuestListAdapter(
                 tv_quest_list_title.text = quest.title
                 tv_quest_list_description.text = quest.description
                 tv_quest_list_time.text = quest.createdAt.timestampToDate()
-                cv_status_indicator.setStatusIndicator(context, quest.status)
+                fab_status_indicator.setStatusIndicator(context, quest.status)
 
                 cv_quest.setOnClickListener {
                     val intent = Intent(context, DetailQuestActivity::class.java)

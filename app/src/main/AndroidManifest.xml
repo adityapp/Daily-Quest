@@ -3,7 +3,7 @@
     package="com.dailyquest">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".feature.common.detailQuest.view.DetailQuestActivity"></activity>
+        <activity android:name=".feature.parent.scanReward.view.ScanRewardActivity"></activity>
+        <activity android:name=".feature.common.detailQuest.view.DetailQuestActivity" />
 
         <service
             android:name=".utils.MessagingService"
@@ -24,8 +25,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <service android:name=".utils.LocationTrackingService"/>
+        <service android:name=".utils.LocationTrackingService" />
 
         <activity android:name=".feature.common.scanUid.view.ScanUidActivity" />
         <activity android:name=".feature.parent.questList.view.QuestListActivity" />

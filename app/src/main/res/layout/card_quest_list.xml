@@ -24,13 +24,12 @@
             android:orientation="horizontal"
             android:gravity="center">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_status_indicator"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_status_indicator"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                app:cardCornerRadius="40dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/colorPrimary"/>
+                app:elevation="0dp"
+                app:backgroundTint="@color/colorPrimary"/>
 
             <TextView
                 android:id="@+id/tv_quest_list_time"
