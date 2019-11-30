@@ -14,7 +14,34 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ToolbarColored" />
+            android:theme="@style/ToolbarColored">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Daily Quest"
+                    android:layout_centerVertical="true"
+                    android:textSize="20sp"
+                    android:layout_marginRight="16dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_location"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_map_blue"
+                    android:visibility="gone"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -102,8 +129,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Waktu Selesai"
-                    android:textSize="12sp"
-                    android:layout_marginBottom="16dp"/>
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hadiah"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/middleYellowRed" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_cash" />
+
+                    <TextView
+                        android:id="@+id/tv_reward"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp. 0"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="20sp"/>
+                </LinearLayout>
 
                 <RelativeLayout
                     android:id="@+id/rl_image"

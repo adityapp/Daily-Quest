@@ -17,16 +17,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".feature.parent.scanReward.view.ScanRewardActivity"></activity>
         <activity android:name=".feature.common.detailQuest.view.DetailQuestActivity" />
-
-        <service
-            android:name=".utils.MessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-        <service android:name=".utils.LocationTrackingService" />
-
         <activity android:name=".feature.common.scanUid.view.ScanUidActivity" />
         <activity android:name=".feature.parent.questList.view.QuestListActivity" />
         <activity android:name=".feature.common.register.view.RegisterActivity" />
@@ -42,6 +32,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <service
+            android:name=".utils.MessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service android:name=".utils.LocationTrackingService" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBFSflc5lftQSBtuFmWWs3fmVu1LRpuFQU" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+    </application>
 </manifest>

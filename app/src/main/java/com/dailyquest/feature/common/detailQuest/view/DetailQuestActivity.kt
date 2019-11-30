@@ -6,6 +6,7 @@ import android.net.Uri
 import com.bumptech.glide.Glide
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
+import com.dailyquest.dialog.LocationTrackingDialog
 import com.dailyquest.dialog.PickImageDialog
 import com.dailyquest.feature.common.detailQuest.DetailQuestPresenterContract
 import com.dailyquest.feature.common.detailQuest.DetailQuestViewContract
@@ -57,6 +58,7 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         tv_start_time.text = newQuest.startTime.timestampToDate()
         tv_end_time.text = newQuest.endTime.timestampToDate()
         quest = newQuest
+        tv_reward.text = "Rp. ${newQuest.reward}"
         dismissLoadingDialog()
     }
 
@@ -111,6 +113,12 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
             tv_file_upload.text = "Unggah Bukti Foto"
             changeStateStatusButton()
         }
+
+        iv_location.setOnClickListener {
+            quest.childrenUid?.let { childrenUid ->
+                LocationTrackingDialog(this, childrenUid).show()
+            }
+        }
     }
 
     private fun setupImagePickerDialog() {
@@ -150,8 +158,14 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
                 rl_upload_image.show()
             }
 
+            role == Constants.ORANG_TUA && status == Constants.STATUS_ONGOING -> {
+                iv_location.show()
+                b_status.remove()
+            }
+
             role == Constants.ORANG_TUA && status == Constants.STATUS_FINISH -> {
                 b_status.text = "Tugas berhasil"
+                iv_location.remove()
                 b_status.show()
             }
 
