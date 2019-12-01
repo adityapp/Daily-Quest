@@ -1,5 +1,6 @@
 package com.dailyquest.feature.common.login.presenter
 
+import android.util.Log
 import com.dailyquest.feature.common.login.LoginPresenterContract
 import com.dailyquest.feature.common.login.LoginViewContract
 import com.dailyquest.utils.Constants
@@ -32,6 +33,7 @@ class LoginPresenter(private val view: LoginViewContract, private val pref: Sess
                 } else {
                     pref.setSession(user.uid, role)
                 }
+                sendTokenToDatabase()
             }
             view.navigateToHome()
         }.addOnFailureListener { e ->
@@ -39,7 +41,7 @@ class LoginPresenter(private val view: LoginViewContract, private val pref: Sess
         }
     }
 
-    override fun sendTokenToDatabase() {
+    private fun sendTokenToDatabase() {
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
             if (!it.isSuccessful) {
                 return@addOnCompleteListener
@@ -58,8 +60,7 @@ class LoginPresenter(private val view: LoginViewContract, private val pref: Sess
     private fun sendParentTokenToDatabase(token: String) {
         firebaseAuth.uid?.let { uid ->
             firebaseDatabase.getReference(Constants.DATABASE_USER).child(uid)
-                .child(Constants.DATABASE_TOKEN)
-                .setValue(token)
+                .updateChildren(mapOf(Constants.DATABASE_TOKEN to token))
         }
     }
 
@@ -67,8 +68,8 @@ class LoginPresenter(private val view: LoginViewContract, private val pref: Sess
         firebaseAuth.uid?.let { uid ->
             pref.getParentUid()?.let { parentUid ->
                 firebaseDatabase.getReference(Constants.DATABASE_USER).child(parentUid)
-                    .child(Constants.ANAK.toLowerCase()).child(uid).child(Constants.DATABASE_TOKEN)
-                    .setValue(token)
+                    .child(Constants.ANAK.toLowerCase()).child(uid)
+                    .updateChildren(mapOf(Constants.DATABASE_TOKEN to token))
             }
         }
     }

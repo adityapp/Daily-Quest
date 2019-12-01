@@ -43,5 +43,7 @@ class Constants {
         const val DATE_FORMAT = "dd/MM/yyyy  HH:mm"
 
         const val DEFAULT_CHANNEL_ID = "daily-quest"
+
+        const val FIREBASE_API_KEY = "AIzaSyAOCtQCg4BJtuOdiy0sRt0Wg1KFFbEuahk"
     }
 }

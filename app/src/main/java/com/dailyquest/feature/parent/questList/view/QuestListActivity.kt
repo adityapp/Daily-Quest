@@ -67,9 +67,7 @@ class QuestListActivity : BaseActivity<QuestListPresenterContract>(), QuestListV
     }
 
     private fun setupPresenter() {
-        children.uid?.let { childrenUid ->
-            presenter = QuestListPresenter(this, pref, childrenUid)
-        }
+        presenter = QuestListPresenter(this, pref, children)
     }
 
     private fun setupSession() {

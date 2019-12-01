@@ -20,7 +20,6 @@ class LoginActivity : BaseActivity<LoginPresenterContract>(), LoginViewContract 
     override fun setupView() {
         beginWith { setupActionBarAndToolbar() }
             .then { setupPresenter() }
-            .then { setupToken() }
             .then { getExtra() }
             .then { setupOnClick() }
     }
@@ -59,10 +58,6 @@ class LoginActivity : BaseActivity<LoginPresenterContract>(), LoginViewContract 
 
     private fun doLogin() {
         presenter.login(et_email.value(), et_kata_sandi.value(), role, parenUid ?: "")
-    }
-
-    private fun setupToken() {
-        presenter.sendTokenToDatabase()
     }
 
     private fun getExtra() {
