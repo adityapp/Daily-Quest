@@ -10,7 +10,7 @@ import com.dailyquest.utils.isPasswordValid
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class RegisterPresenter(private val view: RegisterViewContract, private val pref: SessionManager) :
+class RegisterPresenter(private val view: RegisterViewContract) :
     RegisterPresenterContract {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val firebaseDatabase = FirebaseDatabase.getInstance()
@@ -47,7 +47,7 @@ class RegisterPresenter(private val view: RegisterViewContract, private val pref
                 auth?.user?.let { user ->
                     when (role) {
                         Constants.ANAK -> registerAsChildren(fullName, role, user.uid, parentUid)
-                        Constants.ORANG_TUA -> registerAsParent(fullName, role, user.uid, user.uid)
+                        Constants.ORANG_TUA -> registerAsParent(fullName, role, user.uid)
                     }
                 }
             }
@@ -66,9 +66,7 @@ class RegisterPresenter(private val view: RegisterViewContract, private val pref
             .child(parentUid).child(Constants.ANAK.toLowerCase()).child(userUid)
             .setValue(UserModel(fullName, role))
             .addOnSuccessListener {
-                pref.setSession(parentUid, role)
-                view.dismissLoadingDialog()
-                view.navigateToHome()
+                onSuccess()
             }
             .addOnFailureListener { e ->
                 view.showFailedMessage(e.message.toString())
@@ -78,17 +76,20 @@ class RegisterPresenter(private val view: RegisterViewContract, private val pref
     private fun registerAsParent(
         fullName: String,
         role: String,
-        userUid: String,
-        parentUid: String
+        userUid: String
     ) {
         firebaseDatabase.getReference(Constants.DATABASE_USER).child(userUid)
             .setValue(UserModel(fullName, role)).addOnSuccessListener {
-                pref.setSession(parentUid, role)
-                view.dismissLoadingDialog()
-                view.navigateToHome()
+                onSuccess()
             }
             .addOnFailureListener { e ->
                 view.showFailedMessage(e.message.toString())
             }
+    }
+
+    private fun onSuccess(){
+        firebaseAuth.signOut()
+        view.dismissLoadingDialog()
+        view.navigateToRole()
     }
 }

@@ -10,10 +10,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
-import com.dailyquest.feature.common.main.view.MainActivity
 import com.dailyquest.feature.common.register.RegisterPresenterContract
 import com.dailyquest.feature.common.register.RegisterViewContract
 import com.dailyquest.feature.common.register.presenter.RegisterPresenter
+import com.dailyquest.feature.common.role.view.RoleActivity
 import com.dailyquest.feature.common.scanUid.view.ScanUidActivity
 import com.dailyquest.utils.*
 import kotlinx.android.synthetic.main.activity_register.*
@@ -30,9 +30,9 @@ class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterView
             .then { setupOnClick() }
     }
 
-    override fun navigateToHome() {
-        val intent = Intent(this@RegisterActivity, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    override fun navigateToRole() {
+        val intent = Intent(this, RoleActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         startAndFinish(intent)
     }
 
@@ -94,7 +94,7 @@ class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterView
     }
 
     private fun setupPresenter() {
-        presenter = RegisterPresenter(this, SessionManager(this))
+        presenter = RegisterPresenter(this)
     }
 
     private fun doScanning() {

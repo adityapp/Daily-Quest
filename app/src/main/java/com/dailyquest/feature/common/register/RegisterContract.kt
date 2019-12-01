@@ -3,7 +3,7 @@ package com.dailyquest.feature.common.register
 import com.dailyquest.base.BasePresenter
 
 interface RegisterViewContract {
-    fun navigateToHome()
+    fun navigateToRole()
     fun showFailedMessage(message: String)
     fun showLoadingDialog()
     fun dismissLoadingDialog()
