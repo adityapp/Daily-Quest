@@ -9,7 +9,6 @@ import com.dailyquest.base.BaseDialog
 import com.dailyquest.model.QuestModel
 import com.dailyquest.utils.beginWith
 import com.dailyquest.utils.dateToTimestamp
-import com.dailyquest.utils.then
 import com.dailyquest.utils.value
 import kotlinx.android.synthetic.main.dialog_new_quest.*
 import java.util.*
@@ -23,28 +22,32 @@ class NewQuestDialog(context: Context, private val addListener: (QuestModel) -> 
     override fun setupView() {
         super.setupView()
 
-        beginWith { setupContent() }
-            .then { setupOnClick() }
-    }
-
-    private fun setupContent() {
-
+        beginWith { setupOnClick() }
     }
 
     private fun setupOnClick() {
         b_add.setOnClickListener {
-            addListener.invoke(
-                QuestModel(
-                    title = et_title.value(),
-                    description = et_description.value(),
-                    startTime = et_start_time.value().dateToTimestamp(),
-                    endTime = et_end_time.value().dateToTimestamp(),
-                    createdAt = calendar.timeInMillis,
-                    reward = et_reward.value().toInt(),
-                    hideReward = cb_hide_reward.isChecked
-                )
-            )
-            dismiss()
+            when {
+                et_title.value().isBlank() -> showToast("Judul tidak boleh kosong!")
+                et_description.value().isBlank() -> showToast("Deskripsi tidak boleh kosong!")
+                et_reward.value().isBlank() -> showToast("Hadiah tidak boleh kosong")
+                et_start_time.value().isBlank() -> showToast("Waktu pengerjaan tidak boleh kosong!")
+                et_end_time.value().isBlank() -> showToast("Waktu selesai tidak boleh kosong!")
+                else -> {
+                    addListener.invoke(
+                        QuestModel(
+                            title = et_title.value(),
+                            description = et_description.value(),
+                            startTime = et_start_time.value().dateToTimestamp(),
+                            endTime = et_end_time.value().dateToTimestamp(),
+                            createdAt = calendar.timeInMillis,
+                            reward = et_reward.value().toInt(),
+                            hideReward = cb_hide_reward.isChecked
+                        )
+                    )
+                    dismiss()
+                }
+            }
         }
 
         iv_close.setOnClickListener {
@@ -62,7 +65,7 @@ class NewQuestDialog(context: Context, private val addListener: (QuestModel) -> 
 
     private fun showDatePickerDialog(editText: EditText) {
         val listener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-            showTimePickerDialog(editText, "$dayOfMonth/${month+1}/$year")
+            showTimePickerDialog(editText, "$dayOfMonth/${month + 1}/$year")
         }
 
         DatePickerDialog(
