@@ -53,4 +53,7 @@ dependencies {
     //googleMap
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    //pushNotification
+    implementation 'com.github.prabhat1707:Firebase-Push-Notification-Api-:1.1'
 }

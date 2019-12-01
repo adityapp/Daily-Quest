@@ -10,10 +10,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.RemoteMessage
+import com.trenzlr.firebasenotificationhelper.FirebaseNotificationHelper
 import java.util.*
-import java.util.concurrent.atomic.AtomicInteger
 
 class QuestListPresenter(
     private val view: QuestListViewContract,
@@ -22,7 +20,6 @@ class QuestListPresenter(
 ) :
     QuestListPresenterContract {
     private val firebaseDatabase = FirebaseDatabase.getInstance()
-    private val firebaseMessaging = FirebaseMessaging.getInstance()
 
     override fun addNewQuest() {
         pref.getParentUid()?.let { uid ->
@@ -78,13 +75,12 @@ class QuestListPresenter(
 
     private fun sendNotification() {
         children.token?.let { token ->
-            firebaseMessaging.send(
-                RemoteMessage.Builder(token)
-                    .setMessageId(AtomicInteger().get().toString())
-                    .addData("notification.title", "hello")
-                    .addData("notification.body", "hello")
-                    .build()
-            )
+            FirebaseNotificationHelper.initialize(Constants.FIREBASE_API_KEY)
+                .defaultJson(true, null)
+                .title("Tugas Baru")
+                .message("Hey, kamu baru saja mendapatkan tugas baru loh")
+                .receiverFirebaseToken(token)
+                .send()
         }
     }
 }
