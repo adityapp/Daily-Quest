@@ -72,14 +72,14 @@
                             android:imeOptions="actionNext"
                             android:inputType="textPassword" />
 
-                        <TextView
-                            android:id="@+id/tv_lupa_password"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:text="Lupa kata sandi?"
-                            android:textColor="@color/colorAccent"
-                            android:layout_marginHorizontal="32dp" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_lupa_password"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="right"-->
+<!--                            android:text="Lupa kata sandi?"-->
+<!--                            android:textColor="@color/colorAccent"-->
+<!--                            android:layout_marginHorizontal="32dp" />-->
 
 
                         <Button

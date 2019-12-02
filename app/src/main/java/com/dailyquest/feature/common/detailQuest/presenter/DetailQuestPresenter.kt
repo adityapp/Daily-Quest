@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.trenzlr.firebasenotificationhelper.FirebaseNotificationHelper
 
 class DetailQuestPresenter(
     private val view: DetailQuestViewContract,
@@ -22,6 +23,16 @@ class DetailQuestPresenter(
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val firebaseDatabase = FirebaseDatabase.getInstance()
     private val firebaseStorage = FirebaseStorage.getInstance()
+    private var token: String? = null
+
+    override fun getToken(id: String, childrenUid: String) {
+        pref.getRole()?.let { role ->
+            when (role) {
+                Constants.ANAK -> getParentToken(id, childrenUid)
+                else -> getChildrenToken(id, childrenUid)
+            }
+        }
+    }
 
     override fun updateQuest(quest: QuestModel, selectImage: Uri?) {
         pref.getRole()?.let { role ->
@@ -41,7 +52,46 @@ class DetailQuestPresenter(
         }
     }
 
-    override fun getQuest(id: String, childrenUid: String) {
+    private fun getChildrenToken(id: String, childrenUid: String) {
+        pref.getParentUid()?.let { parentUid ->
+            firebaseDatabase.getReference(Constants.DATABASE_USER).child(parentUid)
+                .child(Constants.ANAK.toLowerCase()).child(childrenUid)
+                .child(Constants.DATABASE_TOKEN)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        view.showFailedMessage(p0.message)
+                    }
+
+                    override fun onDataChange(p0: DataSnapshot) {
+                        p0.getValue(String::class.java)?.let {
+                            token = it
+                            getQuest(id, childrenUid)
+                        }
+                    }
+                })
+        }
+    }
+
+    private fun getParentToken(id: String, childrenUid: String) {
+        pref.getParentUid()?.let { parentUid ->
+            firebaseDatabase.getReference(Constants.DATABASE_USER).child(parentUid)
+                .child(Constants.DATABASE_TOKEN)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        view.showFailedMessage(p0.message)
+                    }
+
+                    override fun onDataChange(p0: DataSnapshot) {
+                        p0.getValue(String::class.java)?.let {
+                            token = it
+                            getQuest(id, childrenUid)
+                        }
+                    }
+                })
+        }
+    }
+
+    private fun getQuest(id: String, childrenUid: String) {
         firebaseAuth.uid?.let { uid ->
             pref.getParentUid()?.let { parentUid ->
                 view.showLoadingDialog()
@@ -154,6 +204,7 @@ class DetailQuestPresenter(
                 )
             )
             .addOnSuccessListener {
+                sendNotification(updateStatus(quest.status), quest.title)
                 getQuest(quest.id.toString(), quest.childrenUid.toString())
             }
             .addOnFailureListener {
@@ -166,6 +217,39 @@ class DetailQuestPresenter(
             Constants.STATUS_OPEN -> Constants.STATUS_ONGOING
             Constants.STATUS_ONGOING -> Constants.STATUS_FINISH
             else -> Constants.STATUS_CLOSE
+        }
+    }
+
+    private fun sendNotification(status: String, questTitle: String) {
+        pref.getRole()?.let { role ->
+            var title = ""
+            var message = ""
+
+            when {
+                Constants.ANAK == role && Constants.STATUS_ONGOING == status -> {
+                    title = "Tugas Diambil"
+                    message = "Tugas $questTitle sedang dijalankan"
+                }
+
+                Constants.ANAK == role && Constants.STATUS_FINISH == status -> {
+                    title = "Tugas Terselesaikan"
+                    message = "Tugas $questTitle telah diselesaikan"
+                }
+
+                Constants.ORANG_TUA == role && Constants.STATUS_CLOSE == status -> {
+                    title = "Selamat"
+                    message = "Tugas yang kamu selesaikan berhasil, Mission Success!"
+                }
+            }
+
+            token?.let {
+                FirebaseNotificationHelper.initialize(Constants.FIREBASE_API_KEY)
+                    .defaultJson(true, null)
+                    .title(title)
+                    .message(message)
+                    .receiverFirebaseToken(it)
+                    .send()
+            }
         }
     }
 }

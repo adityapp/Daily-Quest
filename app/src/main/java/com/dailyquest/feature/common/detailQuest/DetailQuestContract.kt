@@ -12,6 +12,6 @@ interface DetailQuestViewContract {
 }
 
 interface DetailQuestPresenterContract : BasePresenter {
+    fun getToken(id: String, childrenUid: String)
     fun updateQuest(quest: QuestModel, selectImage: Uri?)
-    fun getQuest(id: String, childrenUid: String)
 }

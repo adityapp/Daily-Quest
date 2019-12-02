@@ -29,7 +29,7 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
             .then { getExtra() }
             .then { setupSession() }
             .then { setupPresenter() }
-            .then { setupQuest() }
+            .then { setupToken() }
             .then { setupImagePickerDialog() }
             .then { setupOnClick() }
     }
@@ -94,9 +94,9 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         presenter = DetailQuestPresenter(this, pref)
     }
 
-    private fun setupQuest() {
+    private fun setupToken() {
         quest.id?.let { id ->
-            presenter.getQuest(id, quest.childrenUid.toString())
+            presenter.getToken(id, quest.childrenUid.toString())
         }
     }
 
@@ -150,11 +150,13 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         when {
             role == Constants.ANAK && status == Constants.STATUS_OPEN -> {
                 b_status.text = "Jalankan tugas"
+                b_status.show()
             }
 
             role == Constants.ANAK && status == Constants.STATUS_ONGOING -> {
                 changeStateStatusButton()
                 b_status.text = "Selesaikan tugas"
+                b_status.show()
                 rl_upload_image.show()
             }
 
