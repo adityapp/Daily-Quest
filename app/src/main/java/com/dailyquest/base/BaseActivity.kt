@@ -8,7 +8,7 @@ import com.dailyquest.utils.remove
 import com.dailyquest.utils.show
 import kotlinx.android.synthetic.main.dialog_loading.*
 
-abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BasePresenter {
+abstract class BaseActivity<T : BasePresenter> : AppCompatActivity() {
 
     protected lateinit var presenter: T
 

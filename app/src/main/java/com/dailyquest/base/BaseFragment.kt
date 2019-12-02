@@ -12,7 +12,7 @@ import com.dailyquest.utils.remove
 import com.dailyquest.utils.show
 import kotlinx.android.synthetic.main.dialog_loading.*
 
-abstract class BaseFragment<T : BasePresenter> : Fragment(), BasePresenter {
+abstract class BaseFragment<T : BasePresenter> : Fragment() {
     protected lateinit var view: ViewGroup
     protected lateinit var presenter: T
 

@@ -15,22 +15,11 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 
 class SplashActivity : BaseActivity<SplashPresenterContract>(), SplashViewContract {
-    private val notification = FirebaseInstanceId.getInstance().instanceId
-        .addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                return@OnCompleteListener
-            }
-
-            // Get new Instance ID token
-            val token = task.result?.token
-        })
-
     override fun layoutId() = R.layout.activity_splash
 
     override fun setupView() {
         beginWith { setupPresenter() }
             .then { presenter.auth() }
-            .then { notification }
     }
 
     override fun navigateToSelectRole() {
