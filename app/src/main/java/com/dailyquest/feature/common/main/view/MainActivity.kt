@@ -2,9 +2,7 @@ package com.dailyquest.feature.common.main.view
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -16,12 +14,11 @@ import com.dailyquest.feature.common.home.view.HomeFragment
 import com.dailyquest.feature.common.main.MainPresenterContract
 import com.dailyquest.feature.common.main.MainViewContract
 import com.dailyquest.feature.common.main.presenter.MainPresenter
+import com.dailyquest.feature.common.profile.view.ProfileFragment
 import com.dailyquest.feature.common.role.view.RoleActivity
 import com.dailyquest.feature.parent.children.view.ChildrenFragment
 import com.dailyquest.feature.parent.scanReward.view.ScanRewardActivity
 import com.dailyquest.utils.*
-import com.google.firebase.iid.FirebaseInstanceId
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
@@ -146,7 +143,7 @@ class MainActivity : BaseActivity<MainPresenterContract>(), MainViewContract {
 
                 R.id.quest -> fragmentTransaction(ChildrenFragment())
 
-                R.id.profile -> Toast.makeText(this, "Belum Tersedia", Toast.LENGTH_SHORT).show()
+                R.id.profile -> fragmentTransaction(ProfileFragment())
 
                 R.id.logout -> {
                     destroyService()

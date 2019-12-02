@@ -4,7 +4,6 @@ import com.dailyquest.feature.common.register.RegisterPresenterContract
 import com.dailyquest.feature.common.register.RegisterViewContract
 import com.dailyquest.model.UserModel
 import com.dailyquest.utils.Constants
-import com.dailyquest.utils.SessionManager
 import com.dailyquest.utils.isEmailValid
 import com.dailyquest.utils.isPasswordValid
 import com.google.firebase.auth.FirebaseAuth
@@ -64,7 +63,7 @@ class RegisterPresenter(private val view: RegisterViewContract) :
     ) {
         firebaseDatabase.getReference(Constants.DATABASE_USER)
             .child(parentUid).child(Constants.ANAK.toLowerCase()).child(userUid)
-            .setValue(UserModel(fullName, role))
+            .setValue(UserModel(fullName = fullName, role = role, reward = 0))
             .addOnSuccessListener {
                 onSuccess()
             }
@@ -79,7 +78,7 @@ class RegisterPresenter(private val view: RegisterViewContract) :
         userUid: String
     ) {
         firebaseDatabase.getReference(Constants.DATABASE_USER).child(userUid)
-            .setValue(UserModel(fullName, role)).addOnSuccessListener {
+            .setValue(UserModel(fullName = fullName, role = role)).addOnSuccessListener {
                 onSuccess()
             }
             .addOnFailureListener { e ->
@@ -87,7 +86,7 @@ class RegisterPresenter(private val view: RegisterViewContract) :
             }
     }
 
-    private fun onSuccess(){
+    private fun onSuccess() {
         firebaseAuth.signOut()
         view.dismissLoadingDialog()
         view.navigateToRole()
