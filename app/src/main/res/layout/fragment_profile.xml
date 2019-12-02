@@ -26,33 +26,18 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <LinearLayout
-                    android:id="@+id/ll_edit_name"
+                <TextView
+                    android:id="@+id/tv_fullname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:textAlignment="center"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="16dp">
-
-                    <TextView
-                        android:id="@+id/tv_fullname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textSize="20sp" />
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_edit_red"
-                        android:layout_marginLeft="8dp"/>
-                </LinearLayout>
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tv_role"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:textSize="16sp"
                     android:layout_gravity="center"/>
             </LinearLayout>

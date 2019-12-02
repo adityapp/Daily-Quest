@@ -27,7 +27,6 @@ class RegisterPresenter(private val view: RegisterViewContract) :
             fullName.isBlank() -> view.showFailedMessage("Nama lengkap tidak boleh kosong!")
             !email.isEmailValid() -> view.showFailedMessage("E-mail tidak valid!")
             !password.isPasswordValid() -> view.showFailedMessage("Kata sandi harus lebih dari 6 karakter!")
-            !confirmationPassword.isPasswordValid() -> view.showFailedMessage("Kata sandi harus lebih dari 6 karakter!")
             confirmationPassword != password -> view.showFailedMessage("Kata sandi tidak sama!")
             role == Constants.ANAK && parentUid.isBlank() -> view.showFailedMessage("Silahkan Lakukan Scan Orang Tua!")
             else -> createNewAccount(fullName, email, password, role, parentUid)

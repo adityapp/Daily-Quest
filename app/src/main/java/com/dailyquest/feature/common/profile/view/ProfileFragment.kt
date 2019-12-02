@@ -3,6 +3,7 @@ package com.dailyquest.feature.common.profile.view
 
 import com.dailyquest.R
 import com.dailyquest.base.BaseFragment
+import com.dailyquest.dialog.ChangePasswordDialog
 import com.dailyquest.feature.common.profile.ProfilePresenterContract
 import com.dailyquest.feature.common.profile.ProfileViewContract
 import com.dailyquest.feature.common.profile.presenter.ProfilePresenter
@@ -51,8 +52,10 @@ class ProfileFragment : BaseFragment<ProfilePresenterContract>(), ProfileViewCon
     }
 
     private fun setupOnClick() {
-        view.ll_edit_name.setOnClickListener { }
-
-        view.cv_change_password.setOnClickListener { }
+        view.cv_change_password.setOnClickListener {
+            context?.let {
+                ChangePasswordDialog(it).show()
+            }
+        }
     }
 }
