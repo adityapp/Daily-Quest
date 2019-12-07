@@ -36,8 +36,8 @@ class QuestListPresenter(
                             sendNotification()
                             view.dismissLoadingDialog()
                         }
-                        .addOnFailureListener { e ->
-                            view.showFailedMessage(e.message.toString())
+                        .addOnFailureListener { _ ->
+                            view.showFailedMessage("Maaf, telah terjadi kesalahan")
                         }
                 }
             }
@@ -54,7 +54,7 @@ class QuestListPresenter(
                     .child(Constants.DATABASE_QUEST)
                     .addValueEventListener(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError) {
-                            view.showFailedMessage(p0.message)
+                            view.showFailedMessage("Maaf, telah terjadi kesalahan")
                         }
 
                         override fun onDataChange(p0: DataSnapshot) {

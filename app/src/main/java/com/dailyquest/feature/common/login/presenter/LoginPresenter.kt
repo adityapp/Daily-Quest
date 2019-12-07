@@ -1,6 +1,5 @@
 package com.dailyquest.feature.common.login.presenter
 
-import android.util.Log
 import com.dailyquest.feature.common.login.LoginPresenterContract
 import com.dailyquest.feature.common.login.LoginViewContract
 import com.dailyquest.utils.Constants
@@ -36,8 +35,8 @@ class LoginPresenter(private val view: LoginViewContract, private val pref: Sess
                 sendTokenToDatabase()
             }
             view.navigateToHome()
-        }.addOnFailureListener { e ->
-            view.showFailedMessage(e.message.toString())
+        }.addOnFailureListener { _ ->
+            view.showFailedMessage("Email atau kata sandi salah!")
         }
     }
 

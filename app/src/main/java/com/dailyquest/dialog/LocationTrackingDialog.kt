@@ -67,7 +67,7 @@ class LocationTrackingDialog(context: Context, private val childrenUid: String) 
                 .child(Constants.ANAK.toLowerCase()).child(childrenUid)
                 .addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
-                        showToast(p0.message)
+                        showToast("Maaf, telah terjadi kesalahan")
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {

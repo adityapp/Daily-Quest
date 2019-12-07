@@ -59,7 +59,7 @@ class DetailQuestPresenter(
                 .child(Constants.DATABASE_TOKEN)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
-                        view.showFailedMessage(p0.message)
+                        view.showFailedMessage("Maaf, telah terjadi kesalahan")
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {
@@ -78,7 +78,7 @@ class DetailQuestPresenter(
                 .child(Constants.DATABASE_TOKEN)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
-                        view.showFailedMessage(p0.message)
+                        view.showFailedMessage("Maaf, telah terjadi kesalahan")
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {
@@ -102,14 +102,14 @@ class DetailQuestPresenter(
                     .child(Constants.DATABASE_QUEST).child(id)
                     .addValueEventListener(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError) {
-                            view.showFailedMessage(p0.message)
+                            view.showFailedMessage("Maaf, telah terjadi kesalahan")
                         }
 
                         override fun onDataChange(p0: DataSnapshot) {
                             val quest = p0.getValue(QuestModel::class.java)
                             quest?.let {
-                                quest.id = p0.key
-                                quest.childrenUid = childrenUid
+                                it.id = p0.key
+                                it.childrenUid = childrenUid
                                 view.setupContent(it)
                             }
                         }
@@ -140,12 +140,12 @@ class DetailQuestPresenter(
                         .addOnSuccessListener {
                             it.metadata?.reference?.downloadUrl?.addOnSuccessListener { uriResult ->
                                 updateQuestDatabase(parentUid, uid, quest, uriResult)
-                            }?.addOnFailureListener { e ->
-                                view.showFailedMessage(e.message.toString())
+                            }?.addOnFailureListener {
+                                view.showFailedMessage("Maaf, telah terjadi kesalahan")
                             }
                         }
-                        .addOnFailureListener { e ->
-                            view.showFailedMessage(e.message.toString())
+                        .addOnFailureListener {
+                            view.showFailedMessage("Maaf,  telah terjadi kesalahan")
                         }
                 }
             }
@@ -162,7 +162,7 @@ class DetailQuestPresenter(
                 .child(Constants.DATABASE_REWARD)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
-                        view.showFailedMessage(p0.message)
+                        view.showFailedMessage("Maaf, telah terjadi kesalahan")
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {
@@ -179,8 +179,8 @@ class DetailQuestPresenter(
                                         Uri.parse(quest.image)
                                     )
                                 }
-                                .addOnFailureListener { e ->
-                                    view.showFailedMessage(e.message.toString())
+                                .addOnFailureListener {
+                                    view.showFailedMessage("Maaf, telah terjadi kesalahan")
                                 }
                         }
                     }
@@ -208,7 +208,7 @@ class DetailQuestPresenter(
                 getQuest(quest.id.toString(), quest.childrenUid.toString())
             }
             .addOnFailureListener {
-                view.showFailedMessage(it.message.toString())
+                view.showFailedMessage("Maaf, telah terjadi kesalahan")
             }
     }
 

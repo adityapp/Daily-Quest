@@ -1,4 +1,4 @@
-package com.dailyquest.feature.common.scanUid
+package com.dailyquest.feature.children.scanUid
 
 import com.dailyquest.base.BasePresenter
 

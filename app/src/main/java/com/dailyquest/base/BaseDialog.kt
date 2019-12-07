@@ -18,9 +18,9 @@ abstract class BaseDialog(context: Context) : Dialog(context) {
     }
 
     @LayoutRes
-    abstract fun layoutId(): Int
+    protected abstract fun layoutId(): Int
 
-    open fun setupView() {
+    protected open fun setupView() {
         setCancelable(false)
     }
 

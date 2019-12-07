@@ -47,9 +47,11 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
     override fun setupContent(newQuest: QuestModel) {
         changeStatusState(newQuest.status, pref.getRole().toString())
         newQuest.image?.let {
-            iv_delete_image.remove()
-            Glide.with(this).load(it).into(iv_image)
-            rl_image.show()
+            this?.let { activity ->
+                iv_delete_image.remove()
+                Glide.with(activity).load(it).into(iv_image)
+                rl_image.show()
+            }
         }
         tv_create_time.text = newQuest.createdAt.timestampToDate()
         tv_title.text = newQuest.title
@@ -58,7 +60,8 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
         tv_start_time.text = newQuest.startTime.timestampToDate()
         tv_end_time.text = newQuest.endTime.timestampToDate()
         quest = newQuest
-        tv_reward.text = "Rp. ${newQuest.reward}"
+        tv_reward.text =
+            if (newQuest.hideReward) "Psssttt... Rahasia..." else "Rp. ${newQuest.reward}"
         dismissLoadingDialog()
     }
 

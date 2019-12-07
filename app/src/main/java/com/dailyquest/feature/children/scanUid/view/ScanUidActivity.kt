@@ -1,13 +1,13 @@
-package com.dailyquest.feature.common.scanUid.view
+package com.dailyquest.feature.children.scanUid.view
 
 import android.app.Activity
 import android.content.Intent
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
 import com.dailyquest.feature.common.login.view.LoginActivity
-import com.dailyquest.feature.common.scanUid.ScanUidPresenterContract
-import com.dailyquest.feature.common.scanUid.ScanUidViewContract
-import com.dailyquest.feature.common.scanUid.presenter.ScanUidPresenter
+import com.dailyquest.feature.children.scanUid.ScanUidPresenterContract
+import com.dailyquest.feature.children.scanUid.ScanUidViewContract
+import com.dailyquest.feature.children.scanUid.presenter.ScanUidPresenter
 import com.dailyquest.utils.Constants
 import com.dailyquest.utils.beginWith
 import com.dailyquest.utils.then
@@ -78,7 +78,10 @@ class ScanUidActivity : BaseActivity<ScanUidPresenterContract>(), ZXingScannerVi
     }
 
     private fun setupPresenter() {
-        presenter = ScanUidPresenter(this)
+        presenter =
+            ScanUidPresenter(
+                this
+            )
     }
 
     private fun getExtra() {

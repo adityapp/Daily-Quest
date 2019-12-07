@@ -64,5 +64,4 @@ class LoginActivity : BaseActivity<LoginPresenterContract>(), LoginViewContract 
         role = intent.getStringExtra(Constants.ROLE)
         parenUid = intent.getStringExtra(Constants.PARENT_UID)
     }
-
 }

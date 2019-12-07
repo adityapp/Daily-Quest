@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".feature.parent.scanReward.view.ScanRewardActivity"></activity>
         <activity android:name=".feature.common.detailQuest.view.DetailQuestActivity" />
-        <activity android:name=".feature.common.scanUid.view.ScanUidActivity" />
+        <activity android:name=".feature.children.scanUid.view.ScanUidActivity" />
         <activity android:name=".feature.parent.questList.view.QuestListActivity" />
         <activity android:name=".feature.common.register.view.RegisterActivity" />
         <activity android:name=".feature.common.main.view.MainActivity" />

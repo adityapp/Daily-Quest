@@ -22,7 +22,7 @@ class ChildrenPresenter(private val view: ChildrenViewContract, private val pref
                 .child(Constants.ANAK.toLowerCase())
                 .addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
-                        view.showFailedMessage(p0.message)
+                        view.showFailedMessage("Maaf, telah terjadi kesalahan")
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {

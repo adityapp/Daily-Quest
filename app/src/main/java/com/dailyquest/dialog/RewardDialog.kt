@@ -32,7 +32,7 @@ class RewardDialog(context: Context, private val parentUid: String) : BaseDialog
                 .child(Constants.ANAK.toLowerCase()).child(uid).child(Constants.DATABASE_REWARD)
                 .addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
-                        showToast(p0.message)
+                        showToast("Maaf, telah terjadi kesalahan")
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {

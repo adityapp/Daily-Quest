@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.common.scanUid.view.ScanUidActivity"
+    tools:context=".feature.children.scanUid.view.ScanUidActivity"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar

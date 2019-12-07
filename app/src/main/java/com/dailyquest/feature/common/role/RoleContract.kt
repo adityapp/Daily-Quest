@@ -2,8 +2,6 @@ package com.dailyquest.feature.common.role
 
 import com.dailyquest.base.BasePresenter
 
-interface RoleViewContract{
+interface RoleViewContract
 
-}
-
-interface RolePresenterContract: BasePresenter
+interface RolePresenterContract : BasePresenter

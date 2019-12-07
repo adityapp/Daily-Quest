@@ -14,7 +14,7 @@ import com.dailyquest.feature.common.register.RegisterPresenterContract
 import com.dailyquest.feature.common.register.RegisterViewContract
 import com.dailyquest.feature.common.register.presenter.RegisterPresenter
 import com.dailyquest.feature.common.role.view.RoleActivity
-import com.dailyquest.feature.common.scanUid.view.ScanUidActivity
+import com.dailyquest.feature.children.scanUid.view.ScanUidActivity
 import com.dailyquest.utils.*
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -31,6 +31,7 @@ class RegisterActivity : BaseActivity<RegisterPresenterContract>(), RegisterView
     }
 
     override fun navigateToRole() {
+        dismissLoadingDialog()
         val intent = Intent(this, RoleActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         startAndFinish(intent)

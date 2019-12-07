@@ -41,5 +41,4 @@ class PickImageDialog(private val activity: Activity) : BaseDialog(activity) {
             Constants.IMAGE_PICKER_CODE
         )
     }
-
 }

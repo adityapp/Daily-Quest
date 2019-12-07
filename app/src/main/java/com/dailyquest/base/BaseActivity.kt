@@ -20,9 +20,9 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity() {
     }
 
     @LayoutRes
-    abstract fun layoutId(): Int
+    protected abstract fun layoutId(): Int
 
-    abstract fun setupView()
+    protected abstract fun setupView()
 
     fun showLoadingDialog() = loading_dialog.show()
 

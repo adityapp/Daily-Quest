@@ -12,7 +12,7 @@ import com.dailyquest.feature.common.register.view.RegisterActivity
 import com.dailyquest.feature.common.role.RolePresenterContract
 import com.dailyquest.feature.common.role.RoleViewContract
 import com.dailyquest.feature.common.role.presenter.RolePresenter
-import com.dailyquest.feature.common.scanUid.view.ScanUidActivity
+import com.dailyquest.feature.children.scanUid.view.ScanUidActivity
 import com.dailyquest.utils.Constants
 import com.dailyquest.utils.beginWith
 import com.dailyquest.utils.then
@@ -24,6 +24,13 @@ class RoleActivity : BaseActivity<RolePresenterContract>(), RoleViewContract {
     override fun setupView() {
         beginWith { setupPresenter() }
             .then { setupOnClick() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setupLocationPermission()
+        setupCameraPermission()
     }
 
     private fun setupOnClick() {
@@ -53,13 +60,6 @@ class RoleActivity : BaseActivity<RolePresenterContract>(), RoleViewContract {
 
     private fun setupPresenter() {
         presenter = RolePresenter(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        setupLocationPermission()
-        setupCameraPermission()
     }
 
     private fun setupCameraPermission() {

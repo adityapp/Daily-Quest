@@ -81,13 +81,12 @@ class RegisterPresenter(private val view: RegisterViewContract) :
                 onSuccess()
             }
             .addOnFailureListener { e ->
-                view.showFailedMessage(e.message.toString())
+                view.showFailedMessage("Gagal dalam mendaftarkan akun!")
             }
     }
 
     private fun onSuccess() {
         firebaseAuth.signOut()
-        view.dismissLoadingDialog()
         view.navigateToRole()
     }
 }

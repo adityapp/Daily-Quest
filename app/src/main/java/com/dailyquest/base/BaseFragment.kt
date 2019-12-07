@@ -29,9 +29,9 @@ abstract class BaseFragment<T : BasePresenter> : Fragment() {
     }
 
     @LayoutRes
-    abstract fun layoutId(): Int
+    protected abstract fun layoutId(): Int
 
-    abstract fun setupView()
+    protected abstract fun setupView()
 
     fun showLoadingDialog() = (activity as MainActivity?)?.loading_dialog?.show()
 

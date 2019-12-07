@@ -25,7 +25,7 @@ class HomePresenter(private val view: HomeViewContract, private val pref: Sessio
                 .child(Constants.ANAK.toLowerCase())
                 .addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
-                        view.showFailedMessage(p0.message)
+                        view.showFailedMessage("Maaf, telah terjadi kesalahan")
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {
@@ -56,7 +56,7 @@ class HomePresenter(private val view: HomeViewContract, private val pref: Sessio
                     .child(Constants.ANAK.toLowerCase()).child(uid).child(Constants.DATABASE_QUEST)
                     .addValueEventListener(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError) {
-                            view.showFailedMessage(p0.message)
+                            view.showFailedMessage("Maaf, telah terjadi kesalahan")
                         }
 
                         override fun onDataChange(p0: DataSnapshot) {
