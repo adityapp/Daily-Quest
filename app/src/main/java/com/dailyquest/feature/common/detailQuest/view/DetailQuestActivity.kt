@@ -2,7 +2,9 @@ package com.dailyquest.feature.common.detailQuest.view
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
+import android.util.Log
 import com.bumptech.glide.Glide
 import com.dailyquest.R
 import com.dailyquest.base.BaseActivity
@@ -68,7 +70,18 @@ class DetailQuestActivity : BaseActivity<DetailQuestPresenterContract>(), Detail
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
-            Constants.IMAGE_PICKER_CODE -> {
+            0 -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    (data?.extras?.get("data") as Bitmap).getImageUri(this).let {
+                        selectedImage = it
+                        tv_file_upload.text = "Ubah Foto"
+                        showImage(selectedImage)
+                        imagePicker.dismiss()
+                    }
+                }
+            }
+
+            1 -> {
                 if (resultCode == Activity.RESULT_OK) {
                     selectedImage = data?.data
                     tv_file_upload.text = "Ubah Foto"

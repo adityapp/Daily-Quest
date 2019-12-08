@@ -3,13 +3,16 @@ package com.dailyquest.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
+import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Spinner
 import com.dailyquest.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import org.json.JSONObject
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
@@ -66,4 +69,12 @@ fun FloatingActionButton.setStatusIndicator(context: Context, status: String) {
     } else {
         resources.getColorStateList(color)
     }
+}
+
+fun Bitmap.getImageUri(context: Context): Uri? {
+    Log.d("Hello", this.height.toString())
+    val outImage = Bitmap.createScaledBitmap(this, this.width * 4, this.height * 4, true)
+    val path =
+        MediaStore.Images.Media.insertImage(context.contentResolver, outImage, "DailyQuest", null)
+    return Uri.parse(path)
 }

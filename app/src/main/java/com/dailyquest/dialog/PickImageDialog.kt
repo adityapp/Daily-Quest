@@ -26,19 +26,20 @@ class PickImageDialog(private val activity: Activity) : BaseDialog(activity) {
         }
     }
 
+    private fun pickImageFromCamera() {
+        activity.startActivityForResult(
+            Intent(MediaStore.ACTION_IMAGE_CAPTURE),
+            0
+        )
+    }
+
     private fun pickImageFromGallery() {
         activity.startActivityForResult(
             Intent(
                 Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            ), Constants.IMAGE_PICKER_CODE
+            ), 1
         )
     }
 
-    private fun pickImageFromCamera() {
-        activity.startActivityForResult(
-            Intent(MediaStore.ACTION_IMAGE_CAPTURE),
-            Constants.IMAGE_PICKER_CODE
-        )
-    }
 }
